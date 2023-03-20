@@ -17,7 +17,7 @@ const AuthRoleWrapper = ({ children }: AuthRoleWrapperProps) => {
   }, []);
 
   const user = {
-    roles: ['admin'], // replace with actual user roles
+    roles: ['member'], // replace with actual user roles
     hasPermission: (path: string, roles: string[]) => {
       // replace with actual permission logic
       return roles.includes('all') || roles.some(role => user.roles.includes(role));

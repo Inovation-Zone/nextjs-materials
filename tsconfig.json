@@ -37,7 +37,8 @@
     "**/*.tsx",
     "src/routers/router.tsx",
     "src/routers/withPermission.js",
-    "src/hoc/withRoleAuth.js"
+    "src/hoc/withRoleAuth.js",
+    "i18n.config.js"
   ],
   "exclude": [
     "node_modules"

@@ -1,4 +1,3 @@
-import withRoleAuth from "@/hoc/withRoleAuth";
 
 function Dashboard() {
   return (
@@ -6,4 +5,4 @@ function Dashboard() {
   );
 }
 
-export default withRoleAuth(Dashboard);
+export default Dashboard;

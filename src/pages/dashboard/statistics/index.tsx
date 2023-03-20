@@ -1,4 +1,3 @@
-import withRoleAuth from "@/hoc/withRoleAuth";
 
 function Statistics() {
   return (
@@ -6,4 +5,4 @@ function Statistics() {
   );
 }
 
-export default withRoleAuth(Statistics);
+export default Statistics;

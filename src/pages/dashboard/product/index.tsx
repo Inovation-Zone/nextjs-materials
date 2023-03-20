@@ -1,4 +1,3 @@
-import withRoleAuth from "@/hoc/withRoleAuth";
 
 function Product() {
   return (
@@ -6,4 +5,4 @@ function Product() {
   );
 }
 
-export default withRoleAuth(Product);
+export default Product;

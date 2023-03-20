@@ -1,9 +1,16 @@
-import withRoleAuth from "@/hoc/withRoleAuth";
 
-function Home() {
+import { useLanguage, useTranslate } from '@/hook/useTranslate';
+
+export default function Home() {
+  const trans = useTranslate();
+  const { changeLang } = useLanguage();
+
   return (
-    <h1>123123</h1>
-  );
+    <>
+      {trans.home.title}
+      <button onClick={() => changeLang('vi')} >vi</button>
+      <button onClick={() => changeLang('en')}>en</button>
+    </>
+  )
 }
 
-export default withRoleAuth(Home);

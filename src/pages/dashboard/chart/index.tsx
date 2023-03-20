@@ -1,4 +1,3 @@
-import withRoleAuth from "@/hoc/withRoleAuth";
 
 function Chart() {
   return (
@@ -6,4 +5,4 @@ function Chart() {
   );
 }
 
-export default withRoleAuth(Chart);
+export default Chart;
