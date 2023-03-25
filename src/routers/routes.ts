@@ -21,6 +21,18 @@ export const routes: Route[] = [
     component: Home,
   },
   {
+    path: '/login',
+    roles: ['all'],
+    auth: false,
+    component: Home,
+  },
+  {
+    path: '/forgot-password',
+    roles: ['all'],
+    auth: false,
+    component: Home,
+  },
+  {
     path: '/dashboard',
     roles: ['admin'],
     auth: false,
@@ -37,6 +49,12 @@ export const routes: Route[] = [
             roles: ['admin'],
             auth: false,
             component: Product,
+          },
+          {
+            path: '/categories',
+            roles: ['admin'],
+            auth: false,
+            component: About,
           },
         ]
       },

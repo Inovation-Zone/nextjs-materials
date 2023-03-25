@@ -12,11 +12,12 @@ const nextConfig = {
   swcMinify: true,
 
   // Uncoment to add domain whitelist
-  // images: {
-  //   domains: [
-  //     'res.cloudinary.com',
-  //   ],
-  // },
+  images: {
+    domains: [
+      's3-materials-storage.s3.ap-southeast-1.amazonaws.com',
+      'example.com'
+    ],
+  },
 
   // SVGR
   webpack(config) {

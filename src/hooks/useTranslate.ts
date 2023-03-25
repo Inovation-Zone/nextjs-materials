@@ -18,7 +18,9 @@ const useLanguage = () => {
     router.push('/', '/', { locale: lang });
   };
 
-  return { changeLang };
+  const value = router.locale === 'vi' ? 'vi' : 'en';
+
+  return { value, changeLang };
 };
 
 export {

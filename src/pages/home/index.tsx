@@ -1,5 +1,5 @@
 
-import { useLanguage, useTranslate } from '@/hook/useTranslate';
+import { useLanguage, useTranslate } from '@/hooks/useTranslate';
 
 export default function Home() {
   const trans = useTranslate();

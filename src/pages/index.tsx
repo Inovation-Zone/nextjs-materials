@@ -1,9 +1,8 @@
-import Home from '@/pages/home';
+function Dashboard() {
 
-function App(): React.ReactElement {
   return (
-    <Home />
+    <div>Dashboard</div>
   );
 }
 
-export default App;
+export default Dashboard;

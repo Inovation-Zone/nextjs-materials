@@ -1,6 +1,12 @@
 import * as React from 'react';
 
+import Dashboard from '@/components/dashboard';
+
 export default function Layout({ children }: { children: React.ReactNode }) {
   // Put Header or Footer Here
-  return <>{children}</>;
+  return (
+    <Dashboard>
+      {children}
+    </Dashboard>
+  )
 }
