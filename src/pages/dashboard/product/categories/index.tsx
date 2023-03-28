@@ -11,6 +11,7 @@ import Dialog from '@/components/dialog';
 import CategoryForm from '@/components/forms/categories';
 
 import { TOAST_CONFIG } from '@/configs/toast';
+import { DEFAULT_IMAGE } from '@/constants';
 
 interface Category {
   id: string;
@@ -73,7 +74,7 @@ const ComponentPage: React.FC = () => {
       key: 'thumbnail',
       width: '20%',
       render: (text: string, record: Category) => {
-        return record.imageUrl ? (<img srcSet={record?.imageUrl} className='w-16 h-16 border rounded-lg object-cover' />) : undefined;
+        return <img srcSet={record.imageUrl ? record?.imageUrl : DEFAULT_IMAGE} className='w-16 h-16 border rounded-lg object-cover' />;
       },
     },
     {

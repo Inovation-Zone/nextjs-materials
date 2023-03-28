@@ -41,3 +41,78 @@ export const CATEGORIES_API = {
     api: (categoryId: string) => `/category/${categoryId}`,
   },
 }
+
+export const ADHESIVES_API = {
+  createCategory: {
+    name: 'category',
+    api: '/category',
+  },
+  getAdhesives: {
+    name: 'adhesives',
+    api: '/adhesives',
+  },
+  getCategoryDetails: {
+    name: (categoryId: string) => `/category/${categoryId}`,
+    api: (categoryId: string) => `/category/${categoryId}`,
+  },
+}
+
+export const WOOD_TYPES_API = {
+  createCategory: {
+    name: 'category',
+    api: '/category',
+  },
+  getWoodTypes: {
+    name: 'woodTypes',
+    api: '/woodTypes',
+  },
+  getCategoryDetails: {
+    name: (categoryId: string) => `/category/${categoryId}`,
+    api: (categoryId: string) => `/category/${categoryId}`,
+  },
+}
+
+export const THICKNESSES_API = {
+  createCategory: {
+    name: 'category',
+    api: '/category',
+  },
+  getThicknesses: {
+    name: 'thicknesses',
+    api: '/thicknesses',
+  },
+  getCategoryDetails: {
+    name: (categoryId: string) => `/category/${categoryId}`,
+    api: (categoryId: string) => `/category/${categoryId}`,
+  },
+}
+
+export const SIZES_API = {
+  createCategory: {
+    name: 'category',
+    api: '/category',
+  },
+  getSizes: {
+    name: 'sizes',
+    api: '/sizes',
+  },
+  getCategoryDetails: {
+    name: (categoryId: string) => `/category/${categoryId}`,
+    api: (categoryId: string) => `/category/${categoryId}`,
+  },
+}
+
+export const PRODUCT_API = {
+  createProduct: {
+    name: 'product',
+    api: '/product',
+  },
+  getProducts: {
+    name: 'products',
+    api: '/products',
+  },
+  getProductDetails: {
+    name: (productId: string) => `/product/${productId}`,
+    api: (productId: string) => `/product/${productId}`,
+  },
+}

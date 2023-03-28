@@ -4,8 +4,12 @@ export default {
     title: 'Trang chủ',
   },
   common: {
+    all: 'Tất cả',
+    search: 'Tìm kiếm',
     yes: "Đồng ý",
     no: "Không",
+    addNew: 'Tạo mới',
+    edit: 'Chỉnh sửa',
     name: 'Tên',
     confirm: 'Xác nhận',
     description: 'Mô tả',
@@ -16,6 +20,7 @@ export default {
     deleteBtn: 'Xoá',
     updateBtn: 'Cập nhật',
     cancelBtn: 'Huỷ bỏ',
+    filter: 'Lọc',
     tipRemoveImage: 'Nhấn vào hình ảnh để xoá và chọn ảnh mới',
     form: {
       required: 'Trường này là bắt buộc'
@@ -26,5 +31,12 @@ export default {
     title: 'Quản lý danh mục',
     add: 'Thêm danh mục',
     edit: 'Sửa danh mục'
+  },
+  products: {
+    title: 'Quản lý sản phẩm',
+    viewDetailBtn: 'Chỉnh sửa',
+    add: 'Tạo mới sản phẩm',
+    edit: 'Sửa sản phẩm',
+    delete: 'Xoá',
   }
 }

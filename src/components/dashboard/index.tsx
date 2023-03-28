@@ -146,16 +146,11 @@ function Dashboard({ children }: { children: React.ReactNode }) {
             </Dropdown>
           </Row>
         </Header>
-        <Content
-          style={{
-            margin: '24px 16px',
-            padding: 24,
-            background: '#fff',
-            minHeight: 280,
-          }}
+        <div
+          className='h-full p-6 bg-white min-h-[280px]'
         >
           {children}
-        </Content>
+        </div>
       </Layout>
     </Layout>
   );

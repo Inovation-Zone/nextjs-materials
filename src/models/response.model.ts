@@ -4,4 +4,10 @@ export interface BaseResponse<T = void> {
   message: string;
   data: T;
   otherParams: object;
+  map: any;
+}
+
+export interface Params {
+  searchKeys?: string;
+  categoryIds?: string;
 }

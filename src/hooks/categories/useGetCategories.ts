@@ -3,10 +3,8 @@ import { useQuery } from 'react-query';
 
 import httpRequest from '@/configs/api';
 import { CATEGORIES_API } from '@/constants/api';
-import { Category } from '@/models/categories.model';
-import { BaseResponse } from '@/models/response.model';
 
-const getCategories = async (): Promise<BaseResponse<Category[]>> => {
+const getCategories = async () => {
   const result = await httpRequest.get(CATEGORIES_API.getCategories.api);
   return result?.data?.items;
 };

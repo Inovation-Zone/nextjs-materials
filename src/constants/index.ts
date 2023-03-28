@@ -1,0 +1,1 @@
+export const DEFAULT_IMAGE = 'https://s3-materials-storage.s3.ap-southeast-1.amazonaws.com/others/1680013425996_ooszxcbvpbs.webp';
