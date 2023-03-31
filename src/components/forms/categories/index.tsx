@@ -60,12 +60,12 @@ const CategoryForm: React.FC<CategoryFormProps> = ({ action, category, dialogRef
       createMutate(data,
         {
           onSuccess: () => {
-            toast.success('Item successfully added.', TOAST_CONFIG);
+            toast.success(translate.messageToast.form.success.add, TOAST_CONFIG);
             handleClose();
             onSuccess();
           },
           onError: () => {
-            toast.error('Failed to add item. Please try again later.', TOAST_CONFIG);
+            toast.error(translate.messageToast.form.failed.add, TOAST_CONFIG);
           },
         }
       )
@@ -73,12 +73,12 @@ const CategoryForm: React.FC<CategoryFormProps> = ({ action, category, dialogRef
       updateMutate({ ...data, id: category?.id },
         {
           onSuccess: () => {
-            toast.success('Item successfully updated.', TOAST_CONFIG);
+            toast.success(translate.messageToast.form.success.update, TOAST_CONFIG);
             handleClose();
             onSuccess();
           },
           onError: () => {
-            toast.error('Failed to update item. Please try again later.', TOAST_CONFIG);
+            toast.error(translate.messageToast.form.failed.update, TOAST_CONFIG);
           },
         }
       )

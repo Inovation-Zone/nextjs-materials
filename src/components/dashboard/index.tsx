@@ -4,16 +4,16 @@ import {
   DashboardOutlined,
   FontSizeOutlined,
   HighlightOutlined,
+  HomeOutlined,
   LogoutOutlined,
   MailOutlined,
   MergeCellsOutlined,
   RadarChartOutlined,
-  SearchOutlined,
   SettingOutlined,
   UnorderedListOutlined,
   UserOutlined
 } from '@ant-design/icons';
-import { Avatar, Badge, Dropdown, Input, Layout, Menu, Row } from 'antd';
+import { Avatar, Badge, Dropdown, Layout, Menu, Row, Typography } from 'antd';
 import { useRouter } from 'next/router';
 import { memo, useState } from 'react';
 import { toast } from 'react-toastify';
@@ -21,19 +21,21 @@ import { toast } from 'react-toastify';
 import useLogout from '@/hooks/auth/useLogout';
 import { useUserInfos } from '@/hooks/auth/userContext';
 import useDebounce from '@/hooks/useDebounce';
+import { useTranslate } from '@/hooks/useTranslate';
 
 import SwitchLanguage from '@/components/switchLanguage';
 
 import { TOAST_CONFIG } from '@/configs/toast';
 
-const { Header, Content, Sider } = Layout;
+const { Header, Sider } = Layout;
 
 function Dashboard({ children }: { children: React.ReactNode }) {
   const [menuKey, setMenuKey] = useState<string[]>([]);
   const [collapsed, setCollapsed] = useState<boolean>(false);
   const router = useRouter();
-  const { userInfos } = useUserInfos();
+  const { userInfos, updateUserInfos } = useUserInfos();
   const { mutate } = useLogout();
+  const translate = useTranslate();
 
   const handleMenuClick = (e: any) => {
     if (e.key !== menuKey) {
@@ -49,10 +51,11 @@ function Dashboard({ children }: { children: React.ReactNode }) {
   const handleLogout = useDebounce(() => {
     mutate(true, {
       onSuccess: () => {
-        router.push('/login');
+        updateUserInfos(null);
+        router.push('/');
       },
       onError: () => {
-        toast.error('Logout failed. Please try again.', TOAST_CONFIG);
+        toast.error(translate.messageToast.auth.failed.logout, TOAST_CONFIG);
       },
     })
   }, 300);
@@ -60,7 +63,7 @@ function Dashboard({ children }: { children: React.ReactNode }) {
   const menu = (
     <Menu>
       <Menu.Item key="2" icon={<LogoutOutlined />} onClick={handleLogout}>
-        Logout
+        {translate.common.logout}
       </Menu.Item>
     </Menu>
   );
@@ -91,21 +94,21 @@ function Dashboard({ children }: { children: React.ReactNode }) {
             Messages
             <Badge count={5} offset={[8, 0]} />
           </Menu.Item>
-          <Menu.SubMenu key="/dashboard/product" icon={<MergeCellsOutlined />} title="Product" onTitleClick={handleMenuClick}>
+          <Menu.SubMenu key="/dashboard/product" icon={<MergeCellsOutlined />} title={translate.products.name} onTitleClick={handleMenuClick}>
             <Menu.Item key="/dashboard/product/categories" icon={<UnorderedListOutlined />}>
-              Categories
+              {translate.categories.name}
             </Menu.Item>
-            <Menu.Item key="woodTypes" icon={<RadarChartOutlined />}>
-              WoodTypes
+            <Menu.Item key="/dashboard/product/woodTypes" icon={<RadarChartOutlined />}>
+              {translate.woodTypes.name}
             </Menu.Item>
             <Menu.Item key="adhesives" icon={<HighlightOutlined />}>
-              Adhesives
+              {translate.adhesives.name}
             </Menu.Item>
             <Menu.Item key="thicknesses" icon={<ColumnHeightOutlined />}>
-              Thicknesses
+              {translate.thicknesses.name}
             </Menu.Item>
             <Menu.Item key="sizes" icon={<FontSizeOutlined />}>
-              Sizes
+              {translate.sizes.name}
             </Menu.Item>
           </Menu.SubMenu>
           <Menu.SubMenu key="settings" icon={<SettingOutlined />} title="Settings">
@@ -117,7 +120,7 @@ function Dashboard({ children }: { children: React.ReactNode }) {
       </Sider>
       <Layout>
         <Header
-          className='flex items-center justify-between'
+          className='flex items-center justify-between border'
           style={{
             background: '#fff',
             padding: 0,
@@ -125,25 +128,31 @@ function Dashboard({ children }: { children: React.ReactNode }) {
             justifyContent: 'space-between',
           }}
         >
-          <Input
-            prefix={<SearchOutlined />}
-            placeholder="Search..."
-            className='h-10 w-64 ml-10'
-          />
-          <Row className='flex items-center'>
-            <SwitchLanguage />
-            <Dropdown overlay={menu} className='mr-10 ml-5'>
-              <div
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  cursor: 'pointer',
-                }}
+          <Row className='w-full flex items-center justify-between'>
+            <Row className='flex items-center justify-center pl-6 cursor-pointer'>
+              <HomeOutlined className='text-[20px]' />
+              <Typography
+                className='ml-2 font-bold'
+                onClick={() => router.push('/')}
               >
-                <Avatar className='flex items-center justify-center' icon={<UserOutlined />} />
-                <span style={{ marginLeft: 8 }}>{userInfos?.fullName}</span>
-              </div>
-            </Dropdown>
+                {translate.common.home}
+              </Typography>
+            </Row>
+            <Row className='flex items-center justify-center'>
+              <SwitchLanguage />
+              <Dropdown overlay={menu} className='mr-10 ml-5'>
+                <div
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    cursor: 'pointer',
+                  }}
+                >
+                  <Avatar className='flex items-center justify-center' icon={<UserOutlined />} />
+                  <span style={{ marginLeft: 8 }}>{userInfos?.fullName}</span>
+                </div>
+              </Dropdown>
+            </Row>
           </Row>
         </Header>
         <div

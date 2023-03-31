@@ -6,13 +6,13 @@ import { UserInfos } from '@/models/auth';
 
 export interface UserContext {
   userInfos: UserInfos | null;
-  updateUserInfos: (info: UserInfos) => void;
+  updateUserInfos: (info: UserInfos | null) => void;
 }
 
 const initialValue: UserContext = {
   userInfos: null,
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  updateUserInfos: (infos: UserInfos) => { },
+  updateUserInfos: (infos: UserInfos | null) => { },
 };
 
 const userContext = createContext(initialValue);

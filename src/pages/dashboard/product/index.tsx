@@ -145,7 +145,7 @@ const Product: React.FC = () => {
                     hoverable
                     className='h-[450px]'
                   >
-                    <Tag color="green">{item.category.name}</Tag>
+                    <Tag color="green">{item?.category?.name}</Tag>
                     <Col className='h-[150px]'>
                       <Typography.Title level={5} className="overflow-ellipsis overflow-hidden h-16">{item.name}</Typography.Title>
                       <Typography className='mb-4 h-[80px]' dangerouslySetInnerHTML={{ __html: item.description.length > 100 ? item.description.substring(0, 80) + '...' : item.description }}>{ }</Typography>

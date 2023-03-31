@@ -22,7 +22,11 @@ import queryClient from '@/configs/queryClient';
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
-  const Layout = router.pathname === '/login' || router.pathname === '/forgot-password' ? React.Fragment : Dashboard;
+  const Layout = router.pathname === '/login' ||
+    router.pathname === '/forgot-password' ||
+    router.pathname === '/' ||
+    router.pathname === '/product/details'
+    ? React.Fragment : Dashboard;
 
   return (
     <QueryClientProvider client={queryClient}>

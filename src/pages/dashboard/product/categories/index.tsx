@@ -45,11 +45,11 @@ const ComponentPage: React.FC = () => {
     deleteCategoryMutate({ id: record.id },
       {
         onSuccess: () => {
-          toast.success('Item successfully deleted.', TOAST_CONFIG);
+          toast.success(translate.messageToast.form.success.delete, TOAST_CONFIG);
           refetch();
         },
         onError: () => {
-          toast.error('Failed to delete item. Please try again later.', TOAST_CONFIG);
+          toast.error(translate.messageToast.form.failed.delete, TOAST_CONFIG);
         },
       }
     )

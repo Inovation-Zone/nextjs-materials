@@ -5,9 +5,7 @@ import vi from '@/public/lang/vi';
 
 const useTranslate = () => {
   const { locale } = useRouter();
-
   const trans = locale === 'vi' ? vi : en;
-
   return trans;
 }
 
@@ -15,7 +13,7 @@ const useLanguage = () => {
   const router = useRouter();
 
   const changeLang = (lang: string) => {
-    router.push('/', '/', { locale: lang });
+    router.replace(router.asPath, router.asPath, { locale: lang });
   };
 
   const value = router.locale === 'vi' ? 'vi' : 'en';

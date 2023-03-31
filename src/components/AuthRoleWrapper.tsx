@@ -24,7 +24,6 @@ const AuthRoleWrapper = ({ children }: AuthRoleWrapperProps) => {
     }
   }
 
-
   const findMatchingRoute = (pathname: string, routes: Route[]): Route | undefined => {
     for (const route of routes) {
       const keys: any[] = [];
@@ -43,7 +42,10 @@ const AuthRoleWrapper = ({ children }: AuthRoleWrapperProps) => {
       if (route.routes) {
         const prefix = route.path === '/' ? '' : route.path;
         const nestedPathname = pathname.replace(prefix, '');
-        const matchingChildRoute = findMatchingRoute(nestedPathname, route.routes);
+        const matchingChildRoute = findMatchingRoute(nestedPathname, route.routes.map(r => ({
+          ...r,
+          path: prefix + r.path
+        })));
         if (matchingChildRoute) {
           return matchingChildRoute;
         }

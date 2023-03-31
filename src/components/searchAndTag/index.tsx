@@ -1,6 +1,8 @@
 import { AutoComplete, Button, Col, Row, Tag } from 'antd';
 import { forwardRef, useImperativeHandle, useState } from 'react';
 
+import { useTranslate } from '@/hooks/useTranslate';
+
 import { Option } from '@/models/products.model';
 
 interface SearchAndTagInputProps {
@@ -14,9 +16,7 @@ type Ref = {
 
 const SearchAndTagInput = forwardRef<Ref, SearchAndTagInputProps>(
   ({ options = [] }, ref) => {
-
-    console.log('options', options);
-
+    const translate = useTranslate();
     const [tags, setTags] = useState<Option[]>([]);
     const [filteredOptions, setFilteredOptions] = useState<Option[]>(options);
     const [inputValue, setInputValue] = useState('');
@@ -40,9 +40,7 @@ const SearchAndTagInput = forwardRef<Ref, SearchAndTagInputProps>(
 
     const handleSearch = (value: string) => {
       // Filter out the tags that have already been added
-      const newFilteredOptions = options.filter(
-        (option) => !tags.includes(option)
-      );
+      const newFilteredOptions = options.filter((option) => !tags.includes(option));
 
       // Filter the new filtered options by the user's search query
       const filteredBySearchOptions = newFilteredOptions.filter((option) =>
@@ -68,15 +66,20 @@ const SearchAndTagInput = forwardRef<Ref, SearchAndTagInputProps>(
       <Col className='flex'>
         <AutoComplete
           style={{ width: 300 }}
-          options={filteredOptions}
+          options={filteredOptions.map((option) => ({ ...option, label: option.name }))}
           onSelect={handleSelect}
           onSearch={handleSearch}
-          placeholder="Search to add tag"
+          placeholder={translate.common.search}
           filterOption={false}
           value={inputValue}
         />
+        {filteredOptions.map((option) => (
+          <AutoComplete.Option key={option.value} value={option.value}>
+            {option.name}
+          </AutoComplete.Option>
+        ))}
         <Button type="primary" style={{ marginLeft: '8px' }} onClick={handleAddAll}>
-          Add All
+          {translate.common.addAll}
         </Button>
         <Row className='ml-4'>
           {tags.map((tag) => (

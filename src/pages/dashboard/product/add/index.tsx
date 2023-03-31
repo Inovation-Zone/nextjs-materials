@@ -219,7 +219,7 @@ const AddProduct: React.FC<AddProductProps> = ({ product }) => {
       <Form form={form} onFinish={handleSave} layout="vertical">
         <Form.Item
           name="name"
-          label={translate.common.name}
+          label={<Typography className='font-bold'>{translate.common.name}</Typography>}
           rules={[{ required: true, message: translate.common.form.required }]}
         >
           <Input className='rounded-lg' size='large' />
@@ -227,7 +227,7 @@ const AddProduct: React.FC<AddProductProps> = ({ product }) => {
 
         <Form.Item
           name="categoryId"
-          label="Category"
+          label={<Typography className='font-bold'>{translate.categories.name}</Typography>}
           rules={[{ required: true, message: translate.common.form.required }]}
         >
           <Select
@@ -237,47 +237,54 @@ const AddProduct: React.FC<AddProductProps> = ({ product }) => {
             options={categoriesFormat}
           />
         </Form.Item>
-        <Editor
-          apiKey="p6ztomd4w6uf6v89xty6ye1e33nibaikoi4a7wfw4eb5cibh"
-          onInit={(evt, editor) => editorRef.current = editor}
-          init={{
-            height: 500,
-            menubar: false,
-            plugins: [
-              'advlist autolink lists link image',
-              'charmap print preview anchor help',
-              'searchreplace visualblocks code',
-              'insertdatetime media table paste wordcount'
-            ],
-            toolbar:
-              'undo redo | formatselect | bold italic | \
+        <Form.Item
+          name="description"
+          label={<Typography className='font-bold'>{translate.common.description}</Typography>}
+          rules={[{ required: true, message: translate.common.form.required }]}
+        >
+          <Editor
+            apiKey="p6ztomd4w6uf6v89xty6ye1e33nibaikoi4a7wfw4eb5cibh"
+            onInit={(evt, editor) => editorRef.current = editor}
+            init={{
+              height: 500,
+              menubar: false,
+              plugins: [
+                'advlist autolink lists link image',
+                'charmap print preview anchor help',
+                'searchreplace visualblocks code',
+                'insertdatetime media table paste wordcount'
+              ],
+              toolbar:
+                'undo redo | formatselect | bold italic | \
               alignleft aligncenter alignright | \
               bullist numlist outdent indent | help'
-          }}
-          initialValue={isEdit ? product.description : ''}
-        />
-        <Form.Item label="Wood Types">
+            }}
+            initialValue={isEdit ? product.description : ''}
+          />
+        </Form.Item>
+
+        <Form.Item label={<Typography className='font-bold'>{translate.woodTypes.name}</Typography>}>
           <SearchAndTagInput options={woodTypesFormat} ref={woodTypesRef} />
         </Form.Item>
-        <Form.Item label="Adhesives">
+        <Form.Item label={<Typography className='font-bold'>{translate.adhesives.name}</Typography>}>
           <SearchAndTagInput options={adhesivesFormat} ref={adhesivesRef} />
         </Form.Item>
-        <Form.Item label="Thicknesses">
+        <Form.Item label={<Typography className='font-bold'>{translate.thicknesses.name}</Typography>}>
           <SearchAndTagInput options={thicknessesFormat} ref={thicknessesRef} />
         </Form.Item>
-        <Form.Item label="Sizes">
+        <Form.Item label={<Typography className='font-bold'>{translate.sizes.name}</Typography>}>
           <SearchAndTagInput options={sizesFormat} ref={sizesRef} />
         </Form.Item>
-        <Form.Item label="Images">
+        <Form.Item label={<Typography className='font-bold'>{translate.common.image}</Typography>}>
           <UploadImages name='file' ref={uploadImagesRef} />
         </Form.Item>
         <Row className='w-full flex flex-row-reverse'>
           <Form.Item>
-            <Button onClick={handleCancel} size='large'>
-              Cancel
+            <Button onClick={handleCancel} size='large' className='w-24'>
+              {translate.common.cancelBtn}
             </Button>
-            <Button className='ml-4' type="primary" htmlType="submit" size='large'>
-              Save
+            <Button className='ml-4 w-24' type="primary" htmlType="submit" size='large'>
+              {translate.common.saveBtn}
             </Button>
           </Form.Item>
         </Row>

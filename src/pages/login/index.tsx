@@ -10,6 +10,7 @@ import useDebounce from '@/hooks/useDebounce';
 
 import { TOAST_CONFIG } from '@/configs/toast';
 import { hashPassword } from '@/utils/auth';
+import { useTranslate } from '@/hooks/useTranslate';
 
 interface LoginFormValues {
   email: string;
@@ -21,6 +22,7 @@ const Login = () => {
   const formRef = useRef<FormInstance<LoginFormValues>>(null);
   const router = useRouter();
   const { mutate, isLoading } = useAuth();
+  const translate = useTranslate();
 
   const onFinish = useDebounce((values: LoginFormValues) => {
     mutate({ email: values.email, password: hashPassword(values.password) },
@@ -29,7 +31,7 @@ const Login = () => {
           router.push('/dashboard');
         },
         onError: () => {
-          toast.error('Incorrect email or password. Please try again.', TOAST_CONFIG);
+          toast.error(translate.messageToast.auth.failed.logout, TOAST_CONFIG);
         },
       },
     )

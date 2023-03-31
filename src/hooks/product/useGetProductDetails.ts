@@ -3,10 +3,8 @@ import { useQuery } from 'react-query';
 
 import httpRequest from '@/configs/api';
 import { PRODUCT_API } from '@/constants/api';
-import { Product } from '@/models/products.model';
-import { BaseResponse } from '@/models/response.model';
 
-const getProductDetails = async (productId: string): Promise<BaseResponse<Product>> => {
+const getProductDetails = async (productId: string) => {
   const result = productId && await httpRequest.get(PRODUCT_API.getProductDetails.api(productId));
   return result?.data?.data;
 };

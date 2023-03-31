@@ -12,7 +12,7 @@ const SwitchLanguage: React.FC = () => {
   };
 
   return (
-    <Select value={value} className='w-[150px]' onChange={handleLanguageChange}>
+    <Select value={value} className='w-[130px]' onChange={handleLanguageChange}>
       <Option value="en">English</Option>
       <Option value="vi">Vietnamese</Option>
     </Select>

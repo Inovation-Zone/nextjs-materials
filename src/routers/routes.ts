@@ -4,7 +4,6 @@ export interface Route {
   roles: string[];
   auth: boolean;
   routes?: Route[];
-  params?: any;
 }
 
 export const routes: Route[] = [
@@ -21,6 +20,11 @@ export const routes: Route[] = [
   {
     path: '/forgot-password',
     roles: ['all'],
+    auth: false,
+  },
+  {
+    path: '/product/details',
+    roles: ['admin'],
     auth: false,
   },
   {
@@ -45,6 +49,11 @@ export const routes: Route[] = [
           },
           {
             path: '/add',
+            roles: ['admin'],
+            auth: false,
+          },
+          {
+            path: '/woodTypes',
             roles: ['admin'],
             auth: false,
           },
