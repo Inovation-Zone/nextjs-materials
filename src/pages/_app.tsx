@@ -25,7 +25,8 @@ function MyApp({ Component, pageProps }: AppProps) {
   const Layout = router.pathname === '/login' ||
     router.pathname === '/forgot-password' ||
     router.pathname === '/' ||
-    router.pathname === '/product/details'
+    router.pathname === '/product/details' ||
+    router.pathname === '/catalog'
     ? React.Fragment : Dashboard;
 
   return (

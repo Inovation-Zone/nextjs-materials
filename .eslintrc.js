@@ -24,6 +24,14 @@ module.exports = {
       { props: 'never', children: 'never' },
     ],
 
+    // Enforce no spaces between props in JSX code
+    'react/jsx-props-no-multi-spaces': ['error'],
+
+    // Enforce one prop per line in JSX code
+    'react/jsx-max-props-per-line': ['error', { maximum: 1 }],
+
+    'react/jsx-first-prop-new-line': ['error', 'multiline-multiprop'],
+
     //#region  //*=========== Unused Import ===========
     '@typescript-eslint/no-unused-vars': 'off',
     'unused-imports/no-unused-imports': 'warn',

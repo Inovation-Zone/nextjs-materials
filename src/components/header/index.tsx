@@ -1,23 +1,24 @@
-import { A11y, Autoplay, Navigation, Pagination, Scrollbar } from 'swiper';
-import { Swiper, SwiperSlide } from 'swiper/react';
 import {
-  GlobalOutlined,
   ShoppingCartOutlined,
   UserOutlined,
 } from '@ant-design/icons';
-import { useRef, useState } from 'react';
+import { Col, Typography } from 'antd';
 import { useRouter } from 'next/router';
-import { Product } from '@/models/products.model';
-import { useUserInfos } from '@/hooks/auth/userContext';
-import { Col, Dropdown, Menu, Typography } from 'antd';
-import useGetProducts from '@/hooks/product/useGetProducts';
-
+import { useRef, useState } from 'react';
+import { A11y, Autoplay, Navigation, Pagination, Scrollbar } from 'swiper';
+import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
+
+import { useUserInfos } from '@/hooks/auth/userContext';
+import useGetProducts from '@/hooks/product/useGetProducts';
 import { useTranslate } from '@/hooks/useTranslate';
+
 import SwitchLanguage from '@/components/switchLanguage';
+
+import { Product } from '@/models/products.model';
 
 interface MenuItem {
   label: string;
@@ -50,6 +51,9 @@ export default function Header() {
   }
 
   const handleMenuItemClick = (item: MenuItem) => {
+    if (item.key === 'catalog') {
+      router.push('/catalog');
+    }
     if (item?.expaned) {
       setShowBoard(!showBoard);
     } else {
@@ -80,7 +84,9 @@ export default function Header() {
   const renderMenuProducts = () => {
     return products.map((item: Product) => {
       return (
-        <div key={item.id} className='mt-6 mb-6'>
+        <div
+          key={item.id}
+          className='mt-6 mb-6'>
           <Typography
             onMouseEnter={() => handleMouseEnter(item)}
             onMouseLeave={() => handleMouseLeave()}
@@ -141,12 +147,18 @@ export default function Header() {
               </li>
             ))}
             {showBoard && (
-              <Col span={24} className='flex space-x-6 pr-10 pl-10 w-full h-[400px] bg-white opacity-95 top-12 absolute z-20 right-0' >
+              <Col
+                span={24}
+                className='flex space-x-6 pr-10 pl-10 w-full h-[400px] bg-white opacity-95 top-12 absolute z-20 right-0' >
                 <Col span={12}>
                   {renderMenuProducts()}
                 </Col>
-                <Col span={12} className='flex items-end'>
-                  {productHoved?.fileResources?.length && (<img className='w-full h-[400px]' src={productHoved?.fileResources[0].fileUrl} />)}
+                <Col
+                  span={12}
+                  className='flex items-end'>
+                  {productHoved?.fileResources?.length && (<img
+                    className='w-full h-[400px]'
+                    src={productHoved?.fileResources[0].fileUrl} />)}
                 </Col>
               </Col>
             )}

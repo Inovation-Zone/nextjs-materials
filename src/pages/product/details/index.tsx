@@ -4,18 +4,20 @@ import { Button, Col, InputNumber, Row, Typography } from 'antd';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useEffect, useMemo, useRef } from 'react';
-
-import { Adhesive, Product, Size, Thickness, WoodType } from '@/models/products.model';
-import Header from '@/components/header';
-import useGetProductDetails from '@/hooks/product/useGetProductDetails';
-import CustomSelect from '@/components/customSelect';
-import { useTranslate } from '@/hooks/useTranslate';
 import { A11y, Autoplay, Navigation, Pagination, Scrollbar } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
+
+import useGetProductDetails from '@/hooks/product/useGetProductDetails';
+import { useTranslate } from '@/hooks/useTranslate';
+
+import CustomSelect from '@/components/customSelect';
+import Header from '@/components/header';
+
+import { Adhesive, Product, Size, Thickness, WoodType } from '@/models/products.model';
 
 export default function LandingPage() {
   const router = useRouter();
@@ -98,8 +100,12 @@ export default function LandingPage() {
     <div className='bg-white'>
       <Head>
         <title>Landing Page</title>
-        <meta name='description' content='Landing page description' />
-        <link rel='icon' href='/favicon.ico' />
+        <meta
+          name='description'
+          content='Landing page description' />
+        <link
+          rel='icon'
+          href='/favicon.ico' />
         <link
           rel='stylesheet'
           href='https://cdn.jsdelivr.net/npm/antd/dist/antd.min.css'
@@ -110,21 +116,45 @@ export default function LandingPage() {
         />
       </Head>
       <Header />
-      <Col span={24} className='flex flex-col items-center justify-center'>
-        <Typography.Title className='mt-4' level={3}>{productDetails.name}</Typography.Title>
-        <Col span={24} className='flex pl-40'>
-          <Col span={12} className='p-10'>
+      <Col
+        span={24}
+        className='flex flex-col items-center justify-center'>
+        <Typography.Title
+          className='mt-4'
+          level={3}>{productDetails.name}</Typography.Title>
+        <Col
+          span={24}
+          className='flex pl-40'>
+          <Col
+            span={12}
+            className='p-10'>
             <Row className='flex flex-col'>
-              <Typography.Title className='mt-4' level={4}>{productDetails.name}</Typography.Title>
+              <Typography.Title
+                className='mt-4'
+                level={4}>{productDetails.name}</Typography.Title>
               {renderImagesProduct(productDetails)}
-              <Typography className='mt-8 mb-4' dangerouslySetInnerHTML={{ __html: productDetails.description }}></Typography>
+              <Typography
+                className='mt-8 mb-4'
+                dangerouslySetInnerHTML={{ __html: productDetails.description }}></Typography>
             </Row>
           </Col>
-          <Col span={12} className='p-10' >
-            {productDetails.woodTypes?.length ? <CustomSelect label={translate.woodTypes.name} ref={woodTypesRef} /> : undefined}
-            {productDetails.adhesives?.length ? <CustomSelect label={translate.adhesives.name} ref={adhesivesRef} layout='ver' /> : undefined}
-            {productDetails.thicknesses?.length ? <CustomSelect label={translate.thicknesses.name} ref={thicknessesRef} layout='ver' /> : undefined}
-            {productDetails.sizes?.length ? <CustomSelect label={translate.sizes.name} ref={sizesRef} /> : undefined}
+          <Col
+            span={12}
+            className='p-10' >
+            {productDetails.woodTypes?.length ? <CustomSelect
+              label={translate.woodTypes.name}
+              ref={woodTypesRef} /> : undefined}
+            {productDetails.adhesives?.length ? <CustomSelect
+              label={translate.adhesives.name}
+              ref={adhesivesRef}
+              layout='ver' /> : undefined}
+            {productDetails.thicknesses?.length ? <CustomSelect
+              label={translate.thicknesses.name}
+              ref={thicknessesRef}
+              layout='ver' /> : undefined}
+            {productDetails.sizes?.length ? <CustomSelect
+              label={translate.sizes.name}
+              ref={sizesRef} /> : undefined}
             <Col>
               <Typography className='font-bold text-gray-500 mt-12 mb-4'>Quantity</Typography>
               <InputNumber addonAfter="PIECE" />

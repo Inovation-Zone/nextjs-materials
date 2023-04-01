@@ -1,45 +1,58 @@
 
 import { Col, Row, Typography } from 'antd';
 import Head from 'next/head';
-import { useRouter } from 'next/router';
 
-import useGetProducts from '@/hooks/product/useGetProducts';
-import { useTranslate } from '@/hooks/useTranslate';
+import useGetCatalogGroupByCatalogGroup from '@/hooks/catalog/useGetCatalogGroupByCatalogGroup';
+import { useLanguage } from '@/hooks/useTranslate';
 
 import Header from '@/components/header';
 
-import { DEFAULT_IMAGE } from '@/constants';
-import { Product } from '@/models/products.model';
+import { Catalog, Group } from '@/models/catalogs.model';
 
 export default function LandingPage() {
-  const router = useRouter();
-  const translate = useTranslate();
+  const { value } = useLanguage();
+  const { data: groupCatalogs } = useGetCatalogGroupByCatalogGroup();
 
-  const { data: products = [], isLoading: isLoadingProducts, refetch } = useGetProducts({ searchKeys: '' });
-
-  const handleGoToProductDetails = (product: Product) => {
-    router.push({
-      pathname: '/product/details',
-      query: { id: product.id },
-    })
+  const renderCatalogs = (catalogs: Catalog[]) => {
+    return (
+      <div
+        className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        {catalogs.map((catalog: Catalog) => (
+          <a
+            key={catalog.id}
+            className='cursor-pointer w-full mt-4'
+            href={catalog[`${value}_fileUrl` as keyof Catalog]}
+            target="_blank"
+          >
+            <img
+              className="w-full border h-[350px]"
+              src={catalog.thumbnailUrl}
+              alt={catalog.thumbnailUrl}
+            />
+            <Typography className='mt-4'>{catalog[`${value}_name` as keyof Catalog]}</Typography>
+          </a>
+        ))}
+      </div>
+    )
   }
 
-  const renderProducts = () => {
-    return products.map((item: Product) => {
+  const renderCatalogGroupByGroup = () => {
+    return groupCatalogs.map((group: Group | any) => {
       return (
         <Col
-          key={item.id}
-          span={8}
-          className='min-w-[300px] w-[300px] h-[300px] bg-center'
-          style={{ paddingLeft: 0, paddingRight: 0, backgroundImage: `url(${item.fileResources?.length ? item.fileResources[0].fileUrl : DEFAULT_IMAGE})` }}
+          key={group.id}
+          span={24}
+          className='mx-48 my-8 bg-white p-4'
         >
-          <Typography.Text
-            onClick={() => handleGoToProductDetails(item)}
-            className='w-full flex items-center justify-center text-center h-[60px] font-medium text-[15px] bg-slate-200 opacity-80 uppercase cursor-pointer'
-          >
-            {item.name}
-          </Typography.Text>
-        </Col>
+          <Typography.Title
+            level={2}
+            className='mt-4'>{group[`${value}_name` as keyof Group]}</Typography.Title>
+          <Row
+            key={group.id}
+            className='w-full'>
+            {renderCatalogs(group.catalogs)}
+          </Row>
+        </Col >
       )
     })
   }
@@ -64,15 +77,9 @@ export default function LandingPage() {
         />
       </Head>
       <Header />
-      <div className='w-full flex items-center justify-center flex-col mt-12'>
-        <Typography.Title
-          className='uppercase'
-          level={3}>{translate.products.ourProducts}</Typography.Title>
-        <Row
-          gutter={[16, 0]}
-          className='mt-4 p-0'>{renderProducts()}</Row>
+      <div className='bg-slate-100 py-4'>
+        {renderCatalogGroupByGroup()}
       </div>
-
       <div className='mt-24'>
         <img
           src="https://s3-materials-storage.s3.ap-southeast-1.amazonaws.com/others/1680079661140_bwfl4e6xlw5.png"

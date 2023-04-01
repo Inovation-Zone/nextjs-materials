@@ -116,3 +116,10 @@ export const PRODUCT_API = {
     api: (productId: string) => `/product/${productId}`,
   },
 }
+
+export const CATALOG_API = {
+  getCatalogsGroupByGroupId: {
+    name: 'catalogsGroupByGroupId',
+    api: '/catalogsGroupByGroupId',
+  },
+}
