@@ -49,11 +49,19 @@ const UploadFile = forwardRef<Ref, UploadFileProps>(
     };
 
     return (
-      <Form.Item name={name} {...restProps}>
+      <Form.Item
+        name={name}
+        {...restProps}>
         {fileUrl ? (
           <div>
-            <img onClick={() => handleRemove()} src={fileUrl} alt={fileUrl} className='w-full h-[400px] border rounded-lg cursor-pointer object-cover' />
-            <Text className='text-gray-400' italic>{translate.common.tipRemoveImage}</Text>
+            <img
+              onClick={() => handleRemove()}
+              src={fileUrl}
+              alt={fileUrl}
+              className='w-full h-[400px] border rounded-lg cursor-pointer object-cover' />
+            <Text
+              className='text-gray-400'
+              italic>{translate.common.tipRemoveImage}</Text>
           </div>
         ) : (
           <Col>

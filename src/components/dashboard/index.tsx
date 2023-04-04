@@ -62,7 +62,10 @@ function Dashboard({ children }: { children: React.ReactNode }) {
 
   const menu = (
     <Menu>
-      <Menu.Item key="2" icon={<LogoutOutlined />} onClick={handleLogout}>
+      <Menu.Item
+        key="2"
+        icon={<LogoutOutlined />}
+        onClick={handleLogout}>
         {translate.common.logout}
       </Menu.Item>
     </Menu>
@@ -84,34 +87,59 @@ function Dashboard({ children }: { children: React.ReactNode }) {
           defaultSelectedKeys={['dashboard']}
           selectedKeys={menuKey}
         >
-          <Menu.Item key="/dashboard" icon={<DashboardOutlined />}>
+          <Menu.Item
+            key="/dashboard"
+            icon={<DashboardOutlined />}>
             Dashboard
           </Menu.Item>
-          <Menu.Item key="apps" icon={<AppstoreOutlined />}>
+          <Menu.Item
+            key="apps"
+            icon={<AppstoreOutlined />}>
             Apps
           </Menu.Item>
-          <Menu.Item key="messages" icon={<MailOutlined />}>
+          <Menu.Item
+            key="messages"
+            icon={<MailOutlined />}>
             Messages
-            <Badge count={5} offset={[8, 0]} />
+            <Badge
+              count={5}
+              offset={[8, 0]} />
           </Menu.Item>
-          <Menu.SubMenu key="/dashboard/product" icon={<MergeCellsOutlined />} title={translate.products.name} onTitleClick={handleMenuClick}>
-            <Menu.Item key="/dashboard/product/categories" icon={<UnorderedListOutlined />}>
+          <Menu.SubMenu
+            key="/dashboard/product"
+            icon={<MergeCellsOutlined />}
+            title={translate.products.name}
+            onTitleClick={handleMenuClick}>
+            <Menu.Item
+              key="/dashboard/product/categories"
+              icon={<UnorderedListOutlined />}>
               {translate.categories.name}
             </Menu.Item>
-            <Menu.Item key="/dashboard/product/woodTypes" icon={<RadarChartOutlined />}>
+            <Menu.Item
+              key="/dashboard/product/woodTypes"
+              icon={<RadarChartOutlined />}>
               {translate.woodTypes.name}
             </Menu.Item>
-            <Menu.Item key="adhesives" icon={<HighlightOutlined />}>
+            <Menu.Item
+              key="adhesives"
+              icon={<HighlightOutlined />}>
               {translate.adhesives.name}
             </Menu.Item>
-            <Menu.Item key="thicknesses" icon={<ColumnHeightOutlined />}>
+            <Menu.Item
+              key="thicknesses"
+              icon={<ColumnHeightOutlined />}>
               {translate.thicknesses.name}
             </Menu.Item>
-            <Menu.Item key="sizes" icon={<FontSizeOutlined />}>
+            <Menu.Item
+              key="sizes"
+              icon={<FontSizeOutlined />}>
               {translate.sizes.name}
             </Menu.Item>
           </Menu.SubMenu>
-          <Menu.SubMenu key="settings" icon={<SettingOutlined />} title="Settings">
+          <Menu.SubMenu
+            key="settings"
+            icon={<SettingOutlined />}
+            title="Settings">
             <Menu.Item key="general">General</Menu.Item>
             <Menu.Item key="privacy">Privacy</Menu.Item>
             <Menu.Item key="notifications">Notifications</Menu.Item>
@@ -140,7 +168,9 @@ function Dashboard({ children }: { children: React.ReactNode }) {
             </Row>
             <Row className='flex items-center justify-center'>
               <SwitchLanguage />
-              <Dropdown overlay={menu} className='mr-10 ml-5'>
+              <Dropdown
+                overlay={menu}
+                className='mr-10 ml-5'>
                 <div
                   style={{
                     display: 'flex',
@@ -148,7 +178,9 @@ function Dashboard({ children }: { children: React.ReactNode }) {
                     cursor: 'pointer',
                   }}
                 >
-                  <Avatar className='flex items-center justify-center' icon={<UserOutlined />} />
+                  <Avatar
+                    className='flex items-center justify-center'
+                    icon={<UserOutlined />} />
                   <span style={{ marginLeft: 8 }}>{userInfos?.fullName}</span>
                 </div>
               </Dropdown>

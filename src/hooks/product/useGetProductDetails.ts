@@ -5,11 +5,13 @@ import httpRequest from '@/configs/api';
 import { PRODUCT_API } from '@/constants/api';
 
 const getProductDetails = async (productId: string) => {
-  const result = productId && await httpRequest.get(PRODUCT_API.getProductDetails.api(productId));
-  return result?.data?.data;
+  if (productId) {
+    const result = await httpRequest.get(PRODUCT_API.getProductDetails.api(productId));
+    return result?.data?.data;
+  }
 };
 
-const useGetProductDetails = (productId: string) => {
+const useGetProductDetails = (productId: string | any) => {
   const { data, isLoading, refetch } = useQuery(PRODUCT_API.getProductDetails.name(productId), () => getProductDetails(productId), { staleTime: 0, cacheTime: 0, });
 
   const productDetails = useMemo(() => {

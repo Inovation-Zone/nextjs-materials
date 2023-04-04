@@ -21,11 +21,11 @@ export default function LandingPage() {
     router.push(`/collection/details?id=${collection.id}`);
   }
 
-  const renderCollections = (collections: Collection[]) => {
+  const renderCollections = (collections: Collection[] | undefined) => {
     return (
       <div
         className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2 px-12">
-        {collections.map((collection: Collection) => {
+        {collections?.map((collection: Collection) => {
           const url = collection.fileUrls.length && collection.fileUrls[0];
           return (
             <div

@@ -36,7 +36,7 @@ const AuthRoleWrapper = ({ children }: AuthRoleWrapperProps) => {
         keys.forEach((key, index) => {
           params[key.name] = match[index + 1];
         });
-        return { ...route, params };
+        return { ...route, ...params };
       }
 
       if (route.routes) {

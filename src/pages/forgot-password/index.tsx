@@ -58,7 +58,9 @@ const Login = () => {
             </Button>
           </Form.Item>
           <Form.Item>
-            <a onClick={() => router.push('/login')} href="#">Login now</a>
+            <a
+              onClick={() => router.push('/login')}
+              href="#">Login now</a>
           </Form.Item>
         </Form>
       </div>

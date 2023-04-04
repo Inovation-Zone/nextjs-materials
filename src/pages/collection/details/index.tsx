@@ -14,16 +14,16 @@ import { useLanguage, useTranslate } from '@/hooks/useTranslate';
 
 import Header from '@/components/header';
 
-import { Collection } from '@/models/collections.model';
+import { Collection, CollectionGroup } from '@/models/collections.model';
 
 function CollectionDetails() {
   const router = useRouter();
   const translate = useTranslate();
   const { id = '' } = useMemo(() => router.query, [router]);
   const { value } = useLanguage();
-  const { data: collectionDetails } = useGetCollectionDetails(id);
+  const { data: collectionDetails } = useGetCollectionDetails(id as string);
 
-  const renderImagesCollection = useCallback((collection: Collection) => {
+  const renderImagesCollection = useCallback((collection: Collection | undefined) => {
     return (
       <Swiper
         modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}

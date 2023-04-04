@@ -13,5 +13,5 @@ export interface Collection {
   size: string;
   surface: string;
   fileUrls: string[];
-  collectionGroup?: CollectionGroup;
+  collectionGroup?: CollectionGroup | any;
 }

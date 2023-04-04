@@ -7,10 +7,10 @@ import { toast } from 'react-toastify';
 
 import useAuth from '@/hooks/auth/useLogin';
 import useDebounce from '@/hooks/useDebounce';
+import { useTranslate } from '@/hooks/useTranslate';
 
 import { TOAST_CONFIG } from '@/configs/toast';
 import { hashPassword } from '@/utils/auth';
-import { useTranslate } from '@/hooks/useTranslate';
 
 interface LoginFormValues {
   email: string;
@@ -76,7 +76,9 @@ const Login = () => {
             />
           </Form.Item>
 
-          <Form.Item name="rememberMe" valuePropName="checked">
+          <Form.Item
+            name="rememberMe"
+            valuePropName="checked">
             <Checkbox>Remember me</Checkbox>
           </Form.Item>
 
@@ -92,7 +94,9 @@ const Login = () => {
             </Button>
           </Form.Item>
           <Form.Item>
-            <a onClick={() => router.push('/forgot-password')} href="#">Forgot password?</a>
+            <a
+              onClick={() => router.push('/forgot-password')}
+              href="#">Forgot password?</a>
           </Form.Item>
         </Form>
       </div>

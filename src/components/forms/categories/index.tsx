@@ -86,21 +86,37 @@ const CategoryForm: React.FC<CategoryFormProps> = ({ action, category, dialogRef
   };
 
   return (
-    <Form form={form} layout="vertical" onFinish={handleFinish} initialValues={{}}>
-      <Form.Item label={translate.common.name} name="name" rules={[{ required: true, message: translate.common.form.required }]}>
+    <Form
+      form={form}
+      layout="vertical"
+      onFinish={handleFinish}
+      initialValues={{}}>
+      <Form.Item
+        label={translate.common.name}
+        name="name"
+        rules={[{ required: true, message: translate.common.form.required }]}>
         <Input className='rounded-lg' />
       </Form.Item>
-      <Form.Item label={translate.common.description} name="description" rules={[{ required: true, message: translate.common.form.required }]}>
-        <Input.TextArea className='rounded-lg' size='large' />
+      <Form.Item
+        label={translate.common.description}
+        name="description"
+        rules={[{ required: true, message: translate.common.form.required }]}>
+        <Input.TextArea
+          className='rounded-lg'
+          size='large' />
       </Form.Item>
       <UploadFile
         name="imageUrl"
         ref={uploadFileRef} />
       <Row className='flex justify-end'>
-        <Button className='mr-1' onClick={handleClose}>
+        <Button
+          className='mr-1'
+          onClick={handleClose}>
           {translate.common.cancelBtn}
         </Button>
-        <Button type="primary" htmlType="submit">
+        <Button
+          type="primary"
+          htmlType="submit">
           {action === 'add' ? translate.common.createBtn : translate.common.updateBtn}
         </Button>
       </Row>

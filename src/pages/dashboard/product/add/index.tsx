@@ -209,20 +209,28 @@ const AddProduct: React.FC<AddProductProps> = ({ product }) => {
   };
 
   return (
-    <Space direction="vertical" size="middle" className='flex'>
+    <Space
+      direction="vertical"
+      size="middle"
+      className='flex'>
       <Breadcrumb>
         <Breadcrumb.Item>{translate.home.title}</Breadcrumb.Item>
         <Breadcrumb.Item>{translate.products.title}</Breadcrumb.Item>
         <Breadcrumb.Item>{isEdit ? translate.common.edit : translate.common.addNew}</Breadcrumb.Item>
       </Breadcrumb>
       <Typography.Title level={2}>{isEdit ? translate.products.edit : translate.products.add}</Typography.Title>
-      <Form form={form} onFinish={handleSave} layout="vertical">
+      <Form
+        form={form}
+        onFinish={handleSave}
+        layout="vertical">
         <Form.Item
           name="name"
           label={<Typography className='font-bold'>{translate.common.name}</Typography>}
           rules={[{ required: true, message: translate.common.form.required }]}
         >
-          <Input className='rounded-lg' size='large' />
+          <Input
+            className='rounded-lg'
+            size='large' />
         </Form.Item>
 
         <Form.Item
@@ -264,26 +272,43 @@ const AddProduct: React.FC<AddProductProps> = ({ product }) => {
         </Form.Item>
 
         <Form.Item label={<Typography className='font-bold'>{translate.woodTypes.name}</Typography>}>
-          <SearchAndTagInput options={woodTypesFormat} ref={woodTypesRef} />
+          <SearchAndTagInput
+            options={woodTypesFormat}
+            ref={woodTypesRef} />
         </Form.Item>
         <Form.Item label={<Typography className='font-bold'>{translate.adhesives.name}</Typography>}>
-          <SearchAndTagInput options={adhesivesFormat} ref={adhesivesRef} />
+          <SearchAndTagInput
+            options={adhesivesFormat}
+            ref={adhesivesRef} />
         </Form.Item>
         <Form.Item label={<Typography className='font-bold'>{translate.thicknesses.name}</Typography>}>
-          <SearchAndTagInput options={thicknessesFormat} ref={thicknessesRef} />
+          <SearchAndTagInput
+            options={thicknessesFormat}
+            ref={thicknessesRef} />
         </Form.Item>
         <Form.Item label={<Typography className='font-bold'>{translate.sizes.name}</Typography>}>
-          <SearchAndTagInput options={sizesFormat} ref={sizesRef} />
+          <SearchAndTagInput
+            options={sizesFormat}
+            ref={sizesRef} />
         </Form.Item>
         <Form.Item label={<Typography className='font-bold'>{translate.common.image}</Typography>}>
-          <UploadImages name='file' ref={uploadImagesRef} />
+          <UploadImages
+            name='file'
+            ref={uploadImagesRef} />
         </Form.Item>
         <Row className='w-full flex flex-row-reverse'>
           <Form.Item>
-            <Button onClick={handleCancel} size='large' className='w-24'>
+            <Button
+              onClick={handleCancel}
+              size='large'
+              className='w-24'>
               {translate.common.cancelBtn}
             </Button>
-            <Button className='ml-4 w-24' type="primary" htmlType="submit" size='large'>
+            <Button
+              className='ml-4 w-24'
+              type="primary"
+              htmlType="submit"
+              size='large'>
               {translate.common.saveBtn}
             </Button>
           </Form.Item>

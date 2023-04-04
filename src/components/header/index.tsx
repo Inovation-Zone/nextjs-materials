@@ -177,7 +177,7 @@ export default function Header() {
         className='absolute top-0 left-0 h-full w-full'
         loop
       >
-        {SLIDE_URLS.map((slide: string) => (
+        {SLIDE_URLS.map((slide: any) => (
           <SwiperSlide key={slide.src}>
             <img
               src={slide.src}

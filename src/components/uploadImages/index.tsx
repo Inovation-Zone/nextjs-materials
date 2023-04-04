@@ -59,14 +59,18 @@ const UploadImages = forwardRef<Ref, UploadImagesProps>(
         <div className="flex flex-wrap">
           {fileUrls &&
             fileUrls.map((item, index) => (
-              <div key={item} className="relative mr-4 mb-4">
+              <div
+                key={item}
+                className="relative mr-4 mb-4">
                 <img
                   src={item}
                   alt={item}
                   className="w-[120px] h-[120px] border rounded-lg cursor-pointer object-cover"
                 />
                 <div className="absolute top-0 right-0 m-1">
-                  <DeleteFilled className='text-red-600' onClick={() => handleRemove(index)} />
+                  <DeleteFilled
+                    className='text-red-600'
+                    onClick={() => handleRemove(index)} />
                 </div>
               </div>
             ))}
@@ -75,7 +79,9 @@ const UploadImages = forwardRef<Ref, UploadImagesProps>(
     };
 
     return (
-      <Form.Item name={name} {...restProps}>
+      <Form.Item
+        name={name}
+        {...restProps}>
         <Col>
           <Upload.Dragger
             accept={accept}

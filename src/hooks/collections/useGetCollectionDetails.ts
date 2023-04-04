@@ -11,8 +11,10 @@ interface UseGetCollectionDetailsResult {
 }
 
 const getCollectionDetails = async (collectionId: string) => {
-  const result = collectionId && await httpRequest.get(COLLECTIONS_API.getCollectionDetails.api(collectionId));
-  return result?.data?.data;
+  if (collectionId) {
+    const result = await httpRequest.get(COLLECTIONS_API.getCollectionDetails.api(collectionId));
+    return result?.data?.data;
+  }
 };
 
 const useGetCollectionDetails = (collectionId: string): UseGetCollectionDetailsResult => {

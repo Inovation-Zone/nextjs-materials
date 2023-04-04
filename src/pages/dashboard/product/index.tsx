@@ -38,7 +38,7 @@ const Product: React.FC = () => {
     refetch();
   }, [params]);
 
-  const handleCategoryChange = (checkedValues: string[]) => {
+  const handleCategoryChange = (checkedValues: string[] | any) => {
     setPrams({ ...params, categoryIds: checkedValues.join(',') });
     setSelectedCategories(checkedValues);
   };
@@ -81,13 +81,18 @@ const Product: React.FC = () => {
   }, 300);
 
   return (
-    <Space direction="vertical" size="middle" className='flex'>
+    <Space
+      direction="vertical"
+      size="middle"
+      className='flex'>
       <Breadcrumb>
         <Breadcrumb.Item>{translate.home.title}</Breadcrumb.Item>
         <Breadcrumb.Item>{translate.products.title}</Breadcrumb.Item>
       </Breadcrumb>
       <Typography.Title level={2}>{translate.products.title}</Typography.Title>
-      <Row gutter={[16, 16]} className='h-full'>
+      <Row
+        gutter={[16, 16]}
+        className='h-full'>
         <Col span={6}>
           <Col className='border h-full'>
             <Row className='h-[70px] flex items-center ml-4'>
@@ -109,7 +114,10 @@ const Product: React.FC = () => {
                 onChange={handleCategoryChange}
               >
                 {categories.map((category: Category) => (
-                  <Checkbox className='mt-4' key={category.id} value={category.id}>
+                  <Checkbox
+                    className='mt-4'
+                    key={category.id}
+                    value={category.id}>
                     {category.name}
                   </Checkbox>
                 ))}
@@ -133,7 +141,9 @@ const Product: React.FC = () => {
               {translate.common.createBtn}
             </Button>
           </Row>
-          {isLoadingProducts && <Skeleton className='mt-4' active />}
+          {isLoadingProducts && <Skeleton
+            className='mt-4'
+            active />}
           <Row className={`border h-full mt-4 p-4 ${products.length ? 'grid grid-cols-3 gap-4' : 'flex items-center justify-center'}`}>
             {!products.length && <Empty description={false} />}
             {products.map((item: Product, index: number) => {
@@ -141,14 +151,21 @@ const Product: React.FC = () => {
               return (
                 <Col key={index}>
                   <Card
-                    cover={<img src={fileResources.length ? fileResources[0].fileUrl : DEFAULT_IMAGE} alt="product" className='object-cover h-48' />}
+                    cover={<img
+                      src={fileResources.length ? fileResources[0].fileUrl : DEFAULT_IMAGE}
+                      alt="product"
+                      className='object-cover h-48' />}
                     hoverable
                     className='h-[450px]'
                   >
                     <Tag color="green">{item?.category?.name}</Tag>
                     <Col className='h-[150px]'>
-                      <Typography.Title level={5} className="overflow-ellipsis overflow-hidden h-16">{item.name}</Typography.Title>
-                      <Typography className='mb-4 h-[80px]' dangerouslySetInnerHTML={{ __html: item.description.length > 100 ? item.description.substring(0, 80) + '...' : item.description }}>{ }</Typography>
+                      <Typography.Title
+                        level={5}
+                        className="overflow-ellipsis overflow-hidden h-16">{item.name}</Typography.Title>
+                      <Typography
+                        className='mb-4 h-[80px]'
+                        dangerouslySetInnerHTML={{ __html: item.description.length > 100 ? item.description.substring(0, 80) + '...' : item.description }}>{ }</Typography>
                     </Col>
                     <Col>
                       <Row className='w-full flex items-center justify-between mt-4'>

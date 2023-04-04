@@ -1,5 +1,4 @@
-import { Col } from 'antd';
-import Typography from 'antd/es/typography/Typography';
+import { Col, Typography } from 'antd';
 import { forwardRef, useEffect, useImperativeHandle, useState } from 'react';
 
 import { Option } from '@/models/products.model';
@@ -22,7 +21,7 @@ const CustomSelect = forwardRef<Ref, CustomSelectProps>(({ label, layout }, ref)
   const [optionSelected, setOptionSelected] = useState<Option | undefined>();
 
   useEffect(() => {
-    setOptionSelected(options?.length && options[0]);
+    setOptionSelected(options?.length ? options[0] : undefined);
   }, [options]);
 
   useImperativeHandle(ref, () => ({

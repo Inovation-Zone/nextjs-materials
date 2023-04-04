@@ -22,7 +22,7 @@ const useUserInfos = () => useContext(userContext);
 const UserInfoProvider = ({ children }: { children: React.ReactNode }) => {
   const [userInfos, setUserInfo] = useState<UserInfos | null>(null);
 
-  const updateUserInfos = useCallback((info: UserInfos): void => {
+  const updateUserInfos = useCallback((info: UserInfos | null): void => {
     setUserInfo(info);
   }, []);
 

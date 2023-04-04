@@ -74,7 +74,9 @@ const ComponentPage: React.FC = () => {
       key: 'thumbnail',
       width: '20%',
       render: (text: string, record: Category) => {
-        return <img srcSet={record.imageUrl ? record?.imageUrl : DEFAULT_IMAGE} className='w-16 h-16 border rounded-lg object-cover' />;
+        return <img
+          srcSet={record.imageUrl ? record?.imageUrl : DEFAULT_IMAGE}
+          className='w-16 h-16 border rounded-lg object-cover' />;
       },
     },
     {
@@ -111,7 +113,10 @@ const ComponentPage: React.FC = () => {
   ];
 
   return (
-    <Space direction="vertical" size="middle" className='flex'>
+    <Space
+      direction="vertical"
+      size="middle"
+      className='flex'>
       <Breadcrumb>
         <Breadcrumb.Item>{translate.home.title}</Breadcrumb.Item>
         <Breadcrumb.Item>{translate.categories.title}</Breadcrumb.Item>

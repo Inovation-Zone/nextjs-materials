@@ -52,7 +52,10 @@ export default function ComponentsPage() {
             )}
           >
             <h1>Built-in Components</h1>
-            <ArrowLink direction='left' className='mt-2' href='/'>
+            <ArrowLink
+              direction='left'
+              className='mt-2'
+              href='/'>
               Back to Home
             </ArrowLink>
 
@@ -88,7 +91,9 @@ export default function ComponentsPage() {
                     onChange={(e) => setColor(e.target.value as Color)}
                   >
                     {colorList.map((c) => (
-                      <option key={c} value={c}>
+                      <option
+                        key={c}
+                        value={c}>
                         {c}
                       </option>
                     ))}
@@ -176,7 +181,9 @@ export default function ComponentsPage() {
                   why not build a component with some whimsy touch?
                 </p>
                 <div className='flex flex-wrap items-center gap-4'>
-                  <ArrowLink href='/' direction='left'>
+                  <ArrowLink
+                    href='/'
+                    direction='left'>
                     Direction Left
                   </ArrowLink>
                   <ArrowLink href='/'>Direction Right</ArrowLink>
@@ -244,10 +251,14 @@ export default function ComponentsPage() {
                 </p>
                 <div className='flex flex-wrap gap-2'>
                   <Button variant='primary'>Primary Variant</Button>
-                  <Button variant='outline' isDarkBg={mode === 'dark'}>
+                  <Button
+                    variant='outline'
+                    isDarkBg={mode === 'dark'}>
                     Outline Variant
                   </Button>
-                  <Button variant='ghost' isDarkBg={mode === 'dark'}>
+                  <Button
+                    variant='ghost'
+                    isDarkBg={mode === 'dark'}>
                     Ghost Variant
                   </Button>
                   <Button variant='dark'>Dark Variant</Button>
@@ -293,7 +304,9 @@ export default function ComponentsPage() {
                   </Button>
                 </div>
                 <div className='!mt-4 flex flex-wrap gap-2'>
-                  <Button size='sm' variant='primary'>
+                  <Button
+                    size='sm'
+                    variant='primary'>
                     Small Size
                   </Button>
                   <Button
@@ -303,13 +316,20 @@ export default function ComponentsPage() {
                   >
                     Small Size
                   </Button>
-                  <Button size='sm' variant='ghost' isDarkBg={mode === 'dark'}>
+                  <Button
+                    size='sm'
+                    variant='ghost'
+                    isDarkBg={mode === 'dark'}>
                     Small Size
                   </Button>
-                  <Button size='sm' variant='dark'>
+                  <Button
+                    size='sm'
+                    variant='dark'>
                     Small Size
                   </Button>
-                  <Button size='sm' variant='light'>
+                  <Button
+                    size='sm'
+                    variant='light'>
                     Small Size
                   </Button>
                 </div>
@@ -360,24 +380,38 @@ export default function ComponentsPage() {
                 </div>
 
                 <div className='!mt-4 flex flex-wrap gap-2'>
-                  <Button disabled variant='primary'>
+                  <Button
+                    disabled
+                    variant='primary'>
                     Disabled
                   </Button>
-                  <Button disabled variant='outline' isDarkBg={mode === 'dark'}>
+                  <Button
+                    disabled
+                    variant='outline'
+                    isDarkBg={mode === 'dark'}>
                     Disabled
                   </Button>
-                  <Button disabled variant='ghost' isDarkBg={mode === 'dark'}>
+                  <Button
+                    disabled
+                    variant='ghost'
+                    isDarkBg={mode === 'dark'}>
                     Disabled
                   </Button>
-                  <Button disabled variant='dark'>
+                  <Button
+                    disabled
+                    variant='dark'>
                     Disabled
                   </Button>
-                  <Button disabled variant='light'>
+                  <Button
+                    disabled
+                    variant='light'>
                     Disabled
                   </Button>
                 </div>
                 <div className='flex flex-wrap gap-2'>
-                  <Button isLoading variant='primary'>
+                  <Button
+                    isLoading
+                    variant='primary'>
                     Disabled
                   </Button>
                   <Button
@@ -387,13 +421,20 @@ export default function ComponentsPage() {
                   >
                     Disabled
                   </Button>
-                  <Button isLoading variant='ghost' isDarkBg={mode === 'dark'}>
+                  <Button
+                    isLoading
+                    variant='ghost'
+                    isDarkBg={mode === 'dark'}>
                     Disabled
                   </Button>
-                  <Button isLoading variant='dark'>
+                  <Button
+                    isLoading
+                    variant='dark'>
                     Disabled
                   </Button>
-                  <Button isLoading variant='light'>
+                  <Button
+                    isLoading
+                    variant='light'>
                     Disabled
                   </Button>
                 </div>
@@ -419,9 +460,15 @@ export default function ComponentsPage() {
                     variant='outline'
                     icon={HiOutlineDesktopComputer}
                   />
-                  <IconButton variant='ghost' icon={HiOutlineDeviceMobile} />
-                  <IconButton variant='dark' icon={HiOutlineShieldCheck} />
-                  <IconButton variant='light' icon={HiOutlineCreditCard} />
+                  <IconButton
+                    variant='ghost'
+                    icon={HiOutlineDeviceMobile} />
+                  <IconButton
+                    variant='dark'
+                    icon={HiOutlineShieldCheck} />
+                  <IconButton
+                    variant='light'
+                    icon={HiOutlineCreditCard} />
                 </div>
               </li>
               <li className='space-y-2'>

@@ -17,7 +17,9 @@ const TinyMCEEditor: React.FC<TinyMCEEditorProps> = ({ name, label, initialValue
   };
 
   return (
-    <Form.Item name={name} label={label}>
+    <Form.Item
+      name={name}
+      label={label}>
       <Editor
         apiKey="p6ztomd4w6uf6v89xty6ye1e33nibaikoi4a7wfw4eb5cibh"
         onInit={(evt, editor) => (editorRef.current = editor)}

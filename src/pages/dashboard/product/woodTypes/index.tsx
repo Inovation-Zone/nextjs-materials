@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
 import { Form, Input, InputNumber, Popconfirm, Table, Typography } from 'antd';
+import React, { useState } from 'react';
 
 interface Item {
   key: string;
@@ -127,15 +127,21 @@ const App: React.FC = () => {
         const editable = isEditing(record);
         return editable ? (
           <span>
-            <Typography.Link onClick={() => save(record.key)} style={{ marginRight: 8 }}>
+            <Typography.Link
+              onClick={() => save(record.key)}
+              style={{ marginRight: 8 }}>
               Save
             </Typography.Link>
-            <Popconfirm title="Sure to cancel?" onConfirm={cancel}>
+            <Popconfirm
+              title="Sure to cancel?"
+              onConfirm={cancel}>
               <a>Cancel</a>
             </Popconfirm>
           </span>
         ) : (
-          <Typography.Link disabled={editingKey !== ''} onClick={() => edit(record)}>
+          <Typography.Link
+            disabled={editingKey !== ''}
+            onClick={() => edit(record)}>
             Edit
           </Typography.Link>
         );
@@ -160,7 +166,9 @@ const App: React.FC = () => {
   });
 
   return (
-    <Form form={form} component={false}>
+    <Form
+      form={form}
+      component={false}>
       <Table
         components={{
           body: {

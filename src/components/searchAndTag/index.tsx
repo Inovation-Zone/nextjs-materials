@@ -74,16 +74,25 @@ const SearchAndTagInput = forwardRef<Ref, SearchAndTagInputProps>(
           value={inputValue}
         />
         {filteredOptions.map((option) => (
-          <AutoComplete.Option key={option.value} value={option.value}>
+          <AutoComplete.Option
+            key={option.value}
+            value={option.value}>
             {option.name}
           </AutoComplete.Option>
         ))}
-        <Button type="primary" style={{ marginLeft: '8px' }} onClick={handleAddAll}>
+        <Button
+          type="primary"
+          style={{ marginLeft: '8px' }}
+          onClick={handleAddAll}>
           {translate.common.addAll}
         </Button>
         <Row className='ml-4'>
           {tags.map((tag) => (
-            <Tag closable key={tag?.value} onClose={() => handleTagClose(tag)} className='flex items-center justify-center'>
+            <Tag
+              closable
+              key={tag?.value}
+              onClose={() => handleTagClose(tag)}
+              className='flex items-center justify-center'>
               {tag?.name}
             </Tag>
           ))}
