@@ -2,15 +2,15 @@ import { useMemo } from 'react';
 import { useQuery } from 'react-query';
 
 import httpRequest from '@/configs/api';
-import { CATALOG_API } from '@/constants/api';
+import { CATALOGS_API } from '@/constants/api';
 
-const getAdhesives = async () => {
-  const result = await httpRequest.get(CATALOG_API.getCatalogsGroupByGroupId.api);
+const getCatalogs = async () => {
+  const result = await httpRequest.get(CATALOGS_API.getCatalogsGroupByGroupId.api);
   return result?.data?.items;
 };
 
 const useGetCatalogGroupByCatalogGroup = () => {
-  const { data, isLoading, refetch } = useQuery(CATALOG_API.getCatalogsGroupByGroupId.name, getAdhesives, { staleTime: 0, cacheTime: 0, });
+  const { data, isLoading, refetch } = useQuery(CATALOGS_API.getCatalogsGroupByGroupId.name, getCatalogs, { staleTime: 0, cacheTime: 0, });
 
   const catalogsGroupByGroupId = useMemo(() => {
     return data;

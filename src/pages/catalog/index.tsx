@@ -2,7 +2,7 @@
 import { Col, Row, Typography } from 'antd';
 import Head from 'next/head';
 
-import useGetCatalogGroupByCatalogGroup from '@/hooks/catalog/useGetCatalogGroupByCatalogGroup';
+import useGetCatalogGroupByCatalogGroup from '@/hooks/catalogs/useGetCatalogGroupByCatalogGroup';
 import { useLanguage } from '@/hooks/useTranslate';
 
 import Header from '@/components/header';

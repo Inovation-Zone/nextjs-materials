@@ -117,9 +117,20 @@ export const PRODUCT_API = {
   },
 }
 
-export const CATALOG_API = {
+export const CATALOGS_API = {
   getCatalogsGroupByGroupId: {
     name: 'catalogsGroupByGroupId',
     api: '/catalogsGroupByGroupId',
+  },
+}
+
+export const COLLECTIONS_API = {
+  getCollectionsGroupByCollectionGroupId: {
+    name: 'collectionsGroupByCollectionGroupId',
+    api: '/collectionsGroupByCollectionGroupId',
+  },
+  getCollectionDetails: {
+    name: (collectionId: string) => `/collection/${collectionId}`,
+    api: (collectionId: string) => `/collection/${collectionId}`,
   },
 }

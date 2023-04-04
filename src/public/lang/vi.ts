@@ -69,6 +69,12 @@ export default {
     contacts: 'Liên hệ',
     inquiry: 'Đặt hàng'
   },
+  collections: {
+    colorName: 'Màu sắc',
+    code: 'Mã',
+    surfaceTexture: 'Bề mặt',
+    size: 'Kích thước'
+  },
   messageToast: {
     form: {
       success: {

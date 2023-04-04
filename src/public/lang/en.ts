@@ -69,6 +69,12 @@ export default {
     contacts: 'Contacts',
     inquiry: 'Inquiry'
   },
+  collections: {
+    colorName: 'Color Name',
+    code: 'Code',
+    surfaceTexture: 'Surface Texture',
+    size: 'Size'
+  },
   messageToast: {
     form: {
       success: {

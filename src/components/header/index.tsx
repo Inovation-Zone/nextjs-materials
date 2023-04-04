@@ -18,6 +18,7 @@ import { useTranslate } from '@/hooks/useTranslate';
 
 import SwitchLanguage from '@/components/switchLanguage';
 
+import { SLIDE_URLS } from '@/constants';
 import { Product } from '@/models/products.model';
 
 interface MenuItem {
@@ -39,7 +40,7 @@ export default function Header() {
   const menuItems: MenuItem[] = [
     { label: translate.menus.aboutUs, key: 'about', expaned: true },
     { label: translate.menus.products, key: 'products', expaned: true },
-    { label: translate.menus.collections, key: 'collections' },
+    { label: translate.menus.collections, key: 'collection' },
     { label: translate.menus.catalog, key: 'catalog' },
     { label: translate.menus.news, key: 'news' },
     { label: translate.menus.contacts, key: 'contacts' },
@@ -53,6 +54,9 @@ export default function Header() {
   const handleMenuItemClick = (item: MenuItem) => {
     if (item.key === 'catalog') {
       router.push('/catalog');
+    }
+    if (item.key === 'collection') {
+      router.push('/collection');
     }
     if (item?.expaned) {
       setShowBoard(!showBoard);
@@ -77,9 +81,6 @@ export default function Header() {
     })
   }
 
-  const handleLanguageChange = () => {
-
-  }
 
   const renderMenuProducts = () => {
     return products.map((item: Product) => {
@@ -176,30 +177,13 @@ export default function Header() {
         className='absolute top-0 left-0 h-full w-full'
         loop
       >
-        <SwiperSlide>
-          <img
-            src='https://www.panelplus.com/uploads/slide/d35eb-banner1-04.jpg'
-            className='w-full object-cover'
-          />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img
-            src='https://www.panelplus.com/uploads/slide/5cef4-banner_1-03.jpg'
-            className='w-full object-cover'
-          />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img
-            src='https://www.panelplus.com/uploads/slide/83927-banner1-03.jpg'
-            className='w-full object-cover'
-          />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img
-            src='https://www.panelplus.com/uploads/slide/e142c-download-01.jpg'
-            className='w-full object-cover'
-          />
-        </SwiperSlide>
+        {SLIDE_URLS.map((slide: string) => (
+          <SwiperSlide key={slide.src}>
+            <img
+              src={slide.src}
+              className='w-full object-cover' />
+          </SwiperSlide>
+        ))}
       </Swiper>
     </div>
 
