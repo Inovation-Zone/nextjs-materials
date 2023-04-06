@@ -30,7 +30,7 @@ export const routes: Route[] = [
   {
     path: '/dashboard',
     roles: ['admin'],
-    auth: false,
+    auth: true,
     routes: [
       {
         path: '/product',

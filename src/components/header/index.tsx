@@ -35,6 +35,8 @@ export default function Header() {
   const { userInfos } = useUserInfos();
   const translate = useTranslate();
 
+  console.log('userInfos', userInfos);
+
   const { data: products = [], isLoading: isLoadingProducts, refetch } = useGetProducts({ searchKeys: '' });
 
   const menuItems: MenuItem[] = [
@@ -110,7 +112,7 @@ export default function Header() {
         >
           <UserOutlined className='text-[20px] text-white hover:text-gray-300' />
           <Typography className='ml-2 text-white hover:text-gray-300'>
-            {userInfos ? userInfos?.fullName : 'Login'}
+            {userInfos ? userInfos?.fullName : translate.common.login}
           </Typography>
         </a>
         <a

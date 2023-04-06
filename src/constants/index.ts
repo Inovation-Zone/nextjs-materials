@@ -14,3 +14,14 @@ export const SLIDE_URLS = [
     src: 'https://www.panelplus.com/uploads/slide/e142c-download-01.jpg',
   },
 ];
+
+export const LANGUAGES = [
+  {
+    id: 'vi',
+    label: 'Vietnamese'
+  },
+  {
+    id: 'en',
+    label: 'English'
+  }
+]

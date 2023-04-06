@@ -1,5 +1,5 @@
 import { LoadingOutlined, LogoutOutlined } from '@ant-design/icons';
-import { Button, Checkbox, Form, Input } from 'antd';
+import { Button, Checkbox, Form, Input, Row } from 'antd';
 import { FormInstance } from 'antd/lib/form';
 import { useRouter } from 'next/router';
 import { useRef } from 'react';
@@ -44,7 +44,7 @@ const Login = () => {
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <div className="w-[400px] bg-white p-8 rounded-md shadow-md">
-        <h2 className="text-2xl font-bold mb-4">Login</h2>
+        <h2 className="text-2xl font-bold mb-4">{translate.login.title}</h2>
         <Form
           name="basic"
           initialValues={{ rememberMe: true }}
@@ -55,31 +55,31 @@ const Login = () => {
           className='mt-12'
         >
           <Form.Item
-            label={<span className="font-bold">Email</span>}
+            label={<span className="font-bold">{translate.common.email}</span>}
             name="email"
-            rules={[{ required: true, message: 'Please input your email!' }]}
+            rules={[{ required: true, message: translate.common.form.required }]}
           >
             <Input
               className="rounded-md border-gray-300 shadow-sm px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent w-full"
-              placeholder="Enter your email"
+              placeholder={translate.login.enterYourEmail}
             />
           </Form.Item>
 
           <Form.Item
-            label={<span className="font-bold">Password</span>}
+            label={<span className="font-bold">{translate.common.password}</span>}
             name="password"
-            rules={[{ required: true, message: 'Please input your password!' }]}
+            rules={[{ required: true, message: translate.common.form.required }]}
           >
             <Input.Password
               className="rounded-md border-gray-300 shadow-sm px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent w-full"
-              placeholder="Enter your password"
+              placeholder={translate.login.enterYourPassword}
             />
           </Form.Item>
 
           <Form.Item
             name="rememberMe"
             valuePropName="checked">
-            <Checkbox>Remember me</Checkbox>
+            <Checkbox>{translate.login.rememberMe}</Checkbox>
           </Form.Item>
 
           <Form.Item>
@@ -90,14 +90,20 @@ const Login = () => {
               disabled={isLoading}
               icon={isLoading ? <LoadingOutlined /> : <LogoutOutlined />}
             >
-              Login
+              {translate.login.title}
             </Button>
           </Form.Item>
-          <Form.Item>
+          <Row className='flex items-center justify-between'>
             <a
               onClick={() => router.push('/forgot-password')}
-              href="#">Forgot password?</a>
-          </Form.Item>
+              href="#">{translate.login.forgotPassword}</a>
+            <a
+              onClick={() => router.push('/')}
+              className='cursor-pointer'
+              href='#'>{translate.common.backToHome}</a>
+          </Row>
+          <Row>
+          </Row>
         </Form>
       </div>
     </div>

@@ -25,13 +25,32 @@ export default {
     updateBtn: 'Update',
     cancelBtn: 'Cancel',
     filter: 'Filter',
+    email: 'Email',
+    password: 'Password',
+    backToHome: 'Back To Home',
     tipRemoveImage: 'Click on image to change it',
+    reset: 'Reset',
     form: {
       required: 'This field is required'
     },
     confirmDelete: (type: string) => `Do you want to delete this [${type}]?`,
     image: 'Images',
     addAll: 'Add all'
+  },
+  table: {
+    collection: {
+      name: 'Name',
+      color: 'Color',
+      code: 'Code',
+      size: 'Size',
+      surface: 'Surface',
+      group: 'Group'
+    },
+    catalog: {
+      viName: 'Name (Vietnamese)',
+      enName: 'Name (English)',
+      group: 'Group'
+    },
   },
   categories: {
     name: 'Category',
@@ -47,6 +66,33 @@ export default {
     edit: 'Edit Product',
     delete: 'Delete',
     ourProducts: 'Our Products'
+  },
+  catalog: {
+    title: 'Catalog Management',
+    name: 'Catalog',
+    add: 'Create catalog',
+    edit: 'Edit catalog',
+    thumbnail: 'Thumbnail',
+    targetFile: 'File content (DPF File)',
+    group: {
+      title: 'Group Catalog Management',
+      name: 'Group',
+      add: 'Create new group',
+      edit: 'Edit group'
+    }
+  },
+  collection: {
+    title: 'Collections Management',
+    name: 'Collection',
+    add: 'Create collection',
+    edit: 'Edit collection',
+    image: 'Image',
+    group: {
+      title: 'Group Collection Management',
+      name: 'Group',
+      add: 'Create new group',
+      edit: 'Edit group'
+    }
   },
   woodTypes: {
     name: 'Wood Types',
@@ -93,5 +139,16 @@ export default {
         logout: 'Logout failed. Please try again.'
       }
     }
+  },
+  login: {
+    title: 'Login',
+    rememberMe: 'Remember password',
+    forgotPassword: 'Forgot password?',
+    enterYourEmail: 'Enter your email',
+    enterYourPassword: 'Enter your password'
+  },
+  forgotPassword: {
+    title: 'Reset Password',
+    enterYourEmail: 'Enter your email'
   }
 }

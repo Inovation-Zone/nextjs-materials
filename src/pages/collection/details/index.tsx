@@ -14,7 +14,7 @@ import { useLanguage, useTranslate } from '@/hooks/useTranslate';
 
 import Header from '@/components/header';
 
-import { Collection, CollectionGroup } from '@/models/collections.model';
+import { Collection } from '@/models/collections.model';
 
 function CollectionDetails() {
   const router = useRouter();
@@ -71,34 +71,54 @@ function CollectionDetails() {
       <Col span={24}>
         <Row className='flex items-center justify-center mt-4'>
           <Typography.Title
-            className='mt-4 uppercase'
-            level={2}>
+            className='mt-4 uppercase text-3xl font-bold text-center'
+          >
             {collectionDetails?.collectionGroup?.[`${value}_name`]}
           </Typography.Title>
         </Row>
-        <Row className='px-[10%] mt-12'>
-          <Col span={8}>
+        <Row className='px-4 md:px-[10%] mt-12'>
+          <Col
+            span={12}
+            className='flex justify-center'>
             {renderImagesCollection(collectionDetails)}
           </Col>
           <Col
-            span={16}
-            className='px-16'>
+            span={12}
+            className='px-8'>
             <Col className='pl-5'>
               <Typography.Title
-                level={4}>{collectionDetails?.name}</Typography.Title>
+                level={4}
+                className='text-2xl font-bold'>
+                {collectionDetails?.name}
+              </Typography.Title>
               <Row>
                 <Col span={6}>
-                  <Typography>{translate.collections.colorName}</Typography>
-                  <Typography>{translate.collections.code}</Typography>
-                  <Typography>{translate.collections.surfaceTexture}</Typography>
-                  <Typography>{translate.collections.size}</Typography>
+                  <Typography className='text-lg font-bold'>
+                    {translate.collections.colorName}
+                  </Typography>
+                  <Typography className='text-lg font-bold'>
+                    {translate.collections.code}
+                  </Typography>
+                  <Typography className='text-lg font-bold'>
+                    {translate.collections.surfaceTexture}
+                  </Typography>
+                  <Typography className='text-lg font-bold'>
+                    {translate.collections.size}
+                  </Typography>
                 </Col>
-                <Col
-                  span={18}>
-                  <Typography>{collectionDetails?.color}</Typography>
-                  <Typography>{collectionDetails?.code}</Typography>
-                  <Typography>{collectionDetails?.surface}</Typography>
-                  <Typography>{collectionDetails?.size}</Typography>
+                <Col span={18}>
+                  <Typography className='text-lg'>
+                    {collectionDetails?.color}
+                  </Typography>
+                  <Typography className='text-lg'>
+                    {collectionDetails?.code}
+                  </Typography>
+                  <Typography className='text-lg'>
+                    {collectionDetails?.surface}
+                  </Typography>
+                  <Typography className='text-lg'>
+                    {collectionDetails?.size}
+                  </Typography>
                 </Col>
               </Row>
             </Col>

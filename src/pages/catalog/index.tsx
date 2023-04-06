@@ -21,14 +21,16 @@ export default function LandingPage() {
           <a
             key={catalog.id}
             className='cursor-pointer w-full mt-4'
-            href={catalog[`${value}_fileUrl` as keyof Catalog]}
+            href={catalog.fileUrl}
             target="_blank"
           >
-            <img
-              className="w-full border h-[350px]"
-              src={catalog.thumbnailUrl}
-              alt={catalog.thumbnailUrl}
-            />
+            <div className='p-1 border'>
+              <img
+                className="w-full border h-[350px] object-cover"
+                src={catalog.thumbnailUrl}
+                alt={catalog.thumbnailUrl}
+              />
+            </div>
             <Typography className='mt-4'>{catalog[`${value}_name` as keyof Catalog]}</Typography>
           </a>
         ))}

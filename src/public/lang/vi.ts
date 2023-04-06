@@ -25,13 +25,32 @@ export default {
     updateBtn: 'Cập nhật',
     cancelBtn: 'Huỷ bỏ',
     filter: 'Lọc',
+    email: 'Email',
+    password: 'Mật khẩu',
+    backToHome: 'Quay về trang chủ',
     tipRemoveImage: 'Nhấn vào hình ảnh để xoá và chọn ảnh mới',
+    reset: 'Khởi tạo',
     form: {
       required: 'Trường này là bắt buộc'
     },
     confirmDelete: (type: string) => `Bạn có muốn xoá [${type}] không?`,
     image: 'Hình ảnh',
     addAll: 'Thêm tất cả',
+  },
+  table: {
+    collection: {
+      name: 'Tên',
+      color: 'Màu',
+      code: 'Mã',
+      size: 'Kích thước',
+      surface: 'Bề mặt',
+      group: 'Nhóm'
+    },
+    catalog: {
+      viName: 'Tên (Vietnamese)',
+      enName: 'Tên (English)',
+      group: 'Nhóm'
+    },
   },
   categories: {
     name: 'Danh mục',
@@ -47,6 +66,33 @@ export default {
     edit: 'Sửa sản phẩm',
     delete: 'Xoá',
     ourProducts: 'Sản phẩm của chúng tôi'
+  },
+  catalog: {
+    title: 'Quản lý mục lục',
+    name: 'Mục lục',
+    add: 'Tạo mục lục',
+    edit: 'Sửa mục lục',
+    thumbnail: 'Hình bìa',
+    targetFile: 'Tệp nội dung (Tệp DPF)',
+    group: {
+      title: 'Quản lý nhóm',
+      name: 'Nhóm',
+      add: 'Tạo nhóm',
+      edit: 'Sửa nhóm'
+    }
+  },
+  collection: {
+    title: 'Quản lý bộ sưu tập',
+    name: 'Bộ sưu tập',
+    add: 'Tạo bộ sưu tập',
+    edit: 'Sửa bộ sưu tập',
+    image: 'Hình ảnh',
+    group: {
+      title: 'Quản lý nhóm',
+      name: 'Nhóm',
+      add: 'Tạo nhóm',
+      edit: 'Sửa nhóm'
+    }
   },
   woodTypes: {
     name: 'Loại gỗ',
@@ -93,5 +139,16 @@ export default {
         logout: 'Logout failed. Please try again.'
       }
     }
+  },
+  login: {
+    title: 'Đăng nhập',
+    rememberMe: 'Ghi nhớ mật khẩu',
+    forgotPassword: 'Quên mật khẩu?',
+    enterYourEmail: 'Nhập email',
+    enterYourPassword: 'Nhập mật khẩu'
+  },
+  forgotPassword: {
+    title: 'Cấp lại mật khẩu',
+    enterYourEmail: 'Nhập email',
   }
 }

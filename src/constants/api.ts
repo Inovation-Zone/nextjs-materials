@@ -122,6 +122,30 @@ export const CATALOGS_API = {
     name: 'catalogsGroupByGroupId',
     api: '/catalogsGroupByGroupId',
   },
+  getCatalogGroups: {
+    name: 'groups',
+    api: '/groups',
+  },
+  createCatalogGroup: {
+    name: 'group',
+    api: '/group',
+  },
+  deleteCatalogGroup: {
+    name: (groupId: string) => `/group/${groupId}`,
+    api: (groupId: string) => `/group/${groupId}`,
+  },
+  createCatalog: {
+    name: 'catalog',
+    api: '/catalog',
+  },
+  getCatalogs: {
+    name: 'catalogs',
+    api: '/catalogs',
+  },
+  deleteCatalog: {
+    name: (catalogId: string) => `/catalog/${catalogId}`,
+    api: (catalogId: string) => `/catalog/${catalogId}`,
+  }
 }
 
 export const COLLECTIONS_API = {
@@ -133,4 +157,28 @@ export const COLLECTIONS_API = {
     name: (collectionId: string) => `/collection/${collectionId}`,
     api: (collectionId: string) => `/collection/${collectionId}`,
   },
+  createCollectionGroup: {
+    name: 'collectionGroup',
+    api: '/collectionGroup',
+  },
+  createCollection: {
+    name: 'collection',
+    api: '/collection',
+  },
+  getCollectionGroups: {
+    name: 'collectionGroups',
+    api: '/collectionGroups',
+  },
+  getCollections: {
+    name: 'collections',
+    api: '/collections',
+  },
+  deleteCollectionGroup: {
+    name: (collectionGroupId: string) => `/collectionGroup/${collectionGroupId}`,
+    api: (collectionGroupId: string) => `/collectionGroup/${collectionGroupId}`,
+  },
+  deleteCollection: {
+    name: (collectionId: string) => `/collection/${collectionId}`,
+    api: (collectionId: string) => `/collection/${collectionId}`,
+  }
 }

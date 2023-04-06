@@ -1,17 +1,16 @@
 /* eslint-disable @next/next/no-img-element */
-import { LoadingOutlined, UploadOutlined } from '@ant-design/icons';
-import { Col, Form, message, Typography, Upload } from 'antd';
+import { DeleteFilled, LoadingOutlined, UploadOutlined } from '@ant-design/icons';
+import { Col, Form, Row, Upload } from 'antd';
 import { FormItemProps } from 'antd/lib/form';
+import Link from 'next/link';
 import { forwardRef, useEffect, useImperativeHandle, useState } from 'react';
 
 import useUploadFiles from '@/hooks/files/useUploadFiles';
-import { useTranslate } from '@/hooks/useTranslate';
 
-interface UploadFileProps extends Omit<FormItemProps, 'name'> {
+interface UploadAttachmentProps extends Omit<FormItemProps, 'name'> {
   name: string;
   accept?: string;
   multiple?: boolean;
-  widthPreview?: string;
 }
 
 type Ref = {
@@ -19,12 +18,10 @@ type Ref = {
   setValue: (url: string) => void;
 };
 
-const UploadFile = forwardRef<Ref, UploadFileProps>(
-  ({ name, accept = 'image/*', multiple = false, widthPreview, ...restProps }, ref) => {
+const UploadAttachment = forwardRef<Ref, UploadAttachmentProps>(
+  ({ name, accept = '.pdf', multiple = false, ...restProps }, ref) => {
     const { mutate, data: fileUrlData, isLoading } = useUploadFiles();
     const [fileUrl, setFileUrl] = useState<string | null>('');
-    const translate = useTranslate();
-    const { Text } = Typography;
 
     useEffect(() => {
       fileUrlData?.length && setFileUrl(fileUrlData?.[0]);
@@ -54,17 +51,15 @@ const UploadFile = forwardRef<Ref, UploadFileProps>(
         name={name}
         {...restProps}>
         {fileUrl ? (
-          <div>
-            <img
-              onClick={() => handleRemove()}
-              src={fileUrl}
-              alt={fileUrl}
-              style={{ height: widthPreview && widthPreview }}
-              className='w-full h-[400px] border rounded-lg cursor-pointer object-cover' />
-            <Text
-              className='text-gray-400'
-              italic>{translate.common.tipRemoveImage}</Text>
-          </div>
+          <Row>
+            <Link
+              href={fileUrl}
+              className='truncate w-auto h-6 border rounded-md px-2'
+              target="_blank">Click To Open File</Link>
+            <DeleteFilled
+              className='text-red-600 text-[20px] ml-4'
+              onClick={() => handleRemove()} />
+          </Row>
         ) : (
           <Col>
             <Upload.Dragger
@@ -73,10 +68,6 @@ const UploadFile = forwardRef<Ref, UploadFileProps>(
               onChange={handleChange}
               showUploadList={false}
               beforeUpload={(file) => {
-                if (file.type.indexOf('image/') !== 0) {
-                  message.error('You can only upload image files!');
-                  return false;
-                }
                 return true;
               }}
             >
@@ -92,4 +83,4 @@ const UploadFile = forwardRef<Ref, UploadFileProps>(
   }
 );
 
-export default UploadFile;
+export default UploadAttachment;

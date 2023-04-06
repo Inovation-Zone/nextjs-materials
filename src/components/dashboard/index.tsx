@@ -1,19 +1,20 @@
 import {
-  AppstoreOutlined,
   ColumnHeightOutlined,
   DashboardOutlined,
+  FolderOpenOutlined,
   FontSizeOutlined,
+  GroupOutlined,
   HighlightOutlined,
   HomeOutlined,
+  InsertRowRightOutlined,
   LogoutOutlined,
-  MailOutlined,
   MergeCellsOutlined,
   RadarChartOutlined,
   SettingOutlined,
   UnorderedListOutlined,
   UserOutlined
 } from '@ant-design/icons';
-import { Avatar, Badge, Dropdown, Layout, Menu, Row, Typography } from 'antd';
+import { Avatar, Dropdown, Layout, Menu, Row, Typography } from 'antd';
 import { useRouter } from 'next/router';
 import { memo, useState } from 'react';
 import { toast } from 'react-toastify';
@@ -51,6 +52,7 @@ function Dashboard({ children }: { children: React.ReactNode }) {
   const handleLogout = useDebounce(() => {
     mutate(true, {
       onSuccess: () => {
+        console.log('123213');
         updateUserInfos(null);
         router.push('/');
       },
@@ -92,19 +94,14 @@ function Dashboard({ children }: { children: React.ReactNode }) {
             icon={<DashboardOutlined />}>
             Dashboard
           </Menu.Item>
-          <Menu.Item
-            key="apps"
-            icon={<AppstoreOutlined />}>
-            Apps
-          </Menu.Item>
-          <Menu.Item
+          {/* <Menu.Item
             key="messages"
             icon={<MailOutlined />}>
             Messages
             <Badge
               count={5}
               offset={[8, 0]} />
-          </Menu.Item>
+          </Menu.Item> */}
           <Menu.SubMenu
             key="/dashboard/product"
             icon={<MergeCellsOutlined />}
@@ -137,12 +134,34 @@ function Dashboard({ children }: { children: React.ReactNode }) {
             </Menu.Item>
           </Menu.SubMenu>
           <Menu.SubMenu
+            key="/dashboard/collection"
+            icon={<FolderOpenOutlined />}
+            title={translate.collection.name}
+            onTitleClick={handleMenuClick}>
+            <Menu.Item
+              key="/dashboard/collection/group"
+              icon={<GroupOutlined />}>
+              {translate.collection.group.name}
+            </Menu.Item>
+          </Menu.SubMenu>
+          <Menu.SubMenu
+            key="/dashboard/catalog"
+            icon={<InsertRowRightOutlined />}
+            title={translate.catalog.name}
+            onTitleClick={handleMenuClick}>
+            <Menu.Item
+              key="/dashboard/catalog/group"
+              icon={<GroupOutlined />}>
+              {translate.catalog.group.name}
+            </Menu.Item>
+          </Menu.SubMenu>
+          <Menu.SubMenu
             key="settings"
             icon={<SettingOutlined />}
             title="Settings">
-            <Menu.Item key="general">General</Menu.Item>
+            {/* <Menu.Item key="general">General</Menu.Item>
             <Menu.Item key="privacy">Privacy</Menu.Item>
-            <Menu.Item key="notifications">Notifications</Menu.Item>
+            <Menu.Item key="notifications">Notifications</Menu.Item> */}
           </Menu.SubMenu>
         </Menu>
       </Sider>
