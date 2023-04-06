@@ -107,7 +107,7 @@ const ComponentPage: React.FC = () => {
       key: 'collectionGroupId',
       width: '20%',
       render: (collectionGroupId: string) => {
-        const cg: CollectionGroup = collectionGroups.find((item: CollectionGroup) => item.id === collectionGroupId);
+        const cg: CollectionGroup | any = collectionGroups.find((item: CollectionGroup) => item.id === collectionGroupId);
         return (
           <Typography>{cg?.[`${value}_name` as keyof CollectionGroup]}</Typography>
         )
@@ -275,7 +275,7 @@ const ComponentPage: React.FC = () => {
               size='large'
               loading={isLoadingList}
             >
-              {collectionGroups.map((item: CollectionGroup) => (
+              {collectionGroups.map((item: CollectionGroup | any) => (
                 <Option
                   key={item.id}
                   value={item.id}>

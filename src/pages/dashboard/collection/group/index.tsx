@@ -81,7 +81,7 @@ const App = (): JSX.Element => {
     form.setFieldsValue(collectionGroup);
   };
 
-  const handleDeleteCollectionGroup = (collectionGroup: CollectionGroup): void => {
+  const handleDeleteCollectionGroup = (collectionGroup: CollectionGroup | any): void => {
     confirm({
       content: <Typography className='font-bold'>
         {translate.common.confirmDelete(collectionGroup?.[`${value}_name` as keyof CollectionGroup])}</Typography>,
@@ -135,7 +135,7 @@ const App = (): JSX.Element => {
         }}
         loading={isLoadingList}
         dataSource={collectionGroups as CollectionGroup[]}
-        renderItem={(item) => (
+        renderItem={(item: any) => (
           <List.Item style={{ maxWidth: 360 }}>
             <Card title={item[`${value}_name` as keyof CollectionGroup]}>
               <Row className='gap-2 flex items-center justify-center'>

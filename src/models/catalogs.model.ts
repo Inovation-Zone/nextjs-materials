@@ -1,5 +1,5 @@
 export interface Group {
-  id: string;
+  id?: string;
   en_name: string;
   vi_name: string;
   catalogs?: Catalog[];

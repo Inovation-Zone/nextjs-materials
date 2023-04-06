@@ -81,10 +81,13 @@ const App = (): JSX.Element => {
     form.setFieldsValue(catalogGroup);
   };
 
-  const handleDeleteCatalogGroup = (catalogGroup: Group): void => {
+  const handleDeleteCatalogGroup = (catalogGroup: Group | any): void => {
     confirm({
-      content: <Typography className='font-bold'>
-        {translate.common.confirmDelete(catalogGroup?.[`${value}_name` as keyof Group])}</Typography>,
+      content: catalogGroup && (
+        <Typography>
+          {translate.common.confirmDelete(catalogGroup?.[`${value}_name` as keyof Group])}
+        </Typography>
+      ),
       okText: translate.common.deleteBtn,
       okType: 'danger',
       cancelText: translate.common.cancelBtn,
@@ -135,7 +138,7 @@ const App = (): JSX.Element => {
         }}
         loading={isLoadingList}
         dataSource={catalogGroups as Group[]}
-        renderItem={(item) => (
+        renderItem={(item: any) => (
           <List.Item style={{ maxWidth: 360 }}>
             <Card title={item[`${value}_name` as keyof Group]}>
               <Row className='gap-2 flex items-center justify-center'>

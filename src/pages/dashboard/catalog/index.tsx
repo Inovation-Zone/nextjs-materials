@@ -128,7 +128,7 @@ const ComponentPage: React.FC = () => {
       key: 'groupId',
       width: '30%',
       render: (groupId: string) => {
-        const cg: Group = catalogGroups.find((item: Group) => item.id === groupId);
+        const cg: any = catalogGroups.find((item: Group) => item.id === groupId);
         return (
           <Typography>{cg?.[`${value}_name` as keyof Group]}</Typography>
         )
@@ -138,7 +138,7 @@ const ComponentPage: React.FC = () => {
       title: translate.common.actions,
       key: 'actions',
       width: '10%',
-      render: (text: string, record: Catalog) => (
+      render: (text: string, record: Catalog | any) => (
         <Space size="middle">
           <Button
             icon={<EditOutlined />}
@@ -233,7 +233,7 @@ const ComponentPage: React.FC = () => {
               size='large'
               loading={isLoadingList}
             >
-              {catalogGroups.map((item: Group) => (
+              {catalogGroups.map((item: Group | any) => (
                 <Option
                   key={item.id}
                   value={item.id}>
