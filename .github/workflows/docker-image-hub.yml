@@ -1,0 +1,39 @@
+name: ci
+
+on:
+  push:
+    branches:
+      - 'develop'
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+      - name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+      - name: Build and push
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          push: true
+          tags: nnvanhao/nextjs-materials:latest
+
+      - name: SSH into server and run Docker
+        uses: appleboy/ssh-action@v0.1.9
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USERNAME }}
+          password: ${{ secrets.SERVER_PASSWORD }}
+          script: |
+            docker kill nextjs-materials || true
+            docker rm nextjs-materials || true
+            docker run -e NODE_ENV=production -d -p 3600:3600 --name nextjs-materials --restart always nnvanhao/nextjs-materials:latest
