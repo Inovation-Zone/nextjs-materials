@@ -36,4 +36,4 @@ jobs:
           script: |
             docker kill nextjs-materials || true
             docker rm nextjs-materials || true
-            docker run -e NODE_ENV=production -d -p 3600:3600 --name nextjs-materials --restart always nnvanhao/nextjs-materials:latest
+            docker run -e NODE_ENV=production -d -p 3000:3000 --name nextjs-materials --restart always nnvanhao/nextjs-materials:latest
