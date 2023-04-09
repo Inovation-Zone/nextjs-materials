@@ -20,13 +20,16 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
+      - name: Remove old Docker image
+        run: |
+          docker image rm nnvanhao/nextjs-materials:latest || true
+        if: success()
       - name: Build and push
         uses: docker/build-push-action@v4
         with:
           context: .
           push: true
           tags: nnvanhao/nextjs-materials:latest
-
       - name: SSH into server and run Docker
         uses: appleboy/ssh-action@v0.1.9
         with:
