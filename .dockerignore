@@ -1,0 +1,5 @@
+node_modules
+.next
+/.git
+/.next-cache
+.DS_Store
