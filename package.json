@@ -3,9 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "cp -fp ./.env.dev.local .env.local && next dev",
+    "dev-prod": "cp -fp ./.env.prod.local .env.local && next dev",
     "build": "next build",
     "start": "next start",
+    "start-prod": "cp -fp ./.env.prod.local .env.local && next start",
     "lint": "next lint",
     "lint:fix": "eslint src --fix && yarn format",
     "lint:strict": "eslint --max-warnings=0 src",
