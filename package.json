@@ -5,9 +5,8 @@
   "scripts": {
     "dev": "cp -fp ./.env.dev.local .env.local && next dev",
     "dev-prod": "cp -fp ./.env.prod.local .env.local && next dev",
-    "build": "next build",
-    "start": "next start",
-    "start-prod": "cp -fp ./.env.prod.local .env.local && next start",
+    "build": "cp -fp ./.env.prod.local .env.local && next build",
+    "start": "cp -fp ./.env.prod.local .env.local && next start",
     "lint": "next lint",
     "lint:fix": "eslint src --fix && yarn format",
     "lint:strict": "eslint --max-warnings=0 src",
