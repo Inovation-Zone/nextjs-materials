@@ -51,10 +51,10 @@ export default function LandingPage() {
   return (
     <div className='bg-white'>
       <Head>
-        <title>Landing Page</title>
+        <title>Gỗ Việt Thái - Trang chủ</title>
         <meta
           name='description'
-          content='Landing page description' />
+          content='Trang chủ - Gỗ Việt Thái' />
         <link
           rel='icon'
           href='/favicon.ico' />

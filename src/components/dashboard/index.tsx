@@ -1,6 +1,5 @@
 import {
   ColumnHeightOutlined,
-  DashboardOutlined,
   FolderOpenOutlined,
   FontSizeOutlined,
   GroupOutlined,
@@ -75,10 +74,11 @@ function Dashboard({ children }: { children: React.ReactNode }) {
   );
 
   return (
-    <Layout style={{ minHeight: '100vh' }}>
+    <Layout
+      style={{ minHeight: '100vh' }}>
       <Sider
         width={240}
-        className="sidebar"
+        className="sidebar py-5"
         collapsible
         collapsed={collapsed}
         onCollapse={toggleSidebar}
@@ -90,11 +90,6 @@ function Dashboard({ children }: { children: React.ReactNode }) {
           defaultSelectedKeys={['dashboard']}
           selectedKeys={menuKey}
         >
-          <Menu.Item
-            key="/dashboard"
-            icon={<DashboardOutlined />}>
-            Dashboard
-          </Menu.Item>
           <Menu.Item
             key="/dashboard/order"
             icon={<ShoppingCartOutlined />}>

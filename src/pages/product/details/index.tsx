@@ -140,10 +140,10 @@ export default function LandingPage() {
   return (
     <div className='bg-white'>
       <Head>
-        <title>Landing Page</title>
+        <title>Gỗ Việt Thái - Chi tiết sản phẩm</title>
         <meta
           name='description'
-          content='Landing page description' />
+          content='Gỗ Việt Thái - Chi tiết sản phẩm' />
         <link
           rel='icon'
           href='/favicon.ico' />

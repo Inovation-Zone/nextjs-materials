@@ -10,10 +10,10 @@ export default function About() {
   return (
     <div className='bg-white'>
       <Head>
-        <title>Landing Page</title>
+        <title>Gỗ Việt Thái</title>
         <meta
           name='description'
-          content='Landing page description' />
+          content='Gỗ Việt Thái description' />
         <link
           rel='icon'
           href='/favicon.ico' />

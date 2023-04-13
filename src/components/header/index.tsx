@@ -72,7 +72,7 @@ const Header: React.FC<HeaderProps> = ({ showSlider = true }) => {
   }, [menuRef, boardRef]);
 
   const handleGoToLogin = () => {
-    router.push(userInfos ? '/dashboard' : '/login');
+    router.push(userInfos ? '/dashboard/order' : '/login');
   }
 
   const handleMenuItemClick = (item: MenuItem) => {
@@ -133,7 +133,7 @@ const Header: React.FC<HeaderProps> = ({ showSlider = true }) => {
   return (
     <div
       className={`relative ${showSlider ? 'h-[500px]' : 'h-[300px]'}`}
-      style={{ backgroundImage: `url('https://all-project-resources.s3.ap-southeast-1.amazonaws.com/69e39-shutterstock_1402283801.jpg?response-content-disposition=inline&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEOn%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaDmFwLXNvdXRoZWFzdC0xIkgwRgIhAPe05QHGnJcaNC60A8Mm2tgfDeoNCfSgFAow%2B9aUYUEUAiEAk71q4sMdVsVxBZ27ZjEV0vHJAvnjPIr2YU1jVkcdtT4q7QII0v%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARABGgw3MjIyMDgyODI0MjQiDLk21t0Rwp5qZtT8lyrBAp9%2FNCj%2BW7OgBlw%2BMBDFd8xudDY1gnKGrtkMYTTkwx%2FLg4ybILaC60gI9YALf88hsfM58xi4L%2F0IbVi%2BX2ctzSMj%2BSpndJGbumqqulVHi6u8F1zPHxTQ%2BjvFb%2F2ocCXaUT3T2IyrKfq0c1lm0tBGooC5y35%2FX3DfHudA7w%2FajxVEk9QL6IP1VbRDrvJMCh%2FUdCvfPBitqqtv22Sf0tMaCklbm6U1FV9bg%2BMPOXeyLbCdN787rcTPsxuIOp0qPlQLNj4y55qubeNk2aS%2F8d91%2F7oxfJ8QF6%2BWv6th6ZPgsqJp%2BS%2Fk4RRy9YtzVg3wgOPrw%2F%2Fp%2BmaBeMOIe6jhXxs1fXQsyksMMQ5NR2eoHtYfAJfcVHmfnmkamcWhq6%2BeDzgvq7SUck%2BWJKGAXM6N7%2Fqg6bdZdmtOtJux1oMf21hkDlJwKTD4jd%2BhBjqyAgG5Dcq3s%2Bg39O0EaPgzdjqH%2FP6PZpeVYVfxWnsua8x0lPYTOpeECwrVLAHLG9WDJd4vyW5rzp55eATl6wTFjD4eDSCtgOkcMWTcIR45MavuULdilm5QFn4%2BpEnuYIHMa4MuhpV8pqCQ3vOXHQa5ediEDRnYqlK95O4EumbLtdg%2F71GTKU1EJ1b%2FjY0Lb47qsPgYF2nDcA3xqbyJE16PkVWu6b5Jm4CYsc42%2BlDq7SojfE%2FFB6FC8VMWxLzrIYjATcM3sU9uhLIrqjW32OPFW37kNOUc4oPgpnu8vJ0AHNMZsiuf4ek3vDSyyqRSFcsIwPWk3gNzmgSmfvWMJgudQYt8RhMSYrxXdBLfBHPXAXejAc466OodVIR8ECzsMJkJlxpe5oCL699O%2FZ54O5Cykji2Tg%3D%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20230413T095242Z&X-Amz-SignedHeaders=host&X-Amz-Expires=300&X-Amz-Credential=ASIA2QJXX244DZSIXAN2%2F20230413%2Fap-southeast-1%2Fs3%2Faws4_request&X-Amz-Signature=ad093a82581f52bd2403c19c06a9116c5d5917634add0bf9e31e70d9521f4591')`, objectFit: 'contain' }}>
+      style={{ backgroundImage: `url('https://all-project-resources.s3.ap-southeast-1.amazonaws.com/others/1681380508582_ygmciknpond.jpg')`, objectFit: 'contain' }}>
       <div className='absolute top-5 right-12 z-10 flex space-x-4'>
         <a
           href='#'
@@ -149,7 +149,9 @@ const Header: React.FC<HeaderProps> = ({ showSlider = true }) => {
           href='#'
           className='flex items-center text-gray-500 hover:text-gray-300'
         >
-          <ShoppingCartOutlined className='text-[20px] text-white hover:text-gray-300' />
+          <ShoppingCartOutlined
+            className='text-[20px] text-white hover:text-gray-300'
+            onClick={() => router.push('/cart')} />
         </a>
         <SwitchLanguage />
       </div>
