@@ -27,7 +27,7 @@ import { Adhesive, Product, Size, Thickness, WoodType } from '@/models/products.
 export default function LandingPage() {
   const router = useRouter();
   const { id = '' } = useMemo(() => router.query, [router]);
-  const { data: productDetails, isLoading } = useGetProductDetails(id);
+  const { data: productDetails, isLoading } = useGetProductDetails(id as string);
   const woodTypesRef = useRef<any>(null);
   const adhesivesRef = useRef<any>(null);
   const thicknessesRef = useRef<any>(null);

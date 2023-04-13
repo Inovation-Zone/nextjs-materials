@@ -8,7 +8,7 @@ import AddProduct from "@/pages/dashboard/product/add";
 const EditProduct: React.FC = () => {
   const router = useRouter();
   const { productId = '' } = useMemo(() => router.query, [router]);
-  const { data: productDetails } = useGetProductDetails(productId);
+  const { data: productDetails } = useGetProductDetails(productId as string);
 
   return (
     <AddProduct product={productDetails} />

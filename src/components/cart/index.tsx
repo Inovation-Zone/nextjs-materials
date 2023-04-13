@@ -146,7 +146,7 @@ const Order = () => {
           max={10}
           type='number'
           defaultValue={text}
-          onChange={(value) => handleQuantityChange(record.key, Number(value))}
+        // onChange={(value) => handleQuantityChange(record.key, Number(value))}
         />
       ),
     },
@@ -183,7 +183,7 @@ const Order = () => {
     const data: CustomerOrderBody = {
       ...values,
       code: generateOrderCode(),
-      carts: cartIds,
+      carts: cartIds as any,
       status: 'new'
     }
 

@@ -144,7 +144,7 @@ const ComponentPage: React.FC = () => {
         <CategoryForm
           dialogRef={dialogRef}
           action={isAction}
-          category={categorySelected}
+          category={categorySelected as any}
           onSuccess={() => {
             refetch();
           }}
