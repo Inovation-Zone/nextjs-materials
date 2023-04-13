@@ -1,11 +1,14 @@
 
 
-import { Editor } from '@tinymce/tinymce-react';
-import { Breadcrumb, Button, Form, Input, Row, Select, Space, Typography } from 'antd';
+import { Breadcrumb, Button, Col, Form, Input, Row, Select, Space, Typography } from 'antd';
 import { useRouter } from 'next/router';
 import { useEffect, useMemo, useRef } from 'react';
+// Import React dependencies.
+import React from 'react'
 import { toast } from 'react-toastify';
 
+// Import the Slate editor factory.
+// Import the Slate components and React plugin.
 import useGetAdhesives from '@/hooks/adhesives/useGetAdhesives';
 import useGetCategories from '@/hooks/categories/useGetCategories';
 import useCreateProduct from '@/hooks/product/useCreateProduct';
@@ -13,10 +16,12 @@ import useUpdateProduct from '@/hooks/product/useUpdateProduct';
 import useGetSizes from '@/hooks/sizes/useGetSizes';
 import useGetThicknesses from '@/hooks/thicknesses/useGetThicknesses';
 // Import the Slate components and React plugin.
-import { useTranslate } from '@/hooks/useTranslate';
+import { useLanguage, useTranslate } from '@/hooks/useTranslate';
 import useGetWoodTypes from '@/hooks/woodTypes/useGetWoodTypes';
 
+import Editor from '@/components/editor';
 import SearchAndTagInput from '@/components/searchAndTag';
+import SwitchComponent from '@/components/switch';
 import UploadImages from '@/components/uploadImages';
 
 import { TOAST_CONFIG } from '@/configs/toast';
@@ -27,21 +32,17 @@ interface AddProductProps {
   product: Product;
 }
 
-interface AddProductForm {
-  name: string;
-  categoryId: string;
-  description: string;
-}
-
 const AddProduct: React.FC<AddProductProps> = ({ product }) => {
   const translate = useTranslate();
-  const [form] = Form.useForm<AddProductForm>();
+  const [form] = Form.useForm<Product>();
   const woodTypesRef = useRef<any>(null);
   const adhesivesRef = useRef<any>(null);
   const thicknessesRef = useRef<any>(null);
   const sizesRef = useRef<any>(null);
   const uploadImagesRef = useRef<any>(null);
-  const editorRef = useRef<any>(null);
+  const editorViRef = useRef<any>(null);
+  const editorEnRef = useRef<any>(null);
+  const { value } = useLanguage();
 
   const isEdit = useMemo(() => {
     if (product) {
@@ -61,13 +62,19 @@ const AddProduct: React.FC<AddProductProps> = ({ product }) => {
 
   useEffect(() => {
     if (isEdit) {
+      editorViRef.current.setValue(product?.vi_description);
+      editorEnRef.current.setValue(product?.en_description);
+
+      // hiddenRef.current.setValue(product?.isHidden);
+
       const { woodTypes, adhesives, thicknesses, sizes, fileResources = [] } = product;
+
       form.setFieldsValue(product);
 
       if (woodTypes?.length) {
         const woodTypesFormat = woodTypes.map((item: WoodType) => {
           return {
-            name: item?.name,
+            name: item?.[`${value}_name` as keyof WoodType],
             value: item?.id
           }
         })
@@ -75,7 +82,7 @@ const AddProduct: React.FC<AddProductProps> = ({ product }) => {
       }
 
       if (adhesives?.length) {
-        const adhesivesFormat = adhesives.map((item: WoodType) => {
+        const adhesivesFormat = adhesives.map((item: Adhesive) => {
           return {
             name: item?.name,
             value: item?.id
@@ -113,7 +120,7 @@ const AddProduct: React.FC<AddProductProps> = ({ product }) => {
   const categoriesFormat = useMemo(() => {
     return categories.map((item: Category) => {
       return {
-        label: item.name,
+        label: item?.[`${value}_name` as keyof Category],
         value: item.id
       }
     })
@@ -131,7 +138,7 @@ const AddProduct: React.FC<AddProductProps> = ({ product }) => {
   const woodTypesFormat = useMemo(() => {
     return woodTypes.map((item: WoodType) => {
       return {
-        name: item.name,
+        name: item?.[`${value}_name` as keyof WoodType],
         value: item.id
       }
     })
@@ -161,7 +168,7 @@ const AddProduct: React.FC<AddProductProps> = ({ product }) => {
 
   const handleSave = () => {
     form.validateFields().then((values) => {
-      const content = editorRef.current.getContent();
+      console.log('values', values);
       const woodTypeIds = formatObjectToIds(woodTypesRef.current.getValues());
       const adhesiveIds = formatObjectToIds(adhesivesRef.current.getValues());
       const thicknessIds = formatObjectToIds(thicknessesRef.current.getValues());
@@ -169,9 +176,9 @@ const AddProduct: React.FC<AddProductProps> = ({ product }) => {
       const imageUrls = uploadImagesRef.current.getValues();
 
       const data = {
-        name: values.name,
-        description: content,
-        categoryId: values.categoryId,
+        ...values,
+        vi_description: editorViRef.current.getValue(),
+        en_description: editorEnRef.current.getValue(),
         woodTypeIds,
         adhesiveIds,
         thicknessIds,
@@ -224,8 +231,17 @@ const AddProduct: React.FC<AddProductProps> = ({ product }) => {
         onFinish={handleSave}
         layout="vertical">
         <Form.Item
-          name="name"
-          label={<Typography className='font-bold'>{translate.common.name}</Typography>}
+          name="vi_name"
+          label={<Typography className='font-bold'>{`${translate.common.name} (Vietnamese)`}</Typography>}
+          rules={[{ required: true, message: translate.common.form.required }]}
+        >
+          <Input
+            className='rounded-lg'
+            size='large' />
+        </Form.Item>
+        <Form.Item
+          name="en_name"
+          label={<Typography className='font-bold'>{`${translate.common.name} (English)`}</Typography>}
           rules={[{ required: true, message: translate.common.form.required }]}
         >
           <Input
@@ -246,31 +262,15 @@ const AddProduct: React.FC<AddProductProps> = ({ product }) => {
           />
         </Form.Item>
         <Form.Item
-          name="description"
-          label={<Typography className='font-bold'>{translate.common.description}</Typography>}
-          rules={[{ required: true, message: translate.common.form.required }]}
-        >
-          <Editor
-            apiKey="p6ztomd4w6uf6v89xty6ye1e33nibaikoi4a7wfw4eb5cibh"
-            onInit={(evt, editor) => editorRef.current = editor}
-            init={{
-              height: 500,
-              menubar: false,
-              plugins: [
-                'advlist autolink lists link image',
-                'charmap print preview anchor help',
-                'searchreplace visualblocks code',
-                'insertdatetime media table paste wordcount'
-              ],
-              toolbar:
-                'undo redo | formatselect | bold italic | \
-              alignleft aligncenter alignright | \
-              bullist numlist outdent indent | help'
-            }}
-            initialValue={isEdit ? product.description : ''}
-          />
+          name="content"
+          label={<Typography className='font-bold'>{`${translate.common.description} (Vietnamese)`}</Typography>}>
+          <Editor ref={editorViRef} />
         </Form.Item>
-
+        <Form.Item
+          name="content"
+          label={<Typography className='font-bold'>{`${translate.common.description} (English)`}</Typography>}>
+          <Editor ref={editorEnRef} />
+        </Form.Item>
         <Form.Item label={<Typography className='font-bold'>{translate.woodTypes.name}</Typography>}>
           <SearchAndTagInput
             options={woodTypesFormat}
@@ -291,6 +291,25 @@ const AddProduct: React.FC<AddProductProps> = ({ product }) => {
             options={sizesFormat}
             ref={sizesRef} />
         </Form.Item>
+        <Row>
+          <Col span={4}>
+            <Form.Item
+              name="isHidden"
+              valuePropName="checked"
+              label={<Typography className='font-bold'>{translate.products.hidden}</Typography>}>
+              <SwitchComponent />
+            </Form.Item>
+          </Col>
+          <Col span={4}>
+            <Form.Item
+              name="isOutOfStock"
+              valuePropName="checked"
+              initialValue={isEdit ? product.isOutOfStock : true}
+              label={<Typography className='font-bold'>{translate.products.status}</Typography>}>
+              <SwitchComponent />
+            </Form.Item>
+          </Col>
+        </Row>
         <Form.Item label={<Typography className='font-bold'>{translate.common.image}</Typography>}>
           <UploadImages
             name='file'
@@ -308,6 +327,7 @@ const AddProduct: React.FC<AddProductProps> = ({ product }) => {
               className='ml-4 w-24'
               type="primary"
               htmlType="submit"
+              loading={isLoadingCreateProduct || isLoadingUpdateProduct}
               size='large'>
               {translate.common.saveBtn}
             </Button>

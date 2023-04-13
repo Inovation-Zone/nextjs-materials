@@ -14,6 +14,10 @@ export default {
     addNew: 'Tạo mới',
     edit: 'Chỉnh sửa',
     name: 'Tên',
+    fullName: 'Họ và tên',
+    phone: 'Số điện thoại',
+    contactAddress: 'Địa chỉ liên hệ',
+    note: 'Ghi chú',
     confirm: 'Xác nhận',
     description: 'Mô tả',
     thumbnail: 'Hình ảnh',
@@ -30,12 +34,17 @@ export default {
     backToHome: 'Quay về trang chủ',
     tipRemoveImage: 'Nhấn vào hình ảnh để xoá và chọn ảnh mới',
     reset: 'Khởi tạo',
+    continue: 'Tiếp tục',
+    back: 'Quay lại',
     form: {
       required: 'Trường này là bắt buộc'
     },
     confirmDelete: (type: string) => `Bạn có muốn xoá [${type}] không?`,
     image: 'Hình ảnh',
     addAll: 'Thêm tất cả',
+    buyMore: 'Mua thêm',
+    quantity: 'Số lượng',
+    detail: 'Chi tiết',
   },
   table: {
     collection: {
@@ -65,7 +74,11 @@ export default {
     add: 'Tạo mới sản phẩm',
     edit: 'Sửa sản phẩm',
     delete: 'Xoá',
-    ourProducts: 'Sản phẩm của chúng tôi'
+    ourProducts: 'Sản phẩm của chúng tôi',
+    hidden: 'Ẩn sản phẩm',
+    status: 'Còn hàng',
+    orderNow: 'Đặt hàng ngay',
+    outOfStock: 'Tạm hết hàng'
   },
   catalog: {
     title: 'Quản lý mục lục',
@@ -138,7 +151,18 @@ export default {
       failed: {
         logout: 'Logout failed. Please try again.'
       }
-    }
+    },
+    order: {
+      add: 'Thêm sản phẩm vào giỏ hàng thành công',
+      success: {
+        createOrder: 'Tạo đơn hàng thành công.',
+        changeStatus: 'Cập nhật trạng thái đơn hàng thành công.'
+      },
+      failed: {
+        createOrder: 'Có lỗi khi tạo đơn hàng. Vui lòng thử lại',
+        changeStatus: 'Có lỗi khi thay đổi trạng thái đơn hàng. Vui lòng thử lại'
+      }
+    },
   },
   login: {
     title: 'Đăng nhập',
@@ -150,5 +174,34 @@ export default {
   forgotPassword: {
     title: 'Cấp lại mật khẩu',
     enterYourEmail: 'Nhập email',
+  },
+  cart: {
+    title: 'Giỏ hàng',
+    orders: 'Đơn hàng',
+    customerInfo: 'Thông tin khách hàng',
+    done: 'Hoàn thành',
+    clearCart: 'Xoá tất cả',
+    result: {
+      title: 'Đơn đặt hàng của bạn đã được đặt thành công!',
+      description: 'Đơn đặt hàng của bạn đang được xử lý và sẽ liên hệ với bạn trong vòng 1 đến 2 ngày làm việc tiếp theo.'
+    }
+  },
+  order: {
+    title: 'Quản lý đơn đặt hàng',
+    code: 'Mã đơn hàng',
+    status: 'Trạng thái',
+    createdTime: 'Thời gian tạo đơn',
+    customerInfo: 'Thông tin khách hàng',
+    details: 'Chi tiết đơn hàng',
+    clickToChangeStatus: 'Nhấn vào để thay đổi trạng thái đơn hàng',
+    detail: {
+      title: 'Chi tiết đơn hàng'
+    },
+    statusLabel: {
+      new: 'Đơn mới',
+      process: 'Đang xử lý',
+      done: 'Hoàn thành',
+      closed: 'Đóng'
+    }
   }
 }

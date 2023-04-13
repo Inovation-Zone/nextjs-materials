@@ -1,190 +1,202 @@
-import { Form, Input, InputNumber, Popconfirm, Table, Typography } from 'antd';
+import { DeleteOutlined, EditOutlined, PlusOutlined } from '@ant-design/icons';
+import { Breadcrumb, Button, Card, Form, Input, List, Modal, Row, Space, Typography } from 'antd';
 import React, { useState } from 'react';
+import { toast } from 'react-toastify';
 
-interface Item {
-  key: string;
-  name: string;
-  age: number;
-  address: string;
-}
+import useCreateCatalogGroup from '@/hooks/catalogs/useCreateCatalogGroup';
+import useDeleteCatalogGroup from '@/hooks/catalogs/useDeleteCatalogGroup';
+import useGetCatalogGroups from '@/hooks/catalogs/useGetCatalogGroups';
+import useUpdateCatalogGroup from '@/hooks/catalogs/useUpdateCatalogGroup';
+import { useLanguage, useTranslate } from '@/hooks/useTranslate';
 
-const originData: Item[] = [];
-for (let i = 0; i < 100; i++) {
-  originData.push({
-    key: i.toString(),
-    name: `Edward ${i}`,
-    age: 32,
-    address: `London Park no. ${i}`,
-  });
-}
-interface EditableCellProps extends React.HTMLAttributes<HTMLElement> {
-  editing: boolean;
-  dataIndex: string;
-  title: any;
-  inputType: 'number' | 'text';
-  record: Item;
-  index: number;
-  children: React.ReactNode;
-}
+import { TOAST_CONFIG } from '@/configs/toast';
+import { Group } from '@/models/catalogs.model';
+import { ActionType } from '@/pages/dashboard/product/categories';
 
-const EditableCell: React.FC<EditableCellProps> = ({
-  editing,
-  dataIndex,
-  title,
-  inputType,
-  record,
-  index,
-  children,
-  ...restProps
-}) => {
-  const inputNode = inputType === 'number' ? <InputNumber /> : <Input />;
+const { confirm } = Modal;
 
-  return (
-    <td {...restProps}>
-      {editing ? (
-        <Form.Item
-          name={dataIndex}
-          style={{ margin: 0 }}
-          rules={[
-            {
-              required: true,
-              message: `Please Input ${title}!`,
+const App = (): JSX.Element => {
+  const [form] = Form.useForm<Group>();
+  const [modalVisible, setModalVisible] = useState<boolean>(false);
+  const [isAction, setIsAction] = useState<ActionType>('add');
+  const [catalogGroupSelected, setCatalogGroupSelected] = useState<Group>();
+
+  const { data: catalogGroups = [], refetch, isLoading: isLoadingList } = useGetCatalogGroups();
+  const { mutate: createMutate, isLoading: isCreateLoading } = useCreateCatalogGroup();
+  const { mutate: updateMutate, isLoading: isUpdateLoading } = useUpdateCatalogGroup();
+  const { mutate: deleteMutate, isLoading: isDeleteLoading } = useDeleteCatalogGroup();
+
+  const translate = useTranslate();
+  const { value } = useLanguage();
+
+  const handleAddCatalogGroup = (): void => {
+    setModalVisible(true);
+  };
+
+  const handleCreateCatalogGroup = (): void => {
+    form.validateFields().then(values => {
+      if (isAction === 'add') {
+        createMutate({
+          vi_name: values.vi_name,
+          en_name: values.en_name
+        },
+          {
+            onSuccess: () => {
+              toast.success(translate.messageToast.form.success.add, TOAST_CONFIG);
+              setModalVisible(false);
+              form.resetFields();
+              refetch();
             },
-          ]}
-        >
-          {inputNode}
-        </Form.Item>
-      ) : (
-        children
-      )}
-    </td>
-  );
-};
-
-const App: React.FC = () => {
-  const [form] = Form.useForm();
-  const [data, setData] = useState(originData);
-  const [editingKey, setEditingKey] = useState('');
-
-  const isEditing = (record: Item) => record.key === editingKey;
-
-  const edit = (record: Partial<Item> & { key: React.Key }) => {
-    form.setFieldsValue({ name: '', age: '', address: '', ...record });
-    setEditingKey(record.key);
-  };
-
-  const cancel = () => {
-    setEditingKey('');
-  };
-
-  const save = async (key: React.Key) => {
-    try {
-      const row = (await form.validateFields()) as Item;
-
-      const newData = [...data];
-      const index = newData.findIndex((item) => key === item.key);
-      if (index > -1) {
-        const item = newData[index];
-        newData.splice(index, 1, {
-          ...item,
-          ...row,
-        });
-        setData(newData);
-        setEditingKey('');
-      } else {
-        newData.push(row);
-        setData(newData);
-        setEditingKey('');
-      }
-    } catch (errInfo) {
-      console.log('Validate Failed:', errInfo);
-    }
-  };
-
-  const columns = [
-    {
-      title: 'name',
-      dataIndex: 'name',
-      width: '25%',
-      editable: true,
-    },
-    {
-      title: 'age',
-      dataIndex: 'age',
-      width: '15%',
-      editable: true,
-    },
-    {
-      title: 'address',
-      dataIndex: 'address',
-      width: '40%',
-      editable: true,
-    },
-    {
-      title: 'operation',
-      dataIndex: 'operation',
-      render: (_: any, record: Item) => {
-        const editable = isEditing(record);
-        return editable ? (
-          <span>
-            <Typography.Link
-              onClick={() => save(record.key)}
-              style={{ marginRight: 8 }}>
-              Save
-            </Typography.Link>
-            <Popconfirm
-              title="Sure to cancel?"
-              onConfirm={cancel}>
-              <a>Cancel</a>
-            </Popconfirm>
-          </span>
-        ) : (
-          <Typography.Link
-            disabled={editingKey !== ''}
-            onClick={() => edit(record)}>
-            Edit
-          </Typography.Link>
+            onError: () => {
+              toast.error(translate.messageToast.form.failed.add, TOAST_CONFIG);
+            },
+          }
         );
-      },
-    },
-  ];
+      } else {
+        updateMutate({
+          id: catalogGroupSelected?.id,
+          vi_name: values.vi_name,
+          en_name: values.en_name
+        },
+          {
+            onSuccess: () => {
+              toast.success(translate.messageToast.form.success.update, TOAST_CONFIG);
+              setModalVisible(false);
+              form.resetFields();
+              refetch();
+            },
+            onError: () => {
+              toast.error(translate.messageToast.form.failed.update, TOAST_CONFIG);
+            },
+          }
+        );
+      }
+    });
+  };
 
-  const mergedColumns = columns.map((col) => {
-    if (!col.editable) {
-      return col;
-    }
-    return {
-      ...col,
-      onCell: (record: Item) => ({
-        record,
-        inputType: col.dataIndex === 'age' ? 'number' : 'text',
-        dataIndex: col.dataIndex,
-        title: col.title,
-        editing: isEditing(record),
-      }),
-    };
-  });
+  const handleEditCatalogGroup = (catalogGroup: Group): void => {
+    setIsAction('edit');
+    setModalVisible(true);
+    setCatalogGroupSelected(catalogGroup)
+    form.setFieldsValue(catalogGroup);
+  };
+
+  const handleDeleteCatalogGroup = (catalogGroup: Group | any): void => {
+    confirm({
+      content: catalogGroup && (
+        <Typography>
+          {translate.common.confirmDelete(catalogGroup?.[`${value}_name` as keyof Group])}
+        </Typography>
+      ),
+      okText: translate.common.deleteBtn,
+      okType: 'danger',
+      cancelText: translate.common.cancelBtn,
+      onOk() {
+        deleteMutate(catalogGroup?.id || '',
+          {
+            onSuccess: () => {
+              toast.success(translate.messageToast.form.success.delete, TOAST_CONFIG);
+              refetch();
+            },
+            onError: () => {
+              toast.error(translate.messageToast.form.failed.delete, TOAST_CONFIG);
+            },
+          })
+      },
+    });
+  };
 
   return (
-    <Form
-      form={form}
-      component={false}>
-      <Table
-        components={{
-          body: {
-            cell: EditableCell,
-          },
+    <Space
+      direction="vertical"
+      size="middle"
+      className='flex'>
+      <Breadcrumb>
+        <Breadcrumb.Item>{translate.home.title}</Breadcrumb.Item>
+        <Breadcrumb.Item>{translate.catalog.title}</Breadcrumb.Item>
+        <Breadcrumb.Item>{translate.catalog.group.title}</Breadcrumb.Item>
+      </Breadcrumb>
+      <Typography.Title level={2}>{translate.catalog.group.title}</Typography.Title>
+      <Row className='flex flex-row-reverse'>
+        <Button
+          type="primary"
+          className='flex items-center justify-center'
+          onClick={handleAddCatalogGroup}
+          icon={<PlusOutlined />}>
+          {translate.common.createBtn}
+        </Button>
+      </Row>
+      <List
+        grid={{
+          gutter: 16,
+          xs: 1,
+          sm: 2,
+          md: 3,
+          lg: 4,
+          xl: 4,
+          xxl: 4,
         }}
-        bordered
-        dataSource={data}
-        columns={mergedColumns}
-        rowClassName="editable-row"
-        pagination={{
-          onChange: cancel,
-        }}
+        loading={isLoadingList}
+        dataSource={catalogGroups as Group[]}
+        renderItem={(item: any) => (
+          <List.Item style={{ maxWidth: 360 }}>
+            <Card title={item[`${value}_name` as keyof Group]}>
+              <Row className='gap-2 flex items-center justify-center'>
+                <Button
+                  onClick={() => handleEditCatalogGroup(item)}
+                  icon={<EditOutlined />}
+                  className="flex items-center justify-center"
+                >
+                  {translate.common.editBtn}
+                </Button>
+                <Button
+                  danger
+                  className='flex items-center justify-center'
+                  onClick={() => handleDeleteCatalogGroup(item)}
+                  icon={<DeleteOutlined />}
+                >
+                  {translate.common.deleteBtn}
+                </Button>
+              </Row>
+            </Card>
+          </List.Item>
+        )}
       />
-    </Form>
+      <Modal
+        title={isAction === 'add' ? translate.catalog.group.add : translate.catalog.group.edit}
+        open={modalVisible}
+        confirmLoading={isCreateLoading || isUpdateLoading}
+        onOk={handleCreateCatalogGroup}
+        okText={translate.common.saveBtn}
+        cancelText={translate.common.cancelBtn}
+        onCancel={() => {
+          form.resetFields();
+          setModalVisible(false);
+        }}
+      >
+        <Form
+          form={form}
+          layout='vertical'>
+          <Form.Item
+            name="vi_name"
+            label={`${translate.common.name} (Vietnamese)`}
+            rules={[{ required: true, message: translate.common.form.required }]}>
+            <Input
+              className="block w-full rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+            />
+          </Form.Item>
+          <Form.Item
+            name="en_name"
+            label={`${translate.common.name} (English)`}
+            rules={[{ required: true, message: translate.common.form.required }]}>
+            <Input
+              className="block w-full rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+            />
+          </Form.Item>
+        </Form>
+      </Modal>
+    </Space>
   );
 };
-
 export default App;
+

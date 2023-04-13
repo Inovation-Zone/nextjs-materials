@@ -11,6 +11,7 @@ import {
   MergeCellsOutlined,
   RadarChartOutlined,
   SettingOutlined,
+  ShoppingCartOutlined,
   UnorderedListOutlined,
   UserOutlined
 } from '@ant-design/icons';
@@ -93,6 +94,11 @@ function Dashboard({ children }: { children: React.ReactNode }) {
             key="/dashboard"
             icon={<DashboardOutlined />}>
             Dashboard
+          </Menu.Item>
+          <Menu.Item
+            key="/dashboard/order"
+            icon={<ShoppingCartOutlined />}>
+            {translate.order.title}
           </Menu.Item>
           {/* <Menu.Item
             key="messages"
@@ -212,7 +218,7 @@ function Dashboard({ children }: { children: React.ReactNode }) {
           {children}
         </div>
       </Layout>
-    </Layout>
+    </Layout >
   );
 }
 

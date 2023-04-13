@@ -14,6 +14,10 @@ export default {
     addNew: 'Add New',
     edit: 'Edit',
     name: 'Name',
+    fullName: 'Full name',
+    phone: 'Phone Number',
+    contactAddress: 'Contact Address',
+    note: 'Note',
     confirm: 'Confirm',
     description: 'Description',
     thumbnail: 'Thumbnail',
@@ -30,12 +34,17 @@ export default {
     backToHome: 'Back To Home',
     tipRemoveImage: 'Click on image to change it',
     reset: 'Reset',
+    continue: 'Continue',
+    back: 'Back',
     form: {
       required: 'This field is required'
     },
     confirmDelete: (type: string) => `Do you want to delete this [${type}]?`,
     image: 'Images',
-    addAll: 'Add all'
+    addAll: 'Add all',
+    buyMore: 'Buy More',
+    quantity: 'Quantity',
+    detail: 'Details'
   },
   table: {
     collection: {
@@ -65,7 +74,11 @@ export default {
     add: 'Create New Product',
     edit: 'Edit Product',
     delete: 'Delete',
-    ourProducts: 'Our Products'
+    ourProducts: 'Our Products',
+    hidden: 'Hidden',
+    status: 'Status',
+    orderNow: 'Order now',
+    outOfStock: 'Out of stock'
   },
   catalog: {
     title: 'Catalog Management',
@@ -138,6 +151,17 @@ export default {
       failed: {
         logout: 'Logout failed. Please try again.'
       }
+    },
+    order: {
+      add: 'Product added to cart successfully',
+      success: {
+        createOrder: 'Create order successfully.',
+        changeStatus: 'Update order status successfully.'
+      },
+      failed: {
+        createOrder: 'Failed to create order. Please try again later',
+        changeStatus: 'Failed to update order status. Please try again later'
+      }
     }
   },
   login: {
@@ -150,5 +174,34 @@ export default {
   forgotPassword: {
     title: 'Reset Password',
     enterYourEmail: 'Enter your email'
+  },
+  cart: {
+    title: 'Shopping Cart',
+    orders: 'Orders',
+    customerInfo: 'Customer Info',
+    done: 'Done',
+    clearCart: 'Clear Cart',
+    result: {
+      title: 'Your order has been placed successfully!',
+      description: 'Your order is being processed and will be contact for you within the next 1 to 2 business days.'
+    }
+  },
+  order: {
+    title: 'Orders Management',
+    code: 'Code',
+    status: 'Status',
+    createdTime: 'Created Time',
+    customerInfo: 'Customer Info',
+    details: 'Order Details',
+    clickToChangeStatus: 'Click to change order status',
+    detail: {
+      title: 'Order Details'
+    },
+    statusLabel: {
+      new: 'New',
+      process: 'Process',
+      done: 'Done',
+      closed: 'Closed'
+    }
   }
 }

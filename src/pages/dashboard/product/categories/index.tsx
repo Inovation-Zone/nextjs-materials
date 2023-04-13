@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 
 import useDeleteCategory from '@/hooks/categories/useDeleteCategory';
 import useGetCategories from '@/hooks/categories/useGetCategories';
-import { useTranslate } from '@/hooks/useTranslate';
+import { useLanguage, useTranslate } from '@/hooks/useTranslate';
 
 import Dialog from '@/components/dialog';
 import CategoryForm from '@/components/forms/categories';
@@ -29,6 +29,7 @@ const ComponentPage: React.FC = () => {
   const { data: categories, isLoading, refetch } = useGetCategories();
   const { mutate: deleteCategoryMutate } = useDeleteCategory();
   const translate = useTranslate();
+  const { value } = useLanguage();
 
   const handleAddCategory = () => {
     setIsAction('add');
@@ -58,14 +59,14 @@ const ComponentPage: React.FC = () => {
   const columns = [
     {
       title: translate.common.name,
-      dataIndex: 'name',
-      key: 'name',
+      dataIndex: `${value}_name`,
+      key: `${value}_name`,
       width: '20%',
     },
     {
       title: translate.common.description,
-      dataIndex: 'description',
-      key: 'description',
+      dataIndex: `${value}_description`,
+      key: `${value}_description`,
       width: '50%',
     },
     {
@@ -94,7 +95,7 @@ const ComponentPage: React.FC = () => {
           </Button>
           <Popconfirm
             title={translate.common.confirm}
-            description={translate.common.confirmDelete(record.name)}
+            description={translate.common.confirmDelete(record?.[`${value}_name` as keyof Category])}
             onConfirm={() => handleDelete(record)}
             okText={translate.common.yes}
             cancelText={translate.common.no}

@@ -14,4 +14,6 @@ export interface Collection {
   surface: string;
   fileUrls: string[];
   collectionGroup?: CollectionGroup | any;
+  isHidden?: boolean;
+  isOutOfStock?: boolean;
 }

@@ -8,13 +8,13 @@ import '@/styles/globals.css';
 // !STARTERCONF This is for demo purposes, remove @/styles/colors.css import immediately
 import '@/styles/colors.css';
 import 'react-toastify/dist/ReactToastify.css';
+import 'react-quill/dist/quill.snow.css'
 
 import UserInfoProvider from '@/hooks/auth/userContext';
 
 import Dashboard from '@/components/dashboard';
 
 import queryClient from '@/configs/queryClient';
-
 /**
  * !STARTERCONF info
  * ? `Layout` component is called in every page using `np` snippets. If you have consistent layout across all page, you can add it here too
@@ -28,7 +28,9 @@ function MyApp({ Component, pageProps }: AppProps) {
     router.pathname === '/product/details' ||
     router.pathname === '/catalog' ||
     router.pathname === '/collection' ||
-    router.pathname === '/collection/details'
+    router.pathname === '/collection/details' ||
+    router.pathname === '/about' ||
+    router.pathname === '/cart'
     ? React.Fragment : Dashboard;
 
   return (

@@ -10,4 +10,5 @@ export interface BaseResponse<T = void> {
 export interface Params {
   searchKeys?: string;
   categoryIds?: string;
+  isHidden?: boolean;
 }

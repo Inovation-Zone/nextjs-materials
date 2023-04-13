@@ -182,3 +182,18 @@ export const COLLECTIONS_API = {
     api: (collectionId: string) => `/collection/${collectionId}`,
   }
 }
+
+export const CUSTOMER_ORDER_API = {
+  createCustomerOrder: {
+    name: 'customerOrder',
+    api: '/customerOrder',
+  },
+  getCustomerOrders: {
+    name: 'customerOrders',
+    api: '/customerOrders',
+  },
+  getCustomerOrderDetails: {
+    name: (customerOrderId: string) => `/customerOrder/${customerOrderId}`,
+    api: (customerOrderId: string) => `/customerOrder/${customerOrderId}`,
+  }
+}

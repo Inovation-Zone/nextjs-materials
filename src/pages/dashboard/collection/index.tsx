@@ -10,6 +10,7 @@ import useGetCollections from '@/hooks/collections/useGetCollections';
 import useUpdateCollection from '@/hooks/collections/useUpdateCollection';
 import { useLanguage, useTranslate } from '@/hooks/useTranslate';
 
+import SwitchComponent from '@/components/switch';
 import UploadImages from '@/components/uploadImages';
 
 import { TOAST_CONFIG } from '@/configs/toast';
@@ -41,7 +42,7 @@ const ComponentPage: React.FC = () => {
     setIsAction('edit');
     setModalVisible(true);
     setCollectionSelected(record);
-    uploadImagesRef.current.setValues(record.fileUrls);
+    uploadImagesRef?.current?.setValues(record.fileUrls);
     form.setFieldsValue(record);
   };
 
@@ -284,6 +285,25 @@ const ComponentPage: React.FC = () => {
               ))}
             </Select>
           </Form.Item>
+          <Row>
+            <Col span={12}>
+              <Form.Item
+                name="isHidden"
+                valuePropName="checked"
+                label={<Typography className='font-bold'>{translate.products.hidden}</Typography>}>
+                <SwitchComponent />
+              </Form.Item>
+            </Col>
+            <Col span={12}>
+              <Form.Item
+                name="isOutOfStock"
+                valuePropName="checked"
+                initialValue={isAction === 'add' ? true : collectionSelected?.isOutOfStock}
+                label={<Typography className='font-bold'>{translate.products.status}</Typography>}>
+                <SwitchComponent />
+              </Form.Item>
+            </Col>
+          </Row>
           <Form.Item
             label={translate.collection.image}
             name="image"

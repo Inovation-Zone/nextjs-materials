@@ -21,7 +21,8 @@ const { Option } = Select;
 
 const ComponentPage: React.FC = () => {
   const thumbnailFileRef = useRef<any>(null);
-  const uploadFileRef = useRef<any>(null);
+  const uploadFileViRef = useRef<any>(null);
+  const uploadFileEnRef = useRef<any>(null);
   const [modalVisible, setModalVisible] = useState<boolean>(false);
   const [isAction, setIsAction] = useState<ActionType>('add');
   const [catalogSelected, setCatalogSelected] = useState<Catalog>();
@@ -45,7 +46,8 @@ const ComponentPage: React.FC = () => {
     setModalVisible(true);
     setCatalogSelected(record);
     form.setFieldsValue(record);
-    uploadFileRef?.current?.setValue(record.fileUrl);
+    uploadFileViRef.current.setValue(record.vi_fileUrl);
+    uploadFileEnRef.current.setValue(record.en_fileUrl);
     thumbnailFileRef?.current?.setValue(record.thumbnailUrl);
   };
 
@@ -68,14 +70,16 @@ const ComponentPage: React.FC = () => {
       if (isAction === 'add') {
         createMutate({
           ...values,
-          fileUrl: uploadFileRef.current.getValue(),
+          vi_fileUrl: uploadFileViRef.current.getValue(),
+          en_fileUrl: uploadFileEnRef.current.getValue(),
           thumbnailUrl: thumbnailFileRef.current.getValue()
         },
           {
             onSuccess: () => {
               toast.success(translate.messageToast.form.success.add, TOAST_CONFIG);
               setModalVisible(false);
-              uploadFileRef.current.setValue(null);
+              uploadFileViRef.current.setValue(null);
+              uploadFileEnRef.current.setValue(null);
               thumbnailFileRef.current.setValue(null);
               form.resetFields();
               refetch();
@@ -87,7 +91,8 @@ const ComponentPage: React.FC = () => {
       } else {
         updateMutate({
           ...values,
-          fileUrl: uploadFileRef.current.getValue(),
+          vi_fileUrl: uploadFileViRef.current.getValue(),
+          en_fileUrl: uploadFileEnRef.current.getValue(),
           thumbnailUrl: thumbnailFileRef.current.getValue(),
           id: catalogSelected?.id || ''
         },
@@ -95,7 +100,8 @@ const ComponentPage: React.FC = () => {
             onSuccess: () => {
               toast.success(translate.messageToast.form.success.update, TOAST_CONFIG);
               setModalVisible(false);
-              uploadFileRef.current.setValue(null);
+              uploadFileViRef.current.setValue(null);
+              uploadFileEnRef.current.setValue(null);
               thumbnailFileRef.current.setValue(null);
               form.resetFields();
               refetch();
@@ -200,7 +206,8 @@ const ComponentPage: React.FC = () => {
         onCancel={() => {
           form.resetFields();
           setModalVisible(false);
-          uploadFileRef.current.setValue(null);
+          uploadFileViRef.current.setValue(null);
+          uploadFileEnRef.current.setValue(null);
           thumbnailFileRef.current.setValue(null);
         }}
       >
@@ -253,10 +260,17 @@ const ComponentPage: React.FC = () => {
             </Form.Item>
           </Col>
           <Form.Item
-            label={translate.catalog.targetFile}>
+            label={`${translate.catalog.targetFile} (Vietnamese)`}>
             <UploadAttachment
               name="imageUrl"
-              ref={uploadFileRef}
+              ref={uploadFileViRef}
+            />
+          </Form.Item>
+          <Form.Item
+            label={`${translate.catalog.targetFile} (English)`}>
+            <UploadAttachment
+              name="imageUrl"
+              ref={uploadFileEnRef}
             />
           </Form.Item>
         </Form>

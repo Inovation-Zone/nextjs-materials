@@ -3,6 +3,7 @@ import { useQuery } from 'react-query';
 
 import httpRequest from '@/configs/api';
 import { PRODUCT_API } from '@/constants/api';
+import { Product } from '@/models/products.model';
 
 const getProductDetails = async (productId: string) => {
   if (productId) {
@@ -11,7 +12,7 @@ const getProductDetails = async (productId: string) => {
   }
 };
 
-const useGetProductDetails = (productId: string | any) => {
+const useGetProductDetails = (productId: string) => {
   const { data, isLoading, refetch } = useQuery(PRODUCT_API.getProductDetails.name(productId), () => getProductDetails(productId), { staleTime: 0, cacheTime: 0, });
 
   const productDetails = useMemo(() => {
@@ -19,7 +20,7 @@ const useGetProductDetails = (productId: string | any) => {
   }, [data]);
 
   return {
-    data: productDetails || [],
+    data: productDetails as Product,
     isLoading,
     refetch,
   };

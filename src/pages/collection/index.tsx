@@ -7,7 +7,10 @@ import { useRouter } from 'next/router';
 import useGetCollectionsGroupByCollectionGroup from '@/hooks/collections/useGetCollectionsGroupByCollectionGroup';
 import { useLanguage } from '@/hooks/useTranslate';
 
+import Cover from '@/components/cover';
+import Footer from '@/components/footer';
 import Header from '@/components/header';
+import Loading from '@/components/loading';
 
 import { Collection, CollectionGroup } from '@/models/collections.model';
 
@@ -15,7 +18,7 @@ export default function LandingPage() {
   const { value } = useLanguage();
   const router = useRouter();
 
-  const { data: groupCollections = [] } = useGetCollectionsGroupByCollectionGroup();
+  const { data: groupCollections = [], isLoading } = useGetCollectionsGroupByCollectionGroup({ isHidden: false });
 
   const handleGoToCollectionDetail = (collection: Collection) => {
     router.push(`/collection/details?id=${collection.id}`);
@@ -34,7 +37,7 @@ export default function LandingPage() {
               onClick={() => handleGoToCollectionDetail(collection)}
             >
               <img
-                className="w-[220px] border h-[220px]"
+                className="w-[220px] border h-[220px] animate-fade-in duration-1000"
                 src={url || ''}
                 alt={url || ''}
               />
@@ -91,21 +94,11 @@ export default function LandingPage() {
       <div className='py-4'>
         {renderCollectionGroupByGroup()}
       </div>
-      <div className='mt-24'>
-        <img
-          src="https://s3-materials-storage.s3.ap-southeast-1.amazonaws.com/others/1680079661140_bwfl4e6xlw5.png"
-          alt=""
-          className='w-full h-[500px]' />
-        <div className='pr-24 pl-24 mt-12'>
-          <Typography.Title level={2}>Panel Plus: The Leading Manufacturer of Wood Substitute products</Typography.Title>
-          <Typography.Text>Panel Plus Group formerly named MP Particle Board was founded in 1990 under the managerial direction of Mitr Phol Group. It operates as the leading manufacturer of Particle board, Medium density fibreboard, Melamine faced panels and Synchronous panel, the substitute wood products that are the results of the company’s incorporation of high quality manufacturing technology and excellent management.</Typography.Text>
-        </div>
-      </div>
-
-      <div className='h-[1px] bg-slate-200 mt-8 mb-8'></div>
-      <div className='pt-4 pl-24'>
-        <Typography.Text>Copyright © Panel Plus Co.,Ltd. All rights reserved.</Typography.Text>
-      </div>
+      {isLoading && (
+        <Loading />
+      )}
+      <Cover />
+      <Footer />
     </div>
   );
 }

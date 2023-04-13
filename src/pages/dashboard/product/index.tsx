@@ -14,7 +14,7 @@ import useGetCategories from '@/hooks/categories/useGetCategories';
 import useDeleteProduct from '@/hooks/product/useDeleteProduct';
 import useGetProducts from '@/hooks/product/useGetProducts';
 import useDebounce from '@/hooks/useDebounce';
-import { useTranslate } from '@/hooks/useTranslate';
+import { useLanguage, useTranslate } from '@/hooks/useTranslate';
 
 import { TOAST_CONFIG } from '@/configs/toast';
 import { DEFAULT_IMAGE } from '@/constants';
@@ -29,6 +29,7 @@ const Product: React.FC = () => {
   const { data: products = [], isLoading: isLoadingProducts, refetch } = useGetProducts(params);
   const { mutate: deleteProductMutate, isLoading: isLoadingUpdateProduct } = useDeleteProduct();
   const translate = useTranslate();
+  const { value } = useLanguage();
   const router = useRouter();
 
   const indeterminate = selectedCategories.length > 0 && selectedCategories.length < categories.length;
@@ -118,7 +119,7 @@ const Product: React.FC = () => {
                     className='mt-4'
                     key={category.id}
                     value={category.id}>
-                    {category.name}
+                    {category?.[`${value}_name` as keyof Category]}
                   </Checkbox>
                 ))}
               </Checkbox.Group>
@@ -158,14 +159,14 @@ const Product: React.FC = () => {
                     hoverable
                     className='h-[450px]'
                   >
-                    <Tag color="green">{item?.category?.name}</Tag>
+                    <Tag color="green">{item?.category?.[`${value}_name` as keyof Category]}</Tag>
                     <Col className='h-[150px]'>
                       <Typography.Title
                         level={5}
-                        className="overflow-ellipsis overflow-hidden h-16">{item.name}</Typography.Title>
+                        className="overflow-ellipsis overflow-hidden h-16">{item?.[`${value}_name` as keyof Product] as string}</Typography.Title>
                       <Typography
                         className='mb-4 h-[80px]'
-                        dangerouslySetInnerHTML={{ __html: item.description.length > 100 ? item.description.substring(0, 80) + '...' : item.description }}>{ }</Typography>
+                        dangerouslySetInnerHTML={{ __html: (item?.[`${value}_description` as keyof Product] as string).length > 100 ? (item?.[`${value}_description` as keyof Product] as string).substring(0, 80) + '...' : (item?.[`${value}_description` as keyof Product] as string) }}>{ }</Typography>
                     </Col>
                     <Col>
                       <Row className='w-full flex items-center justify-between mt-4'>
@@ -177,8 +178,9 @@ const Product: React.FC = () => {
                           {translate.products.viewDetailBtn}
                         </Button>
                         <Popconfirm
-                          title="Do you want to delete this item?"
+                          title={translate.common.confirmDelete(item?.[`${value}_name` as keyof Product] as string)}
                           onConfirm={() => handleDeleteProduct(item)}
+                          okType='danger'
                         >
                           <Button
                             type='default'

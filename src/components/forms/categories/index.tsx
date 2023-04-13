@@ -20,8 +20,10 @@ interface CategoryFormProps {
 }
 
 const defaultValues: Category = {
-  name: '',
-  description: '',
+  vi_name: '',
+  en_name: '',
+  vi_description: '',
+  en_description: '',
   imageUrl: '',
 }
 
@@ -41,7 +43,6 @@ const CategoryForm: React.FC<CategoryFormProps> = ({ action, category, dialogRef
   }, [action]);
 
   if (action === 'edit') {
-    console.log('category', category);
     form.setFieldsValue(category || defaultValues);
     uploadFileRef?.current?.setValue(category?.imageUrl);
   }
@@ -52,8 +53,7 @@ const CategoryForm: React.FC<CategoryFormProps> = ({ action, category, dialogRef
 
   const handleFinish = (values: Category) => {
     const data = {
-      name: values.name,
-      description: values.description,
+      ...values,
       imageUrl: uploadFileRef?.current?.getValue()
     }
     if (action === 'add') {
@@ -92,14 +92,28 @@ const CategoryForm: React.FC<CategoryFormProps> = ({ action, category, dialogRef
       onFinish={handleFinish}
       initialValues={{}}>
       <Form.Item
-        label={translate.common.name}
-        name="name"
+        label={`${translate.common.name} (Vietnamese)`}
+        name="vi_name"
         rules={[{ required: true, message: translate.common.form.required }]}>
         <Input className='rounded-lg' />
       </Form.Item>
       <Form.Item
-        label={translate.common.description}
-        name="description"
+        label={`${translate.common.name} (English)`}
+        name="en_name"
+        rules={[{ required: true, message: translate.common.form.required }]}>
+        <Input className='rounded-lg' />
+      </Form.Item>
+      <Form.Item
+        label={`${translate.common.description} (Vietnamese)`}
+        name="vi_description"
+        rules={[{ required: true, message: translate.common.form.required }]}>
+        <Input.TextArea
+          className='rounded-lg'
+          size='large' />
+      </Form.Item>
+      <Form.Item
+        label={`${translate.common.description} (English)`}
+        name="en_description"
         rules={[{ required: true, message: translate.common.form.required }]}>
         <Input.TextArea
           className='rounded-lg'
