@@ -28,7 +28,7 @@ const Login = () => {
     mutate({ email: values.email, password: hashPassword(values.password) },
       {
         onSuccess: () => {
-          router.push('/dashboard');
+          router.push('/dashboard/order');
         },
         onError: () => {
           toast.error(translate.messageToast.auth.failed.logout, TOAST_CONFIG);
@@ -36,10 +36,6 @@ const Login = () => {
       },
     )
   }, 300);
-
-  const onFinishFailed = (errorInfo: any) => {
-    console.log('Failed:', errorInfo);
-  };
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
@@ -49,7 +45,6 @@ const Login = () => {
           name="basic"
           initialValues={{ rememberMe: true }}
           onFinish={onFinish}
-          onFinishFailed={onFinishFailed}
           ref={formRef}
           layout="vertical"
           className='mt-12'

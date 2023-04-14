@@ -255,7 +255,7 @@ const ComponentPage: React.FC = () => {
               <UploadFile
                 name="imageUrl"
                 ref={thumbnailFileRef}
-                widthPreview='170px'
+                heightPreview='170px'
               />
             </Form.Item>
           </Col>

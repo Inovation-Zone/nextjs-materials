@@ -34,8 +34,6 @@ const UploadImages = forwardRef<Ref, UploadImagesProps>(
 
     useImperativeHandle(ref, () => ({
       getValues() {
-        console.log('fileUrls', fileUrls);
-
         return fileUrls;
       },
       setValues(url: string[]) {

@@ -168,7 +168,6 @@ const AddProduct: React.FC<AddProductProps> = ({ product }) => {
 
   const handleSave = () => {
     form.validateFields().then((values) => {
-      console.log('values', values);
       const woodTypeIds = formatObjectToIds(woodTypesRef.current.getValues());
       const adhesiveIds = formatObjectToIds(adhesivesRef.current.getValues());
       const thicknessIds = formatObjectToIds(thicknessesRef.current.getValues());

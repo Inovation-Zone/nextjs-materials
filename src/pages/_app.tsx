@@ -1,4 +1,5 @@
 import { AppProps } from 'next/app';
+import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import React from 'react';
 import { QueryClientProvider } from 'react-query';
@@ -12,9 +13,11 @@ import 'react-quill/dist/quill.snow.css'
 
 import UserInfoProvider from '@/hooks/auth/userContext';
 
-import Dashboard from '@/components/dashboard';
-
 import queryClient from '@/configs/queryClient';
+
+const Dashboard = dynamic(() => import('@/components/dashboard'), {
+  ssr: false,
+});
 /**
  * !STARTERCONF info
  * ? `Layout` component is called in every page using `np` snippets. If you have consistent layout across all page, you can add it here too
@@ -30,7 +33,8 @@ function MyApp({ Component, pageProps }: AppProps) {
     router.pathname === '/collection' ||
     router.pathname === '/collection/details' ||
     router.pathname === '/about' ||
-    router.pathname === '/cart'
+    router.pathname === '/cart' ||
+    router.pathname === '/contact'
     ? React.Fragment : Dashboard;
 
   return (

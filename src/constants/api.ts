@@ -197,3 +197,14 @@ export const CUSTOMER_ORDER_API = {
     api: (customerOrderId: string) => `/customerOrder/${customerOrderId}`,
   }
 }
+
+export const SETTINGS_API = {
+  createSettings: {
+    name: 'settings',
+    api: '/settings',
+  },
+  getSettings: {
+    name: 'settings',
+    api: '/settings',
+  },
+}

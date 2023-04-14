@@ -3,8 +3,9 @@ import {
   UserOutlined,
 } from '@ant-design/icons';
 import { Col, Typography } from 'antd';
+import Cookies from 'js-cookie';
 import { useRouter } from 'next/router';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { A11y, Autoplay, Navigation, Pagination, Scrollbar } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
@@ -12,13 +13,13 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 
-import { useUserInfos } from '@/hooks/auth/userContext';
 import useGetProducts from '@/hooks/product/useGetProducts';
 import { useLanguage, useTranslate } from '@/hooks/useTranslate';
 
 import SwitchLanguage from '@/components/switchLanguage';
 
 import { SLIDE_URLS } from '@/constants';
+import { USER_INFOS } from '@/constants/api';
 import { Product } from '@/models/products.model';
 
 interface MenuItem {
@@ -36,10 +37,11 @@ const Header: React.FC<HeaderProps> = ({ showSlider = true }) => {
   const [productHoved, setProductHoved] = useState<Product | null>();
   const menuRef = useRef<any>(null);
   const router = useRouter();
-  const { userInfos } = useUserInfos();
   const translate = useTranslate();
   const boardRef = useRef<any>(null);
   const { value } = useLanguage();
+
+  const userInfos = useMemo(() => Cookies.get(USER_INFOS) && JSON?.parse(Cookies.get(USER_INFOS) as string), []);
 
   const { data: products = [], isLoading: isLoadingProducts, refetch } = useGetProducts({ searchKeys: '', isHidden: false });
 
@@ -49,7 +51,7 @@ const Header: React.FC<HeaderProps> = ({ showSlider = true }) => {
     { label: translate.menus.collections, key: 'collection' },
     { label: translate.menus.catalog, key: 'catalog' },
     { label: translate.menus.news, key: 'news' },
-    { label: translate.menus.contacts, key: 'contacts' },
+    { label: translate.menus.contacts, key: 'contact' },
     { label: translate.menus.inquiry, key: 'cart' },
   ];
 
@@ -87,6 +89,9 @@ const Header: React.FC<HeaderProps> = ({ showSlider = true }) => {
     }
     if (item.key === 'cart') {
       router.push('/cart');
+    }
+    if (item.key === 'contact') {
+      router.push('/contact');
     }
     if (item?.expaned) {
       setShowBoard(!showBoard);
@@ -159,7 +164,7 @@ const Header: React.FC<HeaderProps> = ({ showSlider = true }) => {
         <div className='absolute top-12 z-10 flex w-full items-end justify-center'>
           <img
             src='https://www.panelplus.com/images/logo-panelplus.png'
-            className='w-[100px] cursor-pointer'
+            className='w-[100px] h-[100px] cursor-pointer'
             onClick={() => router.push('/')}
           />
           <ul

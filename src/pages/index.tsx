@@ -34,7 +34,7 @@ export default function LandingPage() {
         <Col
           key={item.id}
           span={8}
-          className='min-w-[300px] w-[300px] h-[300px] bg-center px-0 transition-transform duration-500 hover:scale-95'
+          className='min-w-[300px] w-[300px] h-[300px] bg-center px-0'
           style={{ backgroundImage: `url(${item.fileResources?.length ? item.fileResources[0].fileUrl : DEFAULT_IMAGE})` }}
         >
           <Typography.Text

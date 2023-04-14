@@ -45,6 +45,7 @@ export default {
     buyMore: 'Mua thêm',
     quantity: 'Số lượng',
     detail: 'Chi tiết',
+    content: 'Nội dung'
   },
   table: {
     collection: {
@@ -203,5 +204,20 @@ export default {
       done: 'Hoàn thành',
       closed: 'Đóng'
     }
+  },
+  setting: {
+    title: 'Cài đặt',
+    general: {
+      title: 'Tổng quan',
+      logo: 'Logo',
+      cover: 'Trang bìa',
+      footer: 'Cuối trang'
+    },
+    about: {
+      title: 'Giới thiệu'
+    },
+    contact: {
+      title: 'Liên hệ'
+    },
   }
 }

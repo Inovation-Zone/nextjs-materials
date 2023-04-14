@@ -13,11 +13,12 @@ import Header from '@/components/header';
 
 import { TOAST_CONFIG } from '@/configs/toast';
 import { DEFAULT_IMAGE } from '@/constants';
-import { CustomerOrderBody } from '@/models/customerOrder.model';
+import { CustomerOrderBody, OrderProduct } from '@/models/customerOrder.model';
 import { Adhesive, Product, Size, Thickness, WoodType } from '@/models/products.model';
 import { generateOrderCode } from '@/utils/string';
 
 export interface CartItem {
+  key?: number;
   product: Product;
   woodType: WoodType;
   adhesive: Adhesive;
@@ -45,7 +46,13 @@ const Order = () => {
   useEffect(() => {
     if (typeof window !== 'undefined' && localStorage?.getItem('productOrders')) {
       const productOrders = JSON.parse(localStorage.getItem('productOrders') || '');
-      setCarts(productOrders);
+      const productOrdersTemp = productOrders.map((item: OrderProduct, index: number) => {
+        return {
+          key: index,
+          ...item
+        }
+      })
+      setCarts(productOrdersTemp);
     }
   }, []);
 
@@ -57,13 +64,14 @@ const Order = () => {
     setCurrent(current - 1);
   };
 
-  const handleQuantityChange = (key: string, quantity: number) => {
-    // setDataSource(prevState => {
-    //   const itemIndex = prevState.findIndex((item) => item.key === key);
-    //   const updatedItem = { ...prevState[itemIndex], quantity };
-    //   const newData = [...prevState.slice(0, itemIndex), updatedItem, ...prevState.slice(itemIndex + 1)];
-    //   return newData;
-    // });
+  const handleQuantityChange = (value: number | null, record: CartItem) => {
+    setCarts(prevState => {
+      const itemIndex = prevState.findIndex((item) => item.key === record.key);
+      const updatedItem = { ...prevState[itemIndex], quantity: value || 1 };
+      const newData = [...prevState.slice(0, itemIndex), updatedItem, ...prevState.slice(itemIndex + 1)];
+      localStorage.setItem('productOrders', JSON.stringify(newData));
+      return newData;
+    });
   };
 
   const clearCart = () => {
@@ -77,11 +85,9 @@ const Order = () => {
       productOrders = JSON.parse(localStorage.getItem('productOrders') || '');
     }
 
-    productOrders.find((item: CartItem, index: number) => {
+    productOrders.forEach((item: CartItem, index: number) => {
       const productOrdersNew = [...productOrders];
-      if (item.product.id === record.product.id) {
-        productOrdersNew.splice(index, 1);
-      }
+      productOrdersNew.splice(index, 1);
       setCarts(productOrdersNew);
       localStorage.setItem('productOrders', JSON.stringify(productOrdersNew));
     })
@@ -146,7 +152,7 @@ const Order = () => {
           max={10}
           type='number'
           defaultValue={text}
-        // onChange={(value) => handleQuantityChange(record.key, Number(value))}
+          onChange={(value) => handleQuantityChange(value, record)}
         />
       ),
     },
@@ -168,8 +174,6 @@ const Order = () => {
   ];
 
   const onFinish = (values: CustomerInfo) => {
-    console.log('carts', carts);
-
     const cartIds = carts.map((item) => {
       return {
         productId: item?.product?.id,

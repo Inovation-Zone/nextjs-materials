@@ -10,10 +10,10 @@ import Header from '@/components/header';
 
 import { Setting } from '@/models/settings.model';
 
-export default function About() {
+export default function Contact() {
   const { data: settings = [] } = useGetSettings();
   const { value } = useLanguage();
-  const aboutSetting = settings.find((item: Setting) => item.key === (value === 'vi' ? 'aboutContentVi' : 'aboutContentEn'));
+  const contactSetting = settings.find((item: Setting) => item.key === (value === 'vi' ? 'contactContentVi' : 'contactContentEn'));
 
   return (
     <div className='bg-white'>
@@ -37,7 +37,7 @@ export default function About() {
       <Header showSlider={false} />
       <div className='p-24'>
         <Typography
-          dangerouslySetInnerHTML={{ __html: aboutSetting?.value }}>
+          dangerouslySetInnerHTML={{ __html: contactSetting?.value }}>
         </Typography>
       </div>
       {/* <Cover /> */}

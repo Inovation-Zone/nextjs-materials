@@ -44,7 +44,8 @@ export default {
     addAll: 'Add all',
     buyMore: 'Buy More',
     quantity: 'Quantity',
-    detail: 'Details'
+    detail: 'Details',
+    content: 'Content'
   },
   table: {
     collection: {
@@ -203,5 +204,20 @@ export default {
       done: 'Done',
       closed: 'Closed'
     }
+  },
+  setting: {
+    title: 'Settings',
+    general: {
+      title: 'General',
+      logo: 'Logo',
+      cover: 'Cover',
+      footer: 'Footer'
+    },
+    about: {
+      title: 'About'
+    },
+    contact: {
+      title: 'Contact'
+    },
   }
 }

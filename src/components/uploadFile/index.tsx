@@ -11,7 +11,7 @@ interface UploadFileProps extends Omit<FormItemProps, 'name'> {
   name: string;
   accept?: string;
   multiple?: boolean;
-  widthPreview?: string;
+  heightPreview?: string;
 }
 
 type Ref = {
@@ -20,7 +20,7 @@ type Ref = {
 };
 
 const UploadFile = forwardRef<Ref, UploadFileProps>(
-  ({ name, accept = 'image/*', multiple = false, widthPreview, ...restProps }, ref) => {
+  ({ name, accept = 'image/*', multiple = false, heightPreview, ...restProps }, ref) => {
     const { mutate, data: fileUrlData, isLoading } = useUploadFiles();
     const [fileUrl, setFileUrl] = useState<string | null>('');
     const translate = useTranslate();
@@ -59,7 +59,7 @@ const UploadFile = forwardRef<Ref, UploadFileProps>(
               onClick={() => handleRemove()}
               src={fileUrl}
               alt={fileUrl}
-              style={{ height: widthPreview && widthPreview }}
+              style={{ height: heightPreview && heightPreview }}
               className='w-full h-[400px] border rounded-lg cursor-pointer object-cover' />
             <Text
               className='text-gray-400'

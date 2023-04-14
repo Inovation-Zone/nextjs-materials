@@ -1,10 +1,13 @@
 import {
+  AppstoreAddOutlined,
   ColumnHeightOutlined,
+  ContactsOutlined,
   FolderOpenOutlined,
   FontSizeOutlined,
   GroupOutlined,
   HighlightOutlined,
   HomeOutlined,
+  InfoCircleOutlined,
   InsertRowRightOutlined,
   LogoutOutlined,
   MergeCellsOutlined,
@@ -15,18 +18,19 @@ import {
   UserOutlined
 } from '@ant-design/icons';
 import { Avatar, Dropdown, Layout, Menu, Row, Typography } from 'antd';
+import Cookies from 'js-cookie';
 import { useRouter } from 'next/router';
-import { memo, useState } from 'react';
+import { memo, useMemo, useState } from 'react';
 import { toast } from 'react-toastify';
 
 import useLogout from '@/hooks/auth/useLogout';
-import { useUserInfos } from '@/hooks/auth/userContext';
 import useDebounce from '@/hooks/useDebounce';
 import { useTranslate } from '@/hooks/useTranslate';
 
 import SwitchLanguage from '@/components/switchLanguage';
 
 import { TOAST_CONFIG } from '@/configs/toast';
+import { USER_INFOS } from '@/constants/api';
 
 const { Header, Sider } = Layout;
 
@@ -34,9 +38,9 @@ function Dashboard({ children }: { children: React.ReactNode }) {
   const [menuKey, setMenuKey] = useState<string[]>([]);
   const [collapsed, setCollapsed] = useState<boolean>(false);
   const router = useRouter();
-  const { userInfos, updateUserInfos } = useUserInfos();
   const { mutate } = useLogout();
   const translate = useTranslate();
+  const userInfos = useMemo(() => Cookies.get(USER_INFOS) && JSON?.parse(Cookies.get(USER_INFOS) as string), []);
 
   const handleMenuClick = (e: any) => {
     if (e.key !== menuKey) {
@@ -52,8 +56,7 @@ function Dashboard({ children }: { children: React.ReactNode }) {
   const handleLogout = useDebounce(() => {
     mutate(true, {
       onSuccess: () => {
-        console.log('123213');
-        updateUserInfos(null);
+        Cookies.set(USER_INFOS, '');
         router.push('/');
       },
       onError: () => {
@@ -159,10 +162,22 @@ function Dashboard({ children }: { children: React.ReactNode }) {
           <Menu.SubMenu
             key="settings"
             icon={<SettingOutlined />}
-            title="Settings">
-            {/* <Menu.Item key="general">General</Menu.Item>
-            <Menu.Item key="privacy">Privacy</Menu.Item>
-            <Menu.Item key="notifications">Notifications</Menu.Item> */}
+            title={translate.setting.title}>
+            <Menu.Item
+              key="/dashboard/setting/general"
+              icon={<AppstoreAddOutlined />}>
+              {translate.setting.general.title}
+            </Menu.Item>
+            <Menu.Item
+              key="/dashboard/setting/about"
+              icon={<InfoCircleOutlined />}>
+              {translate.setting.about.title}
+            </Menu.Item>
+            <Menu.Item
+              key="/dashboard/setting/contact"
+              icon={<ContactsOutlined />}>
+              {translate.setting.contact.title}
+            </Menu.Item>
           </Menu.SubMenu>
         </Menu>
       </Sider>
@@ -201,7 +216,7 @@ function Dashboard({ children }: { children: React.ReactNode }) {
                   <Avatar
                     className='flex items-center justify-center'
                     icon={<UserOutlined />} />
-                  <span style={{ marginLeft: 8 }}>{userInfos?.fullName}</span>
+                  <Typography className='ml-2'>{userInfos?.fullName as string}</Typography>
                 </div>
               </Dropdown>
             </Row>
