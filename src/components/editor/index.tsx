@@ -1,10 +1,14 @@
+// import ImageResize from 'quill-image-resize-module-react';
 import dynamic from 'next/dynamic';
 import { forwardRef, useImperativeHandle, useState } from 'react';
-
-const QuillNoSSRWrapper = dynamic(import('react-quill'), {
+// import ReactQuill from 'react-quill';
+const ReactQuill = dynamic(import('react-quill'), {
   ssr: false,
   loading: () => <p>Loading ...</p>,
 })
+
+
+// ReactQuill.Quill.register('modules/imageResize', ImageResize);
 
 const modules = {
   toolbar: [
@@ -23,11 +27,13 @@ const modules = {
     [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
     [{ 'font': [] }],
     [{ 'align': [] }],
-
+    ['image', 'video'],
     ['clean']
   ],
+  // imageResize: {
+  //   modules: ['Resize', 'DisplaySize']
+  // },
   clipboard: {
-    // toggle to add extra line breaks when pasting HTML:
     matchVisual: false,
   },
 }
@@ -69,7 +75,7 @@ const Editor = forwardRef<EditorRef>((props, ref) => {
     setValue: (val: string) => setValue(val),
   }));
 
-  return <QuillNoSSRWrapper
+  return <ReactQuill
     onChange={handleOnChange}
     value={value}
     modules={modules}

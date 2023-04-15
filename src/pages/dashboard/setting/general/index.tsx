@@ -12,6 +12,11 @@ import UploadFile from "@/components/uploadFile";
 import { TOAST_CONFIG } from "@/configs/toast";
 import { Setting } from "@/models/settings.model";
 
+// const Editor = dynamic(() => import('@/components/editor'), {
+//   ssr: false,
+//   loading: () => <div>Loading...</div>,
+// });
+
 const General = () => {
   const translate = useTranslate();
   const uploadLogoRef = useRef<any>(null);
@@ -28,6 +33,7 @@ const General = () => {
       if (item?.key === 'logo') {
         uploadLogoRef.current.setValue(item?.value);
       }
+
       if (item?.key === 'coverContentVi') {
         coverContentViEditorRef.current.setValue(item?.value);
       }
