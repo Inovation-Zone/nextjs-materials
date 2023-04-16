@@ -1,11 +1,8 @@
 import {
   AppstoreAddOutlined,
-  ColumnHeightOutlined,
   ContactsOutlined,
   FolderOpenOutlined,
-  FontSizeOutlined,
   GroupOutlined,
-  HighlightOutlined,
   HomeOutlined,
   InfoCircleOutlined,
   InsertRowRightOutlined,
@@ -117,11 +114,11 @@ function Dashboard({ children }: { children: React.ReactNode }) {
               {translate.categories.name}
             </Menu.Item>
             <Menu.Item
-              key="/dashboard/product/woodTypes"
+              key="/dashboard/product/settings"
               icon={<RadarChartOutlined />}>
-              {translate.woodTypes.name}
+              {translate.common.settings}
             </Menu.Item>
-            <Menu.Item
+            {/* <Menu.Item
               key="adhesives"
               icon={<HighlightOutlined />}>
               {translate.adhesives.name}
@@ -135,7 +132,7 @@ function Dashboard({ children }: { children: React.ReactNode }) {
               key="sizes"
               icon={<FontSizeOutlined />}>
               {translate.sizes.name}
-            </Menu.Item>
+            </Menu.Item> */}
           </Menu.SubMenu>
           <Menu.SubMenu
             key="/dashboard/collection"

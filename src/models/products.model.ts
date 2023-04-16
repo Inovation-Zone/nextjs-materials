@@ -19,26 +19,26 @@ export interface FileResource {
 }
 
 export interface WoodType {
-  id: string;
+  id?: string;
   vi_name: string;
   en_name: string;
   value?: string;
 }
 
 export interface Adhesive {
-  id: string;
-  name: string;
+  id?: string;
+  name: string | any;
   value?: string;
 }
 
 export interface Thickness {
-  id: string;
+  id?: string;
   name?: string;
-  value: number;
+  value: number | any;
 }
 
 export interface Size {
-  id: string;
+  id?: string;
   name?: string;
   width: number;
   height: number;

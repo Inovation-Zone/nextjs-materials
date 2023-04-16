@@ -43,9 +43,9 @@ export const CATEGORIES_API = {
 }
 
 export const ADHESIVES_API = {
-  createCategory: {
-    name: 'category',
-    api: '/category',
+  createAdhesive: {
+    name: 'adhesive',
+    api: '/adhesive',
   },
   getAdhesives: {
     name: 'adhesives',
@@ -58,9 +58,9 @@ export const ADHESIVES_API = {
 }
 
 export const WOOD_TYPES_API = {
-  createCategory: {
-    name: 'category',
-    api: '/category',
+  createWoodType: {
+    name: 'woodType',
+    api: '/woodType',
   },
   getWoodTypes: {
     name: 'woodTypes',
@@ -73,9 +73,9 @@ export const WOOD_TYPES_API = {
 }
 
 export const THICKNESSES_API = {
-  createCategory: {
-    name: 'category',
-    api: '/category',
+  createThickness: {
+    name: 'thickness',
+    api: '/thickness',
   },
   getThicknesses: {
     name: 'thicknesses',
@@ -88,9 +88,9 @@ export const THICKNESSES_API = {
 }
 
 export const SIZES_API = {
-  createCategory: {
-    name: 'category',
-    api: '/category',
+  createSize: {
+    name: 'size',
+    api: '/size',
   },
   getSizes: {
     name: 'sizes',

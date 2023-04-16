@@ -45,7 +45,9 @@ export default {
     buyMore: 'Mua thêm',
     quantity: 'Số lượng',
     detail: 'Chi tiết',
-    content: 'Nội dung'
+    content: 'Nội dung',
+    settings: 'Cài đặt',
+    clickItemToEdit: 'Ghi chú: Nhấn vào đối tượng để chỉnh sửa'
   },
   table: {
     collection: {
@@ -119,6 +121,8 @@ export default {
   },
   sizes: {
     name: 'Kích thước',
+    width: 'Chiều rộng',
+    height: 'Chiều cao'
   },
   menus: {
     aboutUs: 'Về chúng tôi',

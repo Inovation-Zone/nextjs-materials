@@ -45,7 +45,9 @@ export default {
     buyMore: 'Buy More',
     quantity: 'Quantity',
     detail: 'Details',
-    content: 'Content'
+    content: 'Content',
+    settings: 'Settings',
+    clickItemToEdit: 'Note: Press on item to edit'
   },
   table: {
     collection: {
@@ -119,6 +121,8 @@ export default {
   },
   sizes: {
     name: 'Sizes',
+    width: 'Width',
+    height: 'Height'
   },
   menus: {
     aboutUs: 'About Us',
