@@ -62,10 +62,10 @@ function OrderInfoPage() {
     return data?.orderProducts.length && data.orderProducts.map((item: OrderProduct) => {
       return {
         name: item.product?.[`${value}_name` as keyof Product],
-        woodType: item.woodType?.[`${value}_name` as keyof WoodType],
+        woodType: item?.woodType?.[`${value}_name` as keyof WoodType],
         adhesive: item?.adhesive?.name,
-        thickness: `${item?.thickness?.value} mm`,
-        size: `${item?.size.width} x ${item?.size.height}`,
+        thickness: item?.thickness && `${item?.thickness?.value} mm`,
+        size: item?.size && `${item?.size?.width} x ${item?.size?.height}`,
         quantity: item?.quantity
       }
     })

@@ -82,11 +82,11 @@ export default function LandingPage() {
   const handleOrderNow = () => {
     const data = {
       product: productDetails,
-      woodType: woodTypesRef.current.getValue(),
-      adhesive: adhesivesRef.current.getValue(),
-      thickness: thicknessesRef.current.getValue(),
-      size: sizesRef.current.getValue(),
-      quantity: quantityRef.current.value
+      woodType: woodTypesRef?.current?.getValue(),
+      adhesive: adhesivesRef?.current?.getValue(),
+      thickness: thicknessesRef?.current?.getValue(),
+      size: sizesRef?.current?.getValue(),
+      quantity: quantityRef?.current.value
     }
 
     let productOrders: CartItem[] = [];

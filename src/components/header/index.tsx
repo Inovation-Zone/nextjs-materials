@@ -166,7 +166,7 @@ const Header: React.FC<HeaderProps> = ({ showSlider = true }) => {
       <div className='relative'>
         <div className='absolute top-12 z-10 flex w-full items-end justify-center'>
           <img
-            src={settingLogo?.value ? settingLogo?.value : 'https://www.panelplus.com/images/logo-panelplus.png'}
+            src={settingLogo?.value ? settingLogo?.value : 'https://upload.wikimedia.org/wikipedia/commons/8/89/HD_transparent_picture.png'}
             className='w-[100px] h-[100px] cursor-pointer'
             onClick={() => router.push('/')}
           />

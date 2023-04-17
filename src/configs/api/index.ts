@@ -41,6 +41,7 @@ httpRequest.interceptors.response.use(
       case 400:
         return handleHttpError(status, details?.[0] || 'Bad Request');
       case 401:
+        window.location.href = '/login'; // Redirect to login page
         return handleHttpError(status, 'Unauthorized');
       case 500:
         return handleHttpError(status, details?.[0] || 'Internal Server Error');

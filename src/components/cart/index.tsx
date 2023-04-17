@@ -121,23 +121,31 @@ const Order = () => {
       width: '30%',
       render: (text: number, record: CartItem) => (
         <Row className='gap-2'>
-          <Row className='w-full'>
-            <Col
-              span={8}>{translate.woodTypes.name}:</Col>
-            <Col span={16}>{record.woodType?.[`${value}_name` as keyof WoodType]}</Col>
-          </Row>
-          <Row className='w-full'>
-            <Col span={8}>{translate.adhesives.name}:</Col>
-            <Col span={16}>{record.adhesive.name}</Col>
-          </Row>
-          <Row className='w-full'>
-            <Col span={8}>{translate.thicknesses.name}:</Col>
-            <Col span={16}>{record.thickness.name} mm</Col>
-          </Row>
-          <Row className='w-full'>
-            <Col span={8}>{translate.sizes.name}:</Col>
-            <Col span={16}>[{record.size.name}]</Col>
-          </Row>
+          {record?.woodType ? (
+            <Row className='w-full'>
+              <Col
+                span={8}>{translate.woodTypes.name}:</Col>
+              <Col span={16}>{record?.woodType?.[`${value}_name` as keyof WoodType]}</Col>
+            </Row>
+          ) : undefined}
+          {record?.adhesive ? (
+            <Row className='w-full'>
+              <Col span={8}>{translate.adhesives.name}:</Col>
+              <Col span={16}>{record?.adhesive?.name}</Col>
+            </Row>
+          ) : undefined}
+          {record?.thickness ? (
+            <Row className='w-full'>
+              <Col span={8}>{translate.thicknesses.name}:</Col>
+              <Col span={16}>{record?.thickness?.name} mm</Col>
+            </Row>
+          ) : undefined}
+          {record?.size ? (
+            <Row className='w-full'>
+              <Col span={8}>{translate.sizes.name}:</Col>
+              <Col span={16}>[{record?.size?.name}]</Col>
+            </Row>
+          ) : undefined}
         </Row>
       ),
     },
