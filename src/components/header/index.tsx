@@ -14,6 +14,7 @@ import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 
 import useGetProducts from '@/hooks/product/useGetProducts';
+import useGetSettings from '@/hooks/settings/useGetSettings';
 import { useLanguage, useTranslate } from '@/hooks/useTranslate';
 
 import SwitchLanguage from '@/components/switchLanguage';
@@ -21,6 +22,7 @@ import SwitchLanguage from '@/components/switchLanguage';
 import { SLIDE_URLS } from '@/constants';
 import { USER_INFOS } from '@/constants/api';
 import { Product } from '@/models/products.model';
+import { Setting } from '@/models/settings.model';
 
 interface MenuItem {
   label: string;
@@ -40,7 +42,8 @@ const Header: React.FC<HeaderProps> = ({ showSlider = true }) => {
   const translate = useTranslate();
   const boardRef = useRef<any>(null);
   const { value } = useLanguage();
-
+  const { data: settings = [] } = useGetSettings();
+  const settingLogo = settings.find((item: Setting) => item.key === 'logo');
   const userInfos = useMemo(() => Cookies.get(USER_INFOS) && JSON?.parse(Cookies.get(USER_INFOS) as string), []);
 
   const { data: products = [], isLoading: isLoadingProducts, refetch } = useGetProducts({ searchKeys: '', isHidden: false });
@@ -147,7 +150,7 @@ const Header: React.FC<HeaderProps> = ({ showSlider = true }) => {
         >
           <UserOutlined className='text-[20px] text-white hover:text-gray-300' />
           <Typography className='ml-2 text-white hover:text-gray-300'>
-            {userInfos ? userInfos?.fullName : translate.common.login}
+            {userInfos ? translate.common.dashboardControl : translate.common.login}
           </Typography>
         </a>
         <a
@@ -163,7 +166,7 @@ const Header: React.FC<HeaderProps> = ({ showSlider = true }) => {
       <div className='relative'>
         <div className='absolute top-12 z-10 flex w-full items-end justify-center'>
           <img
-            src='https://www.panelplus.com/images/logo-panelplus.png'
+            src={settingLogo?.value ? settingLogo?.value : 'https://www.panelplus.com/images/logo-panelplus.png'}
             className='w-[100px] h-[100px] cursor-pointer'
             onClick={() => router.push('/')}
           />

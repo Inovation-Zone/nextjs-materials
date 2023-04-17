@@ -47,7 +47,8 @@ export default {
     detail: 'Chi tiết',
     content: 'Nội dung',
     settings: 'Cài đặt',
-    clickItemToEdit: 'Ghi chú: Nhấn vào đối tượng để chỉnh sửa'
+    clickItemToEdit: 'Ghi chú: Nhấn vào đối tượng để chỉnh sửa',
+    dashboardControl: 'Trang quản trị'
   },
   table: {
     collection: {

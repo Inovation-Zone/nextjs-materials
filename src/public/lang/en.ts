@@ -47,7 +47,8 @@ export default {
     detail: 'Details',
     content: 'Content',
     settings: 'Settings',
-    clickItemToEdit: 'Note: Press on item to edit'
+    clickItemToEdit: 'Note: Press on item to edit',
+    dashboardControl: 'Dashboard Control'
   },
   table: {
     collection: {
