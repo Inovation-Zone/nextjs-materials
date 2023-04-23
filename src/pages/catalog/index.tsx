@@ -19,7 +19,7 @@ export default function LandingPage() {
   const renderCatalogs = (catalogs: Catalog[]) => {
     return (
       <div
-        className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        className="w-full grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {catalogs.map((catalog: Catalog) => (
           <a
             key={catalog.id}
@@ -47,7 +47,7 @@ export default function LandingPage() {
         <Col
           key={group.id}
           span={24}
-          className='mx-48 my-8 bg-white p-4'
+          className='lg:mx-48 lg:my-8 md:mx-4 md:my-4 sm:mx-2 sm:my-2 bg-white p-4'
         >
           <Typography.Title
             level={2}

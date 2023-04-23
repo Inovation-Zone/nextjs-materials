@@ -55,7 +55,6 @@ const Header: React.FC<HeaderProps> = ({ showSlider = true }) => {
     { label: translate.menus.products, key: 'products', expaned: true },
     { label: translate.menus.collections, key: 'collection' },
     { label: translate.menus.catalog, key: 'catalog' },
-    { label: translate.menus.news, key: 'news' },
     { label: translate.menus.contacts, key: 'contact' },
     { label: translate.menus.inquiry, key: 'cart' },
   ];
@@ -160,6 +159,16 @@ const Header: React.FC<HeaderProps> = ({ showSlider = true }) => {
         />
         <div
           className='absolute flex gap-5 z-10 right-5 top-5 md:right-8'>
+          <a
+            href='#'
+            className='flex items-center text-white hover:text-gray-400 lg:flex md:flex sm:hidden'
+            onClick={handleGoToLogin}
+          >
+            <UserOutlined className='text-[20px] text-white hover:text-gray-300' />
+            <Typography className='ml-2 text-white hover:text-gray-300'>
+              {(userInfos ? translate.common.dashboardControl : translate.common.login) || ''}
+            </Typography>
+          </a>
           <a
             href='#'
             className='flex items-center text-gray-500 hover:text-gray-300'

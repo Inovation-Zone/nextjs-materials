@@ -35,12 +35,11 @@ export default function About() {
         />
       </Head>
       <Header showSlider={false} />
-      <div className='p-24'>
+      <div className='lg:p-24 md:p-8 sm:p-4'>
         <Typography
           dangerouslySetInnerHTML={{ __html: aboutSetting?.value }}>
         </Typography>
       </div>
-      {/* <Cover /> */}
       <Footer />
     </div>
   );

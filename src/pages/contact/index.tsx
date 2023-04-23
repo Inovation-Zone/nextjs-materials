@@ -35,7 +35,7 @@ export default function Contact() {
         />
       </Head>
       <Header showSlider={false} />
-      <div className='p-24'>
+      <div className='lg:p-24 md:p-8 sm:p-4'>
         <Typography
           dangerouslySetInnerHTML={{ __html: contactSetting?.value }}>
         </Typography>

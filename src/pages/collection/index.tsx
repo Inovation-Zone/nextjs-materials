@@ -27,7 +27,7 @@ export default function LandingPage() {
   const renderCollections = (collections: Collection[] | undefined) => {
     return (
       <div
-        className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2 px-12">
+        className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2 lg:px-12 md:px-4 sm:px-2">
         {collections?.map((collection: Collection) => {
           const url = collection.fileUrls.length && collection.fileUrls[0];
           return (
@@ -55,11 +55,9 @@ export default function LandingPage() {
     return (
       <Tabs
         defaultActiveKey="1"
-        type="card"
         size="middle"
-        className='flex items-center justify-center'
-        tabBarStyle={{ fontWeight: 'bold', textTransform: 'uppercase' }}
-        tabBarGutter={0}
+        className='flex items-center justify-center font-bold'
+        tabBarGutter={20}
         items={groupCollections.map((collectionGroup: CollectionGroup) => {
           return {
             key: collectionGroup.id,
