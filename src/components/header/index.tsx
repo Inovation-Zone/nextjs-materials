@@ -1,8 +1,9 @@
 import {
+  AlignLeftOutlined,
   ShoppingCartOutlined,
-  UserOutlined,
+  UserOutlined
 } from '@ant-design/icons';
-import { Col, Typography } from 'antd';
+import { Col, Drawer, Typography } from 'antd';
 import Cookies from 'js-cookie';
 import { useRouter } from 'next/router';
 import { useEffect, useMemo, useRef, useState } from 'react';
@@ -45,6 +46,7 @@ const Header: React.FC<HeaderProps> = ({ showSlider = true }) => {
   const { data: settings = [] } = useGetSettings();
   const settingLogo = settings.find((item: Setting) => item.key === 'logo');
   const userInfos = useMemo(() => Cookies.get(USER_INFOS) && JSON?.parse(Cookies.get(USER_INFOS) as string), []);
+  const [open, setOpen] = useState(false);
 
   const { data: products = [], isLoading: isLoadingProducts, refetch } = useGetProducts({ searchKeys: '', isHidden: false });
 
@@ -111,6 +113,14 @@ const Header: React.FC<HeaderProps> = ({ showSlider = true }) => {
     setProductHoved(null);
   };
 
+  const showDrawer = () => {
+    setOpen(true);
+  };
+
+  const onClose = () => {
+    setOpen(false);
+  };
+
   const handleGoToProductDetails = (product: Product) => {
     setShowBoard(false);
     router.push({
@@ -140,9 +150,32 @@ const Header: React.FC<HeaderProps> = ({ showSlider = true }) => {
 
   return (
     <div
-      className={`relative ${showSlider ? 'h-[500px]' : 'h-[300px]'}`}
-      style={{ backgroundImage: `url('https://all-project-resources.s3.ap-southeast-1.amazonaws.com/others/1681380508582_ygmciknpond.jpg')`, objectFit: 'contain' }}>
-      <div className='absolute top-5 right-12 z-10 flex space-x-4'>
+      className={`relative ${showSlider ? 'h-[500px] lg:h-[500px] md:h-[300px] sm:h-[220px]' : 'h-[300px]'} lg:bg-repeat-space sm:bg-repeat-round`}
+      style={{ backgroundImage: `url('https://all-project-resources.s3.ap-southeast-1.amazonaws.com/others/1681380508582_ygmciknpond.jpg')` }}>
+      <div className='flex items-center justify-between lg:hidden'>
+        <img
+          src={settingLogo?.value ? settingLogo?.value : 'https://upload.wikimedia.org/wikipedia/commons/8/89/HD_transparent_picture.png'}
+          className='w-[60px] h-[60px] left-3 top-4 cursor-pointer absolute z-10 rounded-md md:w-[80px] md:h-[80px] md:left-8'
+          onClick={() => router.push('/')}
+        />
+        <div
+          className='absolute flex gap-5 z-10 right-5 top-5 md:right-8'>
+          <a
+            href='#'
+            className='flex items-center text-gray-500 hover:text-gray-300'
+          >
+            <ShoppingCartOutlined
+              className='text-[30px] text-white hover:text-gray-300'
+              onClick={() => router.push('/cart')} />
+          </a>
+          <div
+            onClick={() => showDrawer()}>
+            <AlignLeftOutlined className='text-white text-[25px]' />
+            <Typography className='text-white'>Menu</Typography>
+          </div>
+        </div>
+      </div>
+      <div className='absolute top-5 right-12 z-10 flex space-x-4 lg:flex sm:hidden'>
         <a
           href='#'
           className='flex items-center text-white hover:text-gray-400'
@@ -150,7 +183,7 @@ const Header: React.FC<HeaderProps> = ({ showSlider = true }) => {
         >
           <UserOutlined className='text-[20px] text-white hover:text-gray-300' />
           <Typography className='ml-2 text-white hover:text-gray-300'>
-            {userInfos ? translate.common.dashboardControl : translate.common.login}
+            {(userInfos ? translate.common.dashboardControl : translate.common.login) || ''}
           </Typography>
         </a>
         <a
@@ -163,11 +196,11 @@ const Header: React.FC<HeaderProps> = ({ showSlider = true }) => {
         </a>
         <SwitchLanguage />
       </div>
-      <div className='relative'>
+      <div className='relative lg:flex sm:hidden'>
         <div className='absolute top-12 z-10 flex w-full items-end justify-center'>
           <img
             src={settingLogo?.value ? settingLogo?.value : 'https://upload.wikimedia.org/wikipedia/commons/8/89/HD_transparent_picture.png'}
-            className='w-[100px] h-[100px] cursor-pointer'
+            className='w-[100px] h-[100px] cursor-pointer lg:flex sm:hidden'
             onClick={() => router.push('/')}
           />
           <ul
@@ -227,11 +260,61 @@ const Header: React.FC<HeaderProps> = ({ showSlider = true }) => {
             <SwiperSlide key={slide.src}>
               <img
                 src={slide.src}
-                className='w-full object-cover' />
+                className='w-full object-cover lg:h-[500px] md:h-[300px] sm:h-[220px]' />
             </SwiperSlide>
           ))}
         </Swiper>
       )}
+      <Drawer
+        title={<div className='flex items-center justify-between'>
+          <Typography>Menu</Typography>
+          <SwitchLanguage />
+        </div>}
+        onClose={onClose}
+        className='w-full'
+        open={open}>
+        <div className='flex flex-col gap-5'>
+          {menuItems.map((item) => {
+            return (
+              <li
+                ref={menuRef}
+                key={item?.key}
+                className='flex items-center px-5 cursor-pointer'
+                onClick={() => {
+                  handleMenuItemClick(item)
+                  setOpen(false)
+                }}
+              >
+                <div>
+                  <a
+                    href='#'
+                    className='text-[14px] hover:text-gray-900 font-bold'
+                  >
+                    {item?.label}
+                  </a>
+                  {item.expaned ? <div className='h-auto px-4 flex flex-col gap-2 mt-3'>
+                    {products.slice(0, 8).map((item: Product) => {
+                      return (
+                        <div
+                          key={item.id}
+                          className='h-auto flex gap-2'>
+                          -<Typography
+                            onMouseEnter={() => handleMouseEnter(item)}
+                            onMouseLeave={() => handleMouseLeave()}
+                            onClick={() => handleGoToProductDetails(item)}
+                            className='cursor-pointer hover:text-cyan-600 capitalize text-[13px]'>
+                            {item?.[`${value}_name` as keyof Product]?.toString().toLowerCase() as string}
+                          </Typography>
+                        </div>
+                      )
+                    })}
+                  </div> : undefined}
+                </div>
+              </li>
+            )
+          })}
+        </div>
+      </Drawer>
     </div>
 
   )

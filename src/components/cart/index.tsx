@@ -124,26 +124,26 @@ const Order = () => {
           {record?.woodType ? (
             <Row className='w-full'>
               <Col
-                span={8}>{translate.woodTypes.name}:</Col>
-              <Col span={16}>{record?.woodType?.[`${value}_name` as keyof WoodType]}</Col>
+                lg={8}>{translate.woodTypes.name}:</Col>
+              <Col lg={16}>{record?.woodType?.[`${value}_name` as keyof WoodType]}</Col>
             </Row>
           ) : undefined}
           {record?.adhesive ? (
             <Row className='w-full'>
-              <Col span={8}>{translate.adhesives.name}:</Col>
-              <Col span={16}>{record?.adhesive?.name}</Col>
+              <Col lg={8}>{translate.adhesives.name}:</Col>
+              <Col lg={16}>{record?.adhesive?.name}</Col>
             </Row>
           ) : undefined}
           {record?.thickness ? (
             <Row className='w-full'>
-              <Col span={8}>{translate.thicknesses.name}:</Col>
-              <Col span={16}>{record?.thickness?.name} mm</Col>
+              <Col lg={8}>{translate.thicknesses.name}:</Col>
+              <Col lg={16}>{record?.thickness?.name} mm</Col>
             </Row>
           ) : undefined}
           {record?.size ? (
             <Row className='w-full'>
-              <Col span={8}>{translate.sizes.name}:</Col>
-              <Col span={16}>[{record?.size?.name}]</Col>
+              <Col lg={8}>{translate.sizes.name}:</Col>
+              <Col lg={16}>[{record?.size?.name}]</Col>
             </Row>
           ) : undefined}
         </Row>
@@ -222,10 +222,11 @@ const Order = () => {
       content: (
         <>
           <Table
-            className='mt-12'
+            className='lg:mt-12 md:mt-8 sm:mt-4 sm:w-full'
             dataSource={carts}
             columns={columns}
             pagination={false}
+            scroll={{ x: 800 }}
             footer={() => (
               <>
 
@@ -369,10 +370,10 @@ const Order = () => {
           rel='stylesheet' />
       </Head>
       <Header showSlider={false} />
-      <div className='mt-12 px-12 py-10'>
+      <div className='lg:px-12 lg:py-10 md:px-4 md:py-12 sm:px-2 py-4'>
         <h1>{translate.cart.title}</h1>
         <Steps
-          className='px-12 mt-12'
+          className='lg:px-12 lg:mt-12 md:px-12 sm:px-2 sm:mt-8'
           current={current}
           items={items} />
         <div>{steps[current].content}</div>

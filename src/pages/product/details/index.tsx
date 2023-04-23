@@ -160,15 +160,17 @@ export default function LandingPage() {
       <Row
         className='w-full flex flex-col items-center justify-center'>
         <Typography.Title
-          className='mt-4'
+          className='lg:mt-4 md:mt-8 sm:mt-8'
           level={3}>{productDetails?.[`${value}_name` as keyof Product] as string}</Typography.Title>
-        <Row className='w-full px-24'>
+        <Row
+          className='w-full lg:flex lg:flex-row lg:px-24 md:flex-row md:px-4 sm:flex-col sm:p-4'>
           <Col
-            span={12}
-            className='p-10'>
+            lg={12}
+            md={12}
+            className='lg:p-10 md:p-2'>
             <Row className='w-full flex flex-col'>
               <Typography.Title
-                className='mt-4'
+                className='mt-4 sm:hidden'
                 level={4}>{productDetails?.[`${value}_name` as keyof Product] as string}</Typography.Title>
               {renderImagesProduct(productDetails)}
               <Typography
@@ -177,8 +179,9 @@ export default function LandingPage() {
             </Row>
           </Col>
           <Col
-            span={12}
-            className='px-10 mt-5' >
+            lg={12}
+            md={12}
+            className='lg:p-10 md:p-2' >
             {productDetails?.woodTypes?.length ? <CustomSelectWoodType
               label={translate.woodTypes.name}
               ref={woodTypesRef} /> : undefined}

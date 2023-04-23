@@ -5839,6 +5839,11 @@ quill-image-resize-module-react@^3.0.0:
     quill "^1.2.2"
     raw-loader "^0.5.1"
 
+quill-image-uploader@^1.2.4:
+  version "1.2.4"
+  resolved "https://registry.npmjs.org/quill-image-uploader/-/quill-image-uploader-1.2.4.tgz"
+  integrity sha512-ipho6Qpsu4wMlnmrGjlT5C6VzoFag0o2TiOWXR3wJm3g44cG9f5DisPGo7CZkvsCdrxHhNrf2p4BAPWQ4eE8NA==
+
 quill-video-resize@^1.0.0:
   version "1.0.0"
   resolved "https://registry.npmjs.org/quill-video-resize/-/quill-video-resize-1.0.0.tgz"

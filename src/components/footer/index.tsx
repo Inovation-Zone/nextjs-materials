@@ -12,8 +12,8 @@ const Footer = () => {
 
   return (
     <>
-      <div className='h-[1px] bg-slate-200 mt-8 mb-8'></div>
-      <div className='pt-4 pl-24'>
+      <div className='h-[1px] bg-slate-200'></div>
+      <div className='pt-4 pl-24 lg:px-12 lg:py-12 sm:px-4 sm:py-4'>
         <Typography
           className='mb-4'
           dangerouslySetInnerHTML={{ __html: footerSetting?.value }}>

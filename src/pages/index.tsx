@@ -33,8 +33,7 @@ export default function LandingPage() {
       return (
         <Col
           key={item.id}
-          span={8}
-          className='min-w-[300px] w-[300px] h-[300px] bg-center px-0'
+          className='bg-center lg:w-[350px] lg:h-[350px] md:w-[350px] md:h-[350px] sm:w-full sm:h-[350px]'
           style={{ backgroundImage: `url(${item.fileResources?.length ? item.fileResources[0].fileUrl : DEFAULT_IMAGE})` }}
         >
           <Typography.Text
@@ -49,7 +48,7 @@ export default function LandingPage() {
   }
 
   return (
-    <div className='bg-white'>
+    <div className='w-full bg-white'>
       <Head>
         <title>Gỗ Việt Thái - Trang chủ</title>
         <meta
@@ -69,13 +68,14 @@ export default function LandingPage() {
       </Head>
       <Header />
       <div className='w-full flex items-center justify-center flex-col mt-12'>
-        <Typography.Title
-          className='uppercase'
-          level={3}>{translate.products.ourProducts}</Typography.Title>
-        {isLoading ? <Loading /> : (
-          <Row
-            className='mt-4 px-48'>{renderProducts()}</Row>
-        )}
+        <Typography
+          className='uppercase text-[25px] font-medium lg:text-[25px] sm:text-[20px]'>{translate.products.ourProducts}</Typography>
+        {isLoading ?
+          <Loading /> : (
+            <Row
+              className='flex justify-center mt-8 lg:px-48 sm:px-4 sm:flex-wrap'>{renderProducts()}</Row>
+          )
+        }
       </div>
       <Cover />
       <Footer />

@@ -12,13 +12,11 @@ const Cover = () => {
   const coverSetting = settings.find((item: Setting) => item.key === (value === 'vi' ? 'coverContentVi' : 'coverContentEn'));
 
   return (
-    <div className='mt-24'>
-      <div className='px-4 mt-12'>
-        <Typography
-          className='mb-4'
-          dangerouslySetInnerHTML={{ __html: coverSetting?.value }}>
-        </Typography>
-      </div>
+    <div className='px-4 lg:px-12 lg:py-12 sm:py-12'>
+      <Typography
+        className='mb-4'
+        dangerouslySetInnerHTML={{ __html: coverSetting?.value }}>
+      </Typography>
     </div>
   )
 }
